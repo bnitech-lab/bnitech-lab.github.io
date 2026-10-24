@@ -148,10 +148,10 @@ def inline(text):
 
 def years(row):
     span = row["started"]
-    for d in row.get("restarted", []):
-        span += " &middot; again " + d
     if row.get("ended"):
         span += " to " + row["ended"]
+    for d in row.get("restarted", []):
+        span += " &middot; again " + d
     if row.get("stage") == "running":
         if row.get("updated"):
             span += " &middot; last commit " + row["updated"]

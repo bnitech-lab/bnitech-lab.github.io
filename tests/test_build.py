@@ -91,6 +91,10 @@ class Render(unittest.TestCase):
         self.assertLess(page.index(">2011<"), page.index(">2016<"))
         self.assertIn("K-01", page)
 
+    def test_years_read_first_run_then_restarts(self):
+        row = private_row(started="2011-12", ended="2012-01", restarted=["2012-07", "2026-03"])
+        self.assertEqual(build.years(row), "2011-12 to 2012-01 &middot; again 2012-07 &middot; again 2026-03")
+
     def test_html_in_data_is_escaped(self):
         rows = [private_row(title="<script>x</script>")]
         page = build.render([], rows, "2026-01-02")
