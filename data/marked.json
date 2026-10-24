@@ -94,6 +94,18 @@
     "ended": "2024-08"
   },
   {
+    "mode": "public",
+    "title": "Team AI development workflow",
+    "summary": "On my own initiative, I turned recurring parts of my work at NHN into nine Claude Code skills and shared them with the department. Eight of them chain into a bug-analysis flow from issue to fix, with a required developer review step.",
+    "stack": [
+      "Claude Code",
+      "LSP"
+    ],
+    "stage": "finished",
+    "started": "2026-01",
+    "ended": "2026-07"
+  },
+  {
     "mode": "private",
     "code_name": "IDEA-2026-1",
     "title": "AI factory sourcing agent",
