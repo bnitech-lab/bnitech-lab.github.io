@@ -2,17 +2,16 @@
   {
     "mode": "public",
     "title": "Teris",
-    "summary": "A console Tetris in C with hold, combos and a two-piece preview. Rebuilt as a Windows program in 2012 and ported to macOS in 2026.",
+    "summary": "A console Tetris in C with hold, combos and a two-piece preview. In 2026 I came back to it and ported it to macOS.",
     "stack": [
       "C",
-      "Win32 API",
+      "Windows console",
       "ncurses"
     ],
     "stage": "finished",
     "started": "2011-12",
     "ended": "2012-01",
     "restarted": [
-      "2012-07",
       "2026-03"
     ],
     "repo": "bnitech/Teris_2011"
