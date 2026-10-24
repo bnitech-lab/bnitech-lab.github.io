@@ -38,9 +38,9 @@
     "ended": "2015-11"
   },
   {
-    "mode": "private",
-    "code_name": "IDEA-2015-2",
-    "title": "3D exploration adventure game",
+    "mode": "public",
+    "title": "WarmyLand",
+    "summary": "A first-person 3D exploration adventure on a penguin planet, built by a three-person university game club team. I led the Unity development.",
     "stack": [
       "Unity",
       "C#",
@@ -48,7 +48,8 @@
     ],
     "stage": "finished",
     "started": "2015-11",
-    "ended": "2016-02"
+    "ended": "2016-02",
+    "repo": "CienProject2015/ProjectOP"
   },
   {
     "mode": "public",
