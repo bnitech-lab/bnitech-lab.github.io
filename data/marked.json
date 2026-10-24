@@ -3,11 +3,18 @@
     "mode": "public",
     "title": "Teris",
     "summary": "A console Tetris in C with hold, combos and a two-piece preview. Rebuilt as a Windows program in 2012 and ported to macOS in 2026.",
-    "stack": ["C", "Win32 API", "ncurses"],
+    "stack": [
+      "C",
+      "Win32 API",
+      "ncurses"
+    ],
     "stage": "finished",
     "started": "2011-12",
     "ended": "2012-01",
-    "restarted": ["2012-07", "2026-03"],
+    "restarted": [
+      "2012-07",
+      "2026-03"
+    ],
     "repo": "bnitech/Teris_2011"
   },
   {
@@ -22,16 +29,38 @@
     "mode": "private",
     "code_name": "IDEA-2015-1",
     "title": "Phone gesture shortcuts",
-    "stack": ["Android", "Java", "SQLite"],
+    "stack": [
+      "Android",
+      "Java",
+      "SQLite"
+    ],
     "stage": "finished",
     "started": "2015-06",
     "ended": "2015-11"
   },
   {
+    "mode": "private",
+    "code_name": "IDEA-2015-2",
+    "title": "3D exploration adventure game",
+    "stack": [
+      "Unity",
+      "C#",
+      "3ds Max"
+    ],
+    "stage": "finished",
+    "started": "2015-11",
+    "ended": "2016-02"
+  },
+  {
     "mode": "public",
     "title": "Nexon Dabang M",
     "summary": "An in-house cafe menu app with ratings, comments and a rating chart, built by a team of four in a Nexon bootcamp.",
-    "stack": ["Vue.js", "Node.js", "Express", "MySQL"],
+    "stack": [
+      "Vue.js",
+      "Node.js",
+      "Express",
+      "MySQL"
+    ],
     "stage": "finished",
     "started": "2019-01",
     "ended": "2019-03",
@@ -41,7 +70,11 @@
     "mode": "public",
     "title": "API documentation from tests",
     "summary": "Found Spring Auto REST Docs for a Nexon project that had no tests, wired it into CI so the API docs come from tests, and presented it to the team. Another project adopted it.",
-    "stack": ["Spring Boot", "Spring Auto REST Docs", "JUnit 5"],
+    "stack": [
+      "Spring Boot",
+      "Spring Auto REST Docs",
+      "JUnit 5"
+    ],
     "stage": "finished",
     "started": "2021-02",
     "ended": "2021-04"
@@ -50,7 +83,12 @@
     "mode": "private",
     "code_name": "IDEA-2023-1",
     "title": "Office seat reservation",
-    "stack": ["Remix", "TypeScript", "Kotlin", "Spring Boot"],
+    "stack": [
+      "Remix",
+      "TypeScript",
+      "Kotlin",
+      "Spring Boot"
+    ],
     "stage": "stopped",
     "started": "2023-06",
     "ended": "2024-08"
@@ -59,7 +97,12 @@
     "mode": "private",
     "code_name": "IDEA-2026-1",
     "title": "AI factory sourcing agent",
-    "stack": ["Lovable", "React", "Vertex AI", "Supabase"],
+    "stack": [
+      "Lovable",
+      "React",
+      "Vertex AI",
+      "Supabase"
+    ],
     "stage": "finished",
     "started": "2026-03",
     "ended": "2026-06"
@@ -68,7 +111,11 @@
     "mode": "public",
     "title": "AI news service",
     "summary": "An idea for a service with today's news, recent AI stories and recommended content: Reddit and live trend topics in, NotebookLM for analysis, Obsidian to keep it, Claude tying them together.",
-    "stack": ["Claude", "NotebookLM", "Obsidian"],
+    "stack": [
+      "Claude",
+      "NotebookLM",
+      "Obsidian"
+    ],
     "stage": "thought",
     "started": "2026-10"
   }
