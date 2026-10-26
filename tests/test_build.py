@@ -103,3 +103,12 @@ class Render(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+    def test_rows_within_a_year_finished_first_then_stage_order(self):
+        rows = [dict(private_row(stage="stopped", started="2016-01"), code_name="K-02"),
+                dict(private_row(stage="finished", started="2016-03"), code_name="K-01"),
+                dict(private_row(stage="running", as_of="2026-10", started="2016-05"), code_name="K-03")]
+        page = build.render([], rows, "2026-01-02")
+        self.assertLess(page.index("K-01"), page.index("K-03"))
+        self.assertLess(page.index("K-03"), page.index("K-02"))
+

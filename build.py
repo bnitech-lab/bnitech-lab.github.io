@@ -24,6 +24,7 @@ import urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 API = "https://api.github.com"
 
+STAGE_ORDER = ["finished", "running", "stopped", "retired", "planned", "thought"]  # order inside a year
 STAGES = {
     "thought": "Thought only",
     "planned": "Planned",
@@ -195,7 +196,12 @@ def render_row(r):
 
 def render(cards, rows, built):
     by_year = {}
-    for r in sorted(rows, key=lambda r: r["started"], reverse=True):  # newest first, within a year too
+    # Years newest first. Inside a year: finished work first, then the other stages in STAGE_ORDER,
+    # and within a stage the later start first.
+    rank = {s: i for i, s in enumerate(STAGE_ORDER)}
+    ordered = sorted(sorted(rows, key=lambda r: r["started"], reverse=True),
+                     key=lambda r: (-int(r["started"][:4]), rank.get(r["stage"], len(rank))))
+    for r in ordered:
         by_year.setdefault(r["started"][:4], []).append(r)
     ideas = ""
     if rows:
