@@ -281,14 +281,6 @@
   },
   {
     "mode": "public",
-    "title": "Thesis on smartphone game UI",
-    "summary": "A graduation thesis comparing smartphone games by their user interface, as one of the factors behind a hit and its staying power, meant to inform later game projects.",
-    "stack": [],
-    "stage": "finished",
-    "started": "2016-11"
-  },
-  {
-    "mode": "public",
     "title": "3D Maze",
     "summary": "A 3D maze escape game in C++ and OpenGL with three camera views, made by a team of three; I wrote the game code.",
     "stack": [
