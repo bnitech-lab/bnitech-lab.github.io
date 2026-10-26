@@ -1,0 +1,31 @@
+[
+  {
+    "from": "2011-03",
+    "to": "2013-02",
+    "label": "Student",
+    "where": "Yuhan University"
+  },
+  {
+    "from": "2014-03",
+    "to": "2018-02",
+    "label": "Student",
+    "where": "Chung-Ang University"
+  },
+  {
+    "from": "2018-12",
+    "to": "2021-07",
+    "label": "Software engineer",
+    "where": "Nexon Korea"
+  },
+  {
+    "from": "2021-08",
+    "to": "2026-07",
+    "label": "Software engineer",
+    "where": "NHN (FashionGo)"
+  },
+  {
+    "from": "2026-08",
+    "label": "Own projects",
+    "where": "Vancouver, BC"
+  }
+]

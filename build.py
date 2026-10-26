@@ -46,6 +46,60 @@ LINE = re.compile(r"^\s*-\s*\*\*(.+?):\*\*\s*(.+?)\s*$")
 MINUTES = re.compile(r"^Try it \(about (\d+) minutes?\)$")
 
 
+ERA_FIELDS = {"from", "to", "label", "where"}
+
+
+def check_eras(eras):
+    """Return problems with data/eras.json: what I was doing, by period, shown beside each year."""
+    problems = []
+    if not isinstance(eras, list):
+        return ["eras.json must hold a list"]
+    for i, e in enumerate(eras):
+        where = "era %d" % (i + 1)
+        if not isinstance(e, dict):
+            problems.append("%s: not an object" % where)
+            continue
+        extra = sorted(set(e) - ERA_FIELDS)
+        if extra:
+            problems.append("%s: fields not allowed: %s" % (where, ", ".join(extra)))
+        if not e.get("from") or not DATE.match(str(e.get("from"))):
+            problems.append("%s: from must be YYYY or YYYY-MM" % where)
+        if "to" in e and not DATE.match(str(e["to"])):
+            problems.append("%s: to must be YYYY or YYYY-MM" % where)
+        if not e.get("label"):
+            problems.append("%s: label is required" % where)
+    return problems
+
+
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def month_name(ym):
+    return MONTHS[int(ym[5:7]) - 1] if len(ym) == 7 else ""
+
+
+def eras_for_year(eras, year):
+    """The eras that overlap a calendar year, oldest first, each with the months it covers
+    inside that year when it starts or ends there ("to Jul", "from Aug", "Mar to Jul")."""
+    out = []
+    for e in eras:
+        start, end = str(e["from"]), str(e.get("to", "9999"))
+        if not (start[:4] <= year <= end[:4]):
+            continue
+        begins = month_name(start) if start[:4] == year else ""
+        ends = month_name(end) if end[:4] == year else ""
+        if begins and ends:
+            span = f"{begins} to {ends}"
+        elif begins:
+            span = f"from {begins}"
+        elif ends:
+            span = f"to {ends}"
+        else:
+            span = ""
+        out.append(dict(e, span=span))
+    return out
+
+
 def check_rows(rows):
     """Return a list of problems with the marked rows; empty means valid."""
     problems = []
@@ -211,9 +265,13 @@ def kind_of(r):
     return r.get("kind", "project")
 
 
-def render_year(year, items):
+def render_year(year, items, eras=()):
     groups = [("project", None), ("contribution", "Contributions"), ("note", "Ideas and notes")]
-    out = f'\n      <section class="year"><h3>{year}</h3><div class="year-body">'
+    labels = "".join(
+        f'<p class="era">{html.escape(e["label"])}{("<br>" + html.escape(e["where"])) if e.get("where") else ""}'
+        f'{("<br><span class=\"era-span\">" + html.escape(e["span"]) + "</span>") if e["span"] else ""}</p>'
+        for e in eras_for_year(eras, year))
+    out = f'\n      <section class="year"><div class="year-head"><h3>{year}</h3>{labels}</div><div class="year-body">'
     for kind, label in groups:
         rs = [r for r in items if kind_of(r) == kind]
         if not rs:
@@ -224,7 +282,7 @@ def render_year(year, items):
     return out + "</div></section>"
 
 
-def render(cards, rows, built):
+def render(cards, rows, built, eras=()):
     by_year = {}
     # Years newest first. Inside a year: finished work first, then the other stages in STAGE_ORDER,
     # and within a stage the later start first.
@@ -235,11 +293,11 @@ def render(cards, rows, built):
         by_year.setdefault(r["started"][:4], []).append(r)
     ideas = ""
     if rows:
-        groups = "".join(render_year(y, items) for y, items in by_year.items())
+        groups = "".join(render_year(y, items, eras) for y, items in by_year.items())
         ideas = f"""
     <section class="ideas" aria-labelledby="ideas-h">
       <h2 id="ideas-h">Ideas by the year they started</h2>
-      <p class="note">Some ideas are shown under a code name, with only a title, stack, stage and dates.</p>{groups}
+      <p class="note">Beside each year: what I was doing then. Some ideas are shown under a code name, with only a title, stack, stage and dates.</p>{groups}
     </section>"""
     with open(os.path.join(HERE, "page.html"), encoding="utf-8") as f:
         page = f.read()
@@ -259,12 +317,13 @@ def main(argv=None):
     p.add_argument("--out", default=os.path.join(HERE, "_site"))
     a = p.parse_args(argv)
     rows = load("marked.json")
-    problems = check_rows(rows)
+    eras = load("eras.json") if os.path.exists(os.path.join(HERE, "data", "eras.json")) else []
+    problems = check_rows(rows) + check_eras(eras)
     if problems:
         print("\n".join(problems), file=sys.stderr)
         return 1
     if a.check:
-        print("data ok: %d marked row(s)" % len(rows))
+        print("data ok: %d marked row(s), %d era(s)" % (len(rows), len(eras)))
         return 0
     cards = [fetch_card(e) for e in load("cards.json")]
     for r in rows:
@@ -273,7 +332,7 @@ def main(argv=None):
     built = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     os.makedirs(a.out, exist_ok=True)
     with open(os.path.join(a.out, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render(cards, rows, built))
+        f.write(render(cards, rows, built, eras))
     open(os.path.join(a.out, ".nojekyll"), "w").close()
     print("built %s: %d card(s), %d row(s)" % (a.out, len(cards), len(rows)))
     return 0

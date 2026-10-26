@@ -65,7 +65,10 @@ code { font-family: var(--mono); font-size: .86em; background: var(--surface); b
 .meta a { color: var(--muted); }
 section { display: grid; gap: 18px; }
 .note { margin: 0; color: var(--muted); font-size: .95rem; }
-.year { display: grid; grid-template-columns: 5.5rem 1fr; gap: 14px; border-top: 1px solid var(--rule); padding-top: 14px; }
+.year { display: grid; grid-template-columns: 7.5rem 1fr; gap: 14px; border-top: 1px solid var(--rule); padding-top: 14px; }
+.year-head { display: grid; gap: 6px; align-content: start; }
+.era { margin: 0; font-family: var(--mono); font-size: .72rem; line-height: 1.35; color: var(--muted); }
+.era-span { color: var(--accent); }
 .year h3 { margin: 0; font-family: var(--mono); font-weight: 500; font-size: 1rem; color: var(--accent); font-variant-numeric: tabular-nums; }
 .year ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; min-width: 0; }
 .year-body { display: grid; gap: 10px; min-width: 0; }
@@ -85,7 +88,7 @@ section { display: grid; gap: 18px; }
 .stage { font-family: var(--mono); font-size: .72rem; letter-spacing: .04em; border: 1px solid var(--rule); border-radius: 999px; padding: 0 7px; margin-right: 6px; white-space: nowrap; }
 .stage-running { color: var(--accent); border-color: var(--accent); }
 footer { border-top: 1px solid var(--rule); padding-top: 18px; font-size: .85rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px; }
-@media (max-width: 520px) { .year { grid-template-columns: 1fr; gap: 6px; } .wrap { padding-block: 36px 28px; gap: 44px; } }
+@media (max-width: 520px) { .year { grid-template-columns: 1fr; gap: 6px; } .year-head { grid-template-columns: auto 1fr; align-items: baseline; gap: 4px 12px; } .era { grid-column: 2; } .wrap { padding-block: 36px 28px; gap: 44px; } }
 </style>
 </head>
 <body>

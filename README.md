@@ -30,7 +30,10 @@ flowchart LR
    only thought of or planned go under "Ideas and notes" on their own. `build.py --check`
    rejects any other field or kind. Within a year the order is finished, running, stopped,
    retired, planned, thought; a row's summary opens on a tap, so the list stays short.
-4. A GitHub Action rebuilds the page on every push and once a day, so the last-commit dates
+4. `data/eras.json` says what I was doing in each period (studying where, working where, or on
+   my own projects), and the page prints it beside every year the period touches, with the
+   months when a period starts or ends inside that year. `build.py --check` checks it too.
+5. A GitHub Action rebuilds the page on every push and once a day, so the last-commit dates
    stay current with nothing to run on my side.
 
 ## Run it
