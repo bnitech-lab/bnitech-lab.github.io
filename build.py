@@ -195,7 +195,7 @@ def render_row(r):
 
 def render(cards, rows, built):
     by_year = {}
-    for r in sorted(rows, key=lambda r: r["started"]):
+    for r in sorted(rows, key=lambda r: r["started"], reverse=True):  # newest first, within a year too
         by_year.setdefault(r["started"][:4], []).append(r)
     ideas = ""
     if rows:
