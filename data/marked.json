@@ -547,16 +547,6 @@
   },
   {
     "mode": "public",
-    "title": "Office darts tournament",
-    "summary": "Not software: a Monday-afternoon darts tournament I designed for the office, with random teams by skill level, four-player brackets, an entry fee and prizes, run twice.",
-    "stack": [
-      "Notion"
-    ],
-    "stage": "finished",
-    "started": "2024-06"
-  },
-  {
-    "mode": "public",
     "title": "Vision auth API",
     "summary": "Developer friends formed a pretend company and split an app into Android, iOS and backend. I owned the authentication API for Google and Apple sign-in: project setup, test endpoints, and the Exposed and PostgreSQL wiring.",
     "stack": [
@@ -657,18 +647,6 @@
   },
   {
     "mode": "public",
-    "title": "git workflow commands",
-    "summary": "Slash commands for the rules I kept repeating: branch, pull request and commit conventions, branch cleanup and README updates.",
-    "stack": [
-      "Claude Code command",
-      "gh CLI"
-    ],
-    "stage": "running",
-    "started": "2026-03",
-    "as_of": "2026-10"
-  },
-  {
-    "mode": "public",
     "title": "GitHub profile as an AI-work portfolio",
     "summary": "My GitHub profile rebuilt to show how I work with Claude Code: five public repositories, a map of how they connect, and a page of five working rules with evidence.",
     "stack": [
@@ -682,18 +660,6 @@
       "2026-10"
     ],
     "repo": "bnivibe/bnivibe"
-  },
-  {
-    "mode": "public",
-    "title": "notebooklm command",
-    "summary": "A slash command that sends outside content to NotebookLM through its CLI and returns a structured analysis.",
-    "stack": [
-      "Claude Code command",
-      "NotebookLM CLI"
-    ],
-    "stage": "running",
-    "started": "2026-03",
-    "as_of": "2026-10"
   },
   {
     "mode": "public",
@@ -717,18 +683,6 @@
     "stage": "retired",
     "started": "2026-06",
     "ended": "2026-07"
-  },
-  {
-    "mode": "public",
-    "title": "Budget runway model",
-    "summary": "A spreadsheet and an HTML scenario page that change income, spending and start dates to see how long savings last.",
-    "stack": [
-      "Markdown",
-      "HTML"
-    ],
-    "stage": "running",
-    "started": "2026-07",
-    "as_of": "2026-10"
   },
   {
     "mode": "public",
@@ -823,18 +777,6 @@
   },
   {
     "mode": "public",
-    "title": "Household ledger",
-    "summary": "Monthly CSV files of real spending with date, currency, amount, category, item and payment method, compared against the plan.",
-    "stack": [
-      "CSV",
-      "Markdown"
-    ],
-    "stage": "running",
-    "started": "2026-07",
-    "as_of": "2026-10"
-  },
-  {
-    "mode": "public",
     "title": "LLM wiki",
     "summary": "A private knowledge wiki that Claude reads and maintains: topic, entity and source pages built from YouTube, the web and keyword research, cross-checked before they are written, with a lint script.",
     "stack": [
@@ -845,18 +787,6 @@
     "stage": "running",
     "started": "2026-07",
     "as_of": "2026-10"
-  },
-  {
-    "mode": "public",
-    "title": "Moving-abroad checklist",
-    "summary": "A 51-item checklist in seven groups, planned backwards from the departure date: luggage, documents, things to cancel or pause, bag contents, expiry dates while away, and a checked-baggage weight budget.",
-    "stack": [
-      "Google Sheets",
-      "Markdown"
-    ],
-    "stage": "finished",
-    "started": "2026-07",
-    "ended": "2026-08"
   },
   {
     "mode": "public",
@@ -885,16 +815,6 @@
     "stage": "running",
     "started": "2026-07",
     "as_of": "2026-10"
-  },
-  {
-    "mode": "public",
-    "title": "23-day English sprint",
-    "summary": "A plan for the three weeks before departure: no new material, three sessions a day of saying what I already had out loud, blunt roleplay with interruptions, and daily scoring.",
-    "stack": [
-      "Markdown"
-    ],
-    "stage": "finished",
-    "started": "2026-08"
   },
   {
     "mode": "public",
@@ -945,18 +865,6 @@
   },
   {
     "mode": "public",
-    "title": "Activity log and form filler",
-    "summary": "A log written at the moment each application is sent, and a script that fills a scanned report form with the rows and saves it as JPG and PDF.",
-    "stack": [
-      "Python",
-      "Google Sheets"
-    ],
-    "stage": "running",
-    "started": "2026-09",
-    "as_of": "2026-10"
-  },
-  {
-    "mode": "public",
     "title": "daily-routine",
     "summary": "A weekly routine with a place and a time slot for each part of the day, and a cloud routine that posts the day's plan to Discord at 05:00 with three Canadian English expressions, plus a study guide page built from the same data.",
     "stack": [
@@ -979,19 +887,6 @@
     ],
     "stage": "running",
     "started": "2026-09",
-    "as_of": "2026-10"
-  },
-  {
-    "mode": "public",
-    "title": "Eight-week listening and shadowing program",
-    "summary": "An eight-week program around one TV drama: listening without subtitles, repeating, dictation and shadowing, scheduled by where I am each day and whether I can speak aloud there.",
-    "stack": [
-      "Markdown",
-      "HTML"
-    ],
-    "stage": "running",
-    "started": "2026-09",
-    "ended": "2026-11",
     "as_of": "2026-10"
   },
   {
