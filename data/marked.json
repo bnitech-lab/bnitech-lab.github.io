@@ -505,8 +505,7 @@
       "WebFlux"
     ],
     "stage": "stopped",
-    "started": "2023-05",
-    "repo": "FG-Toy/Smart-BOT"
+    "started": "2023-05"
   },
   {
     "mode": "private",
@@ -563,8 +562,7 @@
       "Tailwind"
     ],
     "stage": "stopped",
-    "started": "2025-01",
-    "repo": "bnitech/LMK_api"
+    "started": "2025-01"
   },
   {
     "mode": "public",
