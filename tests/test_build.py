@@ -112,3 +112,26 @@ if __name__ == "__main__":
         self.assertLess(page.index("K-01"), page.index("K-03"))
         self.assertLess(page.index("K-03"), page.index("K-02"))
 
+    def test_kind_must_be_known(self):
+        problems = build.check_rows([private_row(kind="hobby")])
+        self.assertTrue(any("kind" in p for p in problems))
+        self.assertEqual(build.check_rows([private_row(kind="contribution")]), [])
+
+    def test_year_groups_projects_then_contributions_then_notes(self):
+        rows = [dict(private_row(stage="planned", started="2016-01"), code_name="K-IDEA"),
+                dict(private_row(stage="finished", started="2016-02", kind="contribution"), code_name="K-CONTRIB"),
+                dict(private_row(stage="finished", started="2016-03"), code_name="K-PROJ")]
+        page = build.render([], rows, "2026-01-02")
+        self.assertLess(page.index("K-PROJ"), page.index("Contributions"))
+        self.assertLess(page.index("Contributions"), page.index("K-CONTRIB"))
+        self.assertLess(page.index("K-CONTRIB"), page.index("Ideas and notes"))
+        self.assertLess(page.index("Ideas and notes"), page.index("K-IDEA"))
+
+    def test_summary_opens_on_tap_and_private_rows_do_not_fold(self):
+        rows = [{"mode": "public", "title": "Open me", "stack": [], "stage": "finished", "started": "2016",
+                 "summary": "The details."},
+                private_row(started="2016")]
+        page = build.render([], rows, "2026-01-02")
+        self.assertIn("<details>", page)
+        self.assertEqual(page.count("<details>"), 1)
+

@@ -302,7 +302,8 @@
     ],
     "stage": "finished",
     "started": "2017-03",
-    "ended": "2017-09"
+    "ended": "2017-09",
+    "kind": "note"
   },
   {
     "mode": "public",
@@ -315,7 +316,8 @@
     ],
     "stage": "stopped",
     "started": "2017-03",
-    "ended": "2020-09"
+    "ended": "2020-09",
+    "kind": "note"
   },
   {
     "mode": "public",
@@ -359,7 +361,8 @@
       "rst"
     ],
     "stage": "finished",
-    "started": "2018"
+    "started": "2018",
+    "kind": "contribution"
   },
   {
     "mode": "public",
@@ -402,7 +405,8 @@
     ],
     "stage": "running",
     "started": "2019-12",
-    "as_of": "2021"
+    "as_of": "2021",
+    "kind": "contribution"
   },
   {
     "mode": "public",
@@ -413,7 +417,8 @@
     ],
     "stage": "finished",
     "started": "2020-08",
-    "ended": "2020-09"
+    "ended": "2020-09",
+    "kind": "note"
   },
   {
     "mode": "public",
@@ -465,7 +470,8 @@
       "AsciiDoc"
     ],
     "stage": "stopped",
-    "started": "2021-04"
+    "started": "2021-04",
+    "kind": "note"
   },
   {
     "mode": "public",
@@ -493,7 +499,8 @@
     ],
     "stage": "stopped",
     "started": "2021-08",
-    "ended": "2022-10"
+    "ended": "2022-10",
+    "kind": "contribution"
   },
   {
     "mode": "public",
@@ -534,7 +541,8 @@
     ],
     "stage": "stopped",
     "started": "2024-02",
-    "ended": "2024-07"
+    "ended": "2024-07",
+    "kind": "contribution"
   },
   {
     "mode": "public",
@@ -603,7 +611,8 @@
     ],
     "stage": "running",
     "started": "2026-03",
-    "as_of": "2026-07"
+    "as_of": "2026-07",
+    "kind": "contribution"
   },
   {
     "mode": "public",

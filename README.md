@@ -25,7 +25,11 @@ flowchart LR
 3. `data/marked.json` holds the ideas I chose to show by year. My full list of ideas lives
    elsewhere and never enters this repository. A row is either `public` (title, stack, stage,
    dates, an optional one-line summary and repository) or `private` (a code name, title, stack,
-   stage and dates only). `build.py --check` rejects any other field.
+   stage and dates only). An optional `kind` puts a row under a year's "Contributions" (my part
+   in someone else's work) or "Ideas and notes" (writing or study, not software); rows that were
+   only thought of or planned go under "Ideas and notes" on their own. `build.py --check`
+   rejects any other field or kind. Within a year the order is finished, running, stopped,
+   retired, planned, thought; a row's summary opens on a tap, so the list stays short.
 4. A GitHub Action rebuilds the page on every push and once a day, so the last-commit dates
    stay current with nothing to run on my side.
 

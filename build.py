@@ -33,7 +33,8 @@ STAGES = {
     "running": "Running",
     "retired": "Retired",
 }
-COMMON_FIELDS = {"mode", "title", "stack", "stage", "started", "restarted", "ended", "as_of"}
+COMMON_FIELDS = {"mode", "title", "stack", "stage", "started", "restarted", "ended", "as_of", "kind"}
+KINDS = {"project", "contribution", "note"}  # contribution: my part in someone else's work; note: writing, study, not software
 ALLOWED = {
     "private": COMMON_FIELDS | {"code_name"},
     "public": COMMON_FIELDS | {"summary", "repo"},
@@ -82,6 +83,8 @@ def check_rows(rows):
             problems.append("%s: repo must look like owner/name" % where)
         if row.get("stage") == "running" and not row.get("repo") and not row.get("as_of"):
             problems.append("%s: a running idea without a repo needs as_of" % where)
+        if "kind" in row and row["kind"] not in KINDS:
+            problems.append("%s: kind must be one of %s" % (where, ", ".join(sorted(KINDS))))
     return problems
 
 
@@ -177,6 +180,7 @@ def render_card(c):
 
 
 def render_row(r):
+    """One row: the title line is always visible; the summary opens on a tap."""
     stage = STAGES[r["stage"]]
     stack = ", ".join(html.escape(s) for s in r.get("stack", []))
     if r["mode"] == "private":
@@ -185,13 +189,39 @@ def render_row(r):
         name = f'<a href="https://github.com/{html.escape(r["repo"])}">{html.escape(r["title"])}</a>'
     else:
         name = html.escape(r["title"])
-    summary = f'<p class="summary">{inline(r["summary"])}</p>' if r.get("summary") else ""
-    return f"""
+    meta = f'<span class="stage stage-{r["stage"]}">{stage}</span> {years(r)}{(" &middot; " + stack) if stack else ""}'
+    if not r.get("summary"):
+        return f"""
         <li class="row">
           <p class="row-title">{name}</p>
-          {summary}
-          <p class="row-meta"><span class="stage stage-{r['stage']}">{stage}</span> {years(r)}{(' &middot; ' + stack) if stack else ''}</p>
+          <p class="row-meta">{meta}</p>
         </li>"""
+    return f"""
+        <li class="row">
+          <details>
+            <summary><span class="row-title">{name}</span><span class="row-meta">{meta}</span></summary>
+            <p class="summary">{inline(r["summary"])}</p>
+          </details>
+        </li>"""
+
+
+def kind_of(r):
+    if r["stage"] in ("thought", "planned"):
+        return "note"
+    return r.get("kind", "project")
+
+
+def render_year(year, items):
+    groups = [("project", None), ("contribution", "Contributions"), ("note", "Ideas and notes")]
+    out = f'\n      <section class="year"><h3>{year}</h3><div class="year-body">'
+    for kind, label in groups:
+        rs = [r for r in items if kind_of(r) == kind]
+        if not rs:
+            continue
+        if label:
+            out += f'<p class="label">{label}</p>'
+        out += f'<ul class="{kind}s">{"".join(render_row(r) for r in rs)}\n      </ul>'
+    return out + "</div></section>"
 
 
 def render(cards, rows, built):
@@ -205,9 +235,7 @@ def render(cards, rows, built):
         by_year.setdefault(r["started"][:4], []).append(r)
     ideas = ""
     if rows:
-        groups = "".join(
-            f'\n      <section class="year"><h3>{y}</h3><ul>{"".join(render_row(r) for r in items)}\n      </ul></section>'
-            for y, items in by_year.items())
+        groups = "".join(render_year(y, items) for y, items in by_year.items())
         ideas = f"""
     <section class="ideas" aria-labelledby="ideas-h">
       <h2 id="ideas-h">Ideas by the year they started</h2>
