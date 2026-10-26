@@ -135,3 +135,23 @@ if __name__ == "__main__":
         self.assertIn("<details>", page)
         self.assertEqual(page.count("<details>"), 1)
 
+    def test_eras_are_checked_and_shown_beside_the_years_they_overlap(self):
+        bad = build.check_eras([{"from": "yesterday", "label": "x"}, {"from": "2011", "to": "2012", "label": "x", "colour": "red"}])
+        self.assertEqual(len(bad), 2)
+        eras = [{"from": "2011-03", "to": "2013-02", "label": "Student", "where": "Example University"},
+                {"from": "2018-12", "to": "2021-07", "label": "Software engineer", "where": "Example Corp"}]
+        self.assertEqual(build.check_eras(eras), [])
+        self.assertEqual([e["where"] for e in build.eras_for_year(eras, "2012")], ["Example University"])
+        self.assertEqual(build.eras_for_year(eras, "2015"), [])
+        rows = [dict(private_row(started="2012"), code_name="K-A"), dict(private_row(started="2019"), code_name="K-B")]
+        page = build.render([], rows, "2026-01-02", eras)
+        self.assertIn("Example University", page)
+        self.assertIn("Example Corp", page)
+
+    def test_split_years_say_which_months_each_era_covers(self):
+        eras = [{"from": "2018-12", "to": "2021-07", "label": "Software engineer", "where": "Example Corp"},
+                {"from": "2021-08", "label": "Own projects"}]
+        spans = [e["span"] for e in build.eras_for_year(eras, "2021")]
+        self.assertEqual(spans, ["to Jul", "from Aug"])
+        self.assertEqual([e["span"] for e in build.eras_for_year(eras, "2020")], [""])
+
