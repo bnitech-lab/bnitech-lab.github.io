@@ -68,6 +68,20 @@
   },
   {
     "mode": "public",
+    "title": "Excel download module",
+    "summary": "A small Spring Boot module over Apache POI for Excel downloads: typed cells with a theme, data type and size, header and body layers, merges and blank rows, so a report is written as named fields and records instead of cell indexes and style objects. A sample controller shows it.",
+    "stack": [
+      "Spring Boot",
+      "Apache POI",
+      "JPA"
+    ],
+    "stage": "finished",
+    "started": "2020-10",
+    "ended": "2021-04",
+    "repo": "bnitech/excel-download"
+  },
+  {
+    "mode": "public",
     "title": "API documentation from tests",
     "summary": "Found Spring Auto REST Docs for a Nexon project that had no tests, wired it into CI so the API docs come from tests, and presented it to the team. Another project adopted it.",
     "stack": [
@@ -77,7 +91,8 @@
     ],
     "stage": "finished",
     "started": "2021-02",
-    "ended": "2021-04"
+    "ended": "2021-04",
+    "repo": "bnitech/spring-rest-docs"
   },
   {
     "mode": "private",
