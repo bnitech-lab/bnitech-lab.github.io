@@ -1,6 +1,103 @@
 [
   {
     "mode": "public",
+    "title": "BLUE DICE GAME",
+    "summary": "A two-player dice race on a 19-square board in Visual Basic 6, my first university team project (five students; I planned the program).",
+    "stack": [
+      "Visual Basic 6"
+    ],
+    "stage": "finished",
+    "started": "2011-04",
+    "ended": "2011-06",
+    "repo": "bnitech-lab/blue-dice-game-2011"
+  },
+  {
+    "mode": "public",
+    "title": "BNI's Cafe board site",
+    "summary": "A cafe-style bulletin board built three times: an HTML frameset home page, a Classic ASP version with members and admin pages, and a PHP version with member ranks, per-rank read, write and delete rights, replies and password recovery.",
+    "stack": [
+      "HTML",
+      "Classic ASP",
+      "PHP",
+      "MySQL"
+    ],
+    "stage": "finished",
+    "started": "2011-05",
+    "ended": "2012-12"
+  },
+  {
+    "mode": "private",
+    "code_name": "IDEA-2011-1",
+    "title": "Mobile parking payment",
+    "stack": [],
+    "stage": "planned",
+    "started": "2011-05"
+  },
+  {
+    "mode": "public",
+    "title": "DHTML calculator",
+    "summary": "A web calculator with digits, operators, clear and backspace, evaluated with eval, plus a short write-up.",
+    "stack": [
+      "HTML",
+      "JavaScript"
+    ],
+    "stage": "finished",
+    "started": "2011-09"
+  },
+  {
+    "mode": "public",
+    "title": "Lotto number picker",
+    "summary": "A lottery number picker written three times while learning each language: a VB.NET form for a class, then a Win32 window program, then a Java Swing version.",
+    "stack": [
+      "VB.NET",
+      "C++ Win32",
+      "Java Swing"
+    ],
+    "stage": "finished",
+    "started": "2011-09",
+    "ended": "2012",
+    "restarted": [
+      "2012-07",
+      "2012-09"
+    ]
+  },
+  {
+    "mode": "public",
+    "title": "Mukbo DB",
+    "summary": "A C++ console maze game from an OOP course: steer DB through the map and eat every piece of bread. Monsters and stage select were never finished. Its title screen already said BNI Tech.",
+    "stack": [
+      "C++",
+      "Windows console"
+    ],
+    "stage": "stopped",
+    "started": "2011-09",
+    "ended": "2011-10",
+    "repo": "bnitech-lab/mukbo-db-2011"
+  },
+  {
+    "mode": "public",
+    "title": "Number base converter",
+    "summary": "A small Windows form that converts numbers between bases.",
+    "stack": [
+      "VB.NET"
+    ],
+    "stage": "finished",
+    "started": "2011-09"
+  },
+  {
+    "mode": "public",
+    "title": "Rolly Poly",
+    "summary": "An unfinished two-player property-trading board game in VB.NET by a team of three; I wrote the ranking and buy screens.",
+    "stack": [
+      "VB.NET",
+      "Windows Forms"
+    ],
+    "stage": "stopped",
+    "started": "2011-11",
+    "repo": "bnitech-lab/rolly-poly-2011"
+  },
+  {
+    "mode": "public",
     "title": "Teris",
     "summary": "A console Tetris in C with hold, combos and a two-piece preview. In 2026 I came back to it and ported it to macOS.",
     "stack": [
@@ -17,12 +114,104 @@
     "repo": "bnitech/Teris_2011"
   },
   {
-    "mode": "private",
-    "code_name": "IDEA-2011-1",
-    "title": "Mobile parking payment",
-    "stack": [],
-    "stage": "planned",
-    "started": "2011-05"
+    "mode": "public",
+    "title": "Campus guide",
+    "summary": "A Flash app for parents, new students and visitors: pick a start and a destination and a character walks the path to the building; it also finds restrooms, ATMs and departments. A five-person graduation project; I led the team.",
+    "stack": [
+      "Adobe Flash",
+      "ActionScript"
+    ],
+    "stage": "finished",
+    "started": "2012-03",
+    "ended": "2012-10"
+  },
+  {
+    "mode": "public",
+    "title": "PHP sign-up and login pages",
+    "summary": "Sign-up form, login, profile editing and duplicate checks for id and phone number, built step by step as a course report.",
+    "stack": [
+      "PHP",
+      "HTML",
+      "MySQL"
+    ],
+    "stage": "finished",
+    "started": "2012-04",
+    "ended": "2012-06"
+  },
+  {
+    "mode": "public",
+    "title": "Space Shooter",
+    "summary": "A Galaga-style shooter in C++ on the plain Win32 API with double-buffered GDI drawing; one stage is playable. The art was redrawn for this release.",
+    "stack": [
+      "C++",
+      "Win32 GDI"
+    ],
+    "stage": "stopped",
+    "started": "2012-04",
+    "ended": "2012-07",
+    "repo": "bnitech-lab/space-shooter-2012"
+  },
+  {
+    "mode": "public",
+    "title": "Shell phone book",
+    "summary": "A menu-driven bash script that keeps a phone book in a file, in two versions.",
+    "stack": [
+      "Bash"
+    ],
+    "stage": "finished",
+    "started": "2012-05",
+    "ended": "2012-06"
+  },
+  {
+    "mode": "public",
+    "title": "Bookstore manager",
+    "summary": "A bookstore program with a login window and tabs to search, edit and add or remove books by ISBN, title, author, category, publisher and stock. The edit and add tabs stayed empty.",
+    "stack": [
+      "Java Swing",
+      "MySQL"
+    ],
+    "stage": "stopped",
+    "started": "2012-06"
+  },
+  {
+    "mode": "public",
+    "title": "PackMan plus",
+    "summary": "A Java Swing maze game: eat every coin while robots roam, with items and three difficulty levels. The art was redrawn for this release.",
+    "stack": [
+      "Java",
+      "Swing"
+    ],
+    "stage": "finished",
+    "started": "2012-09",
+    "ended": "2012-11",
+    "repo": "bnitech-lab/packman-plus-2012"
+  },
+  {
+    "mode": "public",
+    "title": "Ajotchi basketball matching app",
+    "summary": "Online basketball communities lived in cafes with no app, so this one matched teams and opponents by location, let players register and like courts, and kept pickup teams and friends for the next game. A five-person contest team; I led it.",
+    "stack": [
+      "Android",
+      "Java",
+      "Parse",
+      "Naver Maps API"
+    ],
+    "stage": "stopped",
+    "started": "2014-09",
+    "ended": "2015-06"
+  },
+  {
+    "mode": "public",
+    "title": "Angry Pokemons",
+    "summary": "An Android side-scrolling action game, an unofficial student fan game. The characters and music are removed from the published code.",
+    "stack": [
+      "Java",
+      "Android"
+    ],
+    "stage": "finished",
+    "started": "2014-10",
+    "ended": "2014-12",
+    "repo": "bnitech-lab/angry-pokemons-2014"
   },
   {
     "mode": "private",
@@ -39,6 +228,19 @@
   },
   {
     "mode": "public",
+    "title": "ESC: Enjoy Suwon Culture",
+    "summary": "An Android app that put Suwon's community-centre culture programs, from the city's open data, on the phone. Passed the first round of the city's open-data contest. A three-person team; I led development.",
+    "stack": [
+      "Android",
+      "Java",
+      "Suwon open data"
+    ],
+    "stage": "finished",
+    "started": "2015-09",
+    "ended": "2015-12"
+  },
+  {
+    "mode": "public",
     "title": "WarmyLand",
     "summary": "A first-person 3D exploration adventure on a penguin planet, built by a three-person university game club team. I led the Unity development.",
     "stack": [
@@ -50,6 +252,122 @@
     "started": "2015-11",
     "ended": "2016-02",
     "repo": "CienProject2015/ProjectOP"
+  },
+  {
+    "mode": "public",
+    "title": "ChatProgram",
+    "summary": "An Android chat prototype that tried AWS Cognito Sync to keep a comment and chat list in step with a server. One screen and an adapter; what it was for is not recorded.",
+    "stack": [
+      "Android",
+      "Java",
+      "AWS Cognito Sync"
+    ],
+    "stage": "stopped",
+    "started": "2016-01"
+  },
+  {
+    "mode": "public",
+    "title": "Font preview site",
+    "summary": "A site to try fonts in the browser, change size and colour, and save the result as a PNG, with a searchable font list and recent picks. Free fonts only.",
+    "stack": [
+      "Node.js",
+      "Express",
+      "EJS",
+      "MySQL",
+      "jQuery"
+    ],
+    "stage": "stopped",
+    "started": "2016-02"
+  },
+  {
+    "mode": "public",
+    "title": "Thesis on smartphone game UI",
+    "summary": "A graduation thesis comparing smartphone games by their user interface, as one of the factors behind a hit and its staying power, meant to inform later game projects.",
+    "stack": [],
+    "stage": "finished",
+    "started": "2016-11"
+  },
+  {
+    "mode": "public",
+    "title": "3D Maze",
+    "summary": "A 3D maze escape game in C++ and OpenGL with three camera views, made by a team of three; I wrote the game code.",
+    "stack": [
+      "C++",
+      "OpenGL",
+      "GLUT"
+    ],
+    "stage": "finished",
+    "started": "2016-12",
+    "repo": "bnitech-lab/maze-3d-2016"
+  },
+  {
+    "mode": "public",
+    "title": "Java lecture series",
+    "summary": "Slides, notes, mind maps and an English-Korean glossary for teaching object-oriented basics in Java: classes and objects, variables and methods, constructors, overloading, recursion. Eleven revisions of chapter one.",
+    "stack": [
+      "PowerPoint",
+      "XMind"
+    ],
+    "stage": "finished",
+    "started": "2017-03",
+    "ended": "2017-09"
+  },
+  {
+    "mode": "public",
+    "title": "Tech blog",
+    "summary": "A study blog in two generations: first on Tistory, then a Jekyll static site with notes from Kotlin in Action. Last post in 2020.",
+    "stack": [
+      "Tistory",
+      "Jekyll",
+      "GitHub Pages"
+    ],
+    "stage": "stopped",
+    "started": "2017-03",
+    "ended": "2020-09"
+  },
+  {
+    "mode": "public",
+    "title": "CrashTower",
+    "summary": "An unfinished real-time card battle prototype for Android by a student team; I wrote the battle screen.",
+    "stack": [
+      "Java",
+      "Android"
+    ],
+    "stage": "stopped",
+    "started": "2017-05",
+    "ended": "2017-08",
+    "repo": "bnitech-lab/crash-tower-2017"
+  },
+  {
+    "mode": "public",
+    "title": "Dorent",
+    "summary": "A peer-to-peer rental site that connects people who have things to lend with people who need them, the first product of a small startup where I worked part time and led development.",
+    "stack": [
+      "Spring Boot",
+      "Spring MVC",
+      "MyBatis",
+      "JSP",
+      "jQuery",
+      "Bootstrap",
+      "MySQL",
+      "AWS EC2",
+      "AWS S3"
+    ],
+    "stage": "finished",
+    "started": "2017-08",
+    "ended": "2017-12"
+  },
+  {
+    "mode": "public",
+    "title": "OpenStack localization contributhon",
+    "summary": "Translated OpenStack docs, the dashboard and a white paper into Korean, reviewed typo fixes, and wrote the activity up in rst, as part of the 2018 contributhon.",
+    "stack": [
+      "Zanata",
+      "Gerrit",
+      "rst"
+    ],
+    "stage": "finished",
+    "started": "2018"
   },
   {
     "mode": "public",
@@ -68,6 +386,46 @@
   },
   {
     "mode": "public",
+    "title": "BNI-Board",
+    "summary": "A bulletin board in plain JavaScript; only an index page and one script survive.",
+    "stack": [
+      "JavaScript",
+      "HTML"
+    ],
+    "stage": "stopped",
+    "started": "2019-12"
+  },
+  {
+    "mode": "public",
+    "title": "Nexon in-house survey service",
+    "summary": "An in-house survey service used on the web and inside games, which I maintained and improved at Nexon: a faster Excel export and a save history for questionnaires. Not my idea; my share was the upkeep and those improvements.",
+    "stack": [
+      "Java",
+      "Spring MVC",
+      "Vue.js",
+      "JPA",
+      "QueryDSL",
+      "MySQL",
+      "Redis",
+      "AWS"
+    ],
+    "stage": "running",
+    "started": "2019-12",
+    "as_of": "2021"
+  },
+  {
+    "mode": "public",
+    "title": "Be Native shadowing study",
+    "summary": "A Notion system I designed to run an English shadowing study group: notices, rules with fines and vocabulary tests, schedules, a test archive and drama-script materials.",
+    "stack": [
+      "Notion"
+    ],
+    "stage": "finished",
+    "started": "2020-08",
+    "ended": "2020-09"
+  },
+  {
+    "mode": "public",
     "title": "Excel download module",
     "summary": "A small Spring Boot module over Apache POI for Excel downloads: typed cells with a theme, data type and size, header and body layers, merges and blank rows, so a report is written as named fields and records instead of cell indexes and style objects. A sample controller shows it.",
     "stack": [
@@ -79,6 +437,20 @@
     "started": "2020-10",
     "ended": "2021-04",
     "repo": "bnitech/excel-download"
+  },
+  {
+    "mode": "public",
+    "title": "bnilive shop skeleton",
+    "summary": "The skeleton of a shop-style service: a JWT login server, a product API and a Vue client, with notes on setting up the server on AWS.",
+    "stack": [
+      "Spring Boot",
+      "JWT",
+      "Vue.js",
+      "AWS EC2"
+    ],
+    "stage": "stopped",
+    "started": "2020-11",
+    "ended": "2021-05"
   },
   {
     "mode": "public",
@@ -95,6 +467,57 @@
     "repo": "bnitech/spring-rest-docs"
   },
   {
+    "mode": "public",
+    "title": "knowledge-repository",
+    "summary": "A repository meant to collect computer-science notes in AsciiDoc. Only the table of contents was written.",
+    "stack": [
+      "AsciiDoc"
+    ],
+    "stage": "stopped",
+    "started": "2021-04"
+  },
+  {
+    "mode": "public",
+    "title": "WDYW",
+    "summary": "A personal survey service meant to explore personalization, with a roadmap in Jira and Confluence. The code stopped at a user entity and its service.",
+    "stack": [
+      "Java",
+      "Spring Boot",
+      "JPA"
+    ],
+    "stage": "stopped",
+    "started": "2021-05"
+  },
+  {
+    "mode": "public",
+    "title": "Themeparkers backend",
+    "summary": "A theme-park app someone else started, with attraction guides and wait-time statistics. I did the backend and led the move from a Node monolith to Spring Boot services; my part ended in 2022.",
+    "stack": [
+      "Java",
+      "Kotlin",
+      "Spring Boot",
+      "MongoDB",
+      "AWS EC2",
+      "Jenkins"
+    ],
+    "stage": "stopped",
+    "started": "2021-08",
+    "ended": "2022-10"
+  },
+  {
+    "mode": "public",
+    "title": "Smart-BOT",
+    "summary": "A Spring server skeleton that receives Discord bot requests. Three commits and a sample that echoes a path value; what it was for is not recorded.",
+    "stack": [
+      "Kotlin",
+      "Spring Boot",
+      "WebFlux"
+    ],
+    "stage": "stopped",
+    "started": "2023-05",
+    "repo": "FG-Toy/Smart-BOT"
+  },
+  {
     "mode": "private",
     "code_name": "IDEA-2023-1",
     "title": "Office seat reservation",
@@ -107,6 +530,60 @@
     "stage": "stopped",
     "started": "2023-06",
     "ended": "2024-08"
+  },
+  {
+    "mode": "public",
+    "title": "Drawli coloring service",
+    "summary": "A drawing and coloring service at a friend's company. I helped unpaid for a few months on the coloring AI model, the Kakao login setup and a server improvement plan.",
+    "stack": [
+      "Vue",
+      "Node.js",
+      "Express",
+      "TypeScript",
+      "TypeORM"
+    ],
+    "stage": "stopped",
+    "started": "2024-02",
+    "ended": "2024-07"
+  },
+  {
+    "mode": "public",
+    "title": "Office darts tournament",
+    "summary": "Not software: a Monday-afternoon darts tournament I designed for the office, with random teams by skill level, four-player brackets, an entry fee and prizes, run twice.",
+    "stack": [
+      "Notion"
+    ],
+    "stage": "finished",
+    "started": "2024-06"
+  },
+  {
+    "mode": "public",
+    "title": "Vision auth API",
+    "summary": "Developer friends formed a pretend company and split an app into Android, iOS and backend. I owned the authentication API for Google and Apple sign-in: project setup, test endpoints, and the Exposed and PostgreSQL wiring.",
+    "stack": [
+      "Kotlin",
+      "Spring Boot",
+      "Exposed",
+      "PostgreSQL"
+    ],
+    "stage": "stopped",
+    "started": "2024-06",
+    "ended": "2024-09"
+  },
+  {
+    "mode": "public",
+    "title": "LMK",
+    "summary": "Three service skeletons in one go, a core API, a webhook receiver and a web app, one commit each. What LMK stands for is not recorded.",
+    "stack": [
+      "Kotlin",
+      "Spring Boot",
+      "WebFlux",
+      "Remix",
+      "Tailwind"
+    ],
+    "stage": "stopped",
+    "started": "2025-01",
+    "repo": "bnitech/LMK_api"
   },
   {
     "mode": "public",
@@ -136,6 +613,438 @@
   },
   {
     "mode": "public",
+    "title": "Bloomlog",
+    "summary": "A personal app for people who visit skin clinics: treatment records, passes, points, payments and treatment cycles in one place, with a skin quiz and three languages. Someone else's app; my part was a security review and the Play release preparation.",
+    "stack": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Supabase",
+      "Capacitor"
+    ],
+    "stage": "running",
+    "started": "2026-03",
+    "as_of": "2026-07"
+  },
+  {
+    "mode": "public",
+    "title": "Claude done-notification hook",
+    "summary": "A hook that posted the project, branch, time taken, last request and changed files to Discord when a Claude session finished. Removed after a few days.",
+    "stack": [
+      "Claude Code hook",
+      "Shell",
+      "Discord webhook"
+    ],
+    "stage": "retired",
+    "started": "2026-03",
+    "ended": "2026-03"
+  },
+  {
+    "mode": "public",
+    "title": "dawnbase",
+    "summary": "A personal knowledge archive where Claude writes every article from a link or my notes and a read-only site shows them. Phase one finished and never deployed; search, tags and auth were planned and not built.",
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Drizzle",
+      "Vitest",
+      "Playwright"
+    ],
+    "stage": "stopped",
+    "started": "2026-03",
+    "ended": "2026-06",
+    "repo": "bnivibe/dawnbase"
+  },
+  {
+    "mode": "public",
+    "title": "git workflow commands",
+    "summary": "Slash commands for the rules I kept repeating: branch, pull request and commit conventions, branch cleanup and README updates.",
+    "stack": [
+      "Claude Code command",
+      "gh CLI"
+    ],
+    "stage": "running",
+    "started": "2026-03",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "GitHub profile as an AI-work portfolio",
+    "summary": "My GitHub profile rebuilt to show how I work with Claude Code: five public repositories, a map of how they connect, and a page of five working rules with evidence.",
+    "stack": [
+      "Markdown",
+      "SVG",
+      "Python"
+    ],
+    "stage": "finished",
+    "started": "2026-03",
+    "restarted": [
+      "2026-10"
+    ],
+    "repo": "bnivibe/bnivibe"
+  },
+  {
+    "mode": "public",
+    "title": "notebooklm command",
+    "summary": "A slash command that sends outside content to NotebookLM through its CLI and returns a structured analysis.",
+    "stack": [
+      "Claude Code command",
+      "NotebookLM CLI"
+    ],
+    "stage": "running",
+    "started": "2026-03",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "dooray-analyze",
+    "summary": "A Claude Code skill that pulls Dooray tasks and wiki pages through a CLI, keeps the originals and writes an insight analysis of each.",
+    "stack": [
+      "Claude Code skill",
+      "dooray CLI"
+    ],
+    "stage": "finished",
+    "started": "2026-06"
+  },
+  {
+    "mode": "public",
+    "title": "Personal knowledge system",
+    "summary": "A plan to rebuild the structure of a company knowledge system on my laptop. Only the first stage was done; it was dropped the day the LLM wiki started.",
+    "stack": [
+      "Markdown",
+      "Claude Code skill"
+    ],
+    "stage": "retired",
+    "started": "2026-06",
+    "ended": "2026-07"
+  },
+  {
+    "mode": "public",
+    "title": "Budget runway model",
+    "summary": "A spreadsheet and an HTML scenario page that change income, spending and start dates to see how long savings last.",
+    "stack": [
+      "Markdown",
+      "HTML"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "claude-config",
+    "summary": "My Claude Code setup as code: instructions, skills, hooks, scripts, memory and launchd jobs in a private git repository, restored onto a new machine by one bootstrap script.",
+    "stack": [
+      "git",
+      "Python",
+      "Shell",
+      "launchd"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "cs-prep",
+    "summary": "A Claude Code skill for computer-science and software-engineering questions: answers checked against primary sources, drills from a question bank with three kinds of follow-up pressure, and capture of the questions a real interview asked.",
+    "stack": [
+      "Claude Code skill",
+      "Markdown question bank"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "dawndeck",
+    "summary": "A personal start page for the laptop and the phone: city clocks and weather, an exchange rate, wiki search, spaced-repetition cards for English and CS, countdown banners and an expiry radar. Visitors read, the owner signs in.",
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Drizzle",
+      "PostgreSQL",
+      "Auth.js",
+      "Tailwind"
+    ],
+    "stage": "stopped",
+    "started": "2026-07",
+    "ended": "2026-08"
+  },
+  {
+    "mode": "public",
+    "title": "dooray-task-post",
+    "summary": "A slash command that creates Dooray tasks with content written to a set of rules.",
+    "stack": [
+      "Claude Code command"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Drive output archive and audit",
+    "summary": "A rule and a check: everything Claude produces for me goes into one Drive folder tree, readable from any device, and a command scans every session transcript for documents that were left outside it.",
+    "stack": [
+      "Google Drive",
+      "Python",
+      "git"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "english-practice",
+    "summary": "A Claude Code skill for everyday Canadian English: free talk, drills and message checks, with every correction and suggested phrase kept in a Drive corpus. A phone route lets a chat on the go land in the same corpus.",
+    "stack": [
+      "Claude Code skill",
+      "Markdown corpus"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "english-review",
+    "summary": "A skill that turned my tutoring archive and a Canadian phrasebook into Leitner review cards and watched their quality. Card-making stopped in 2026-10; the archive continues.",
+    "stack": [
+      "Claude Code skill",
+      "Python",
+      "Leitner boxes"
+    ],
+    "stage": "stopped",
+    "started": "2026-07",
+    "ended": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Household ledger",
+    "summary": "Monthly CSV files of real spending with date, currency, amount, category, item and payment method, compared against the plan.",
+    "stack": [
+      "CSV",
+      "Markdown"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "LLM wiki",
+    "summary": "A private knowledge wiki that Claude reads and maintains: topic, entity and source pages built from YouTube, the web and keyword research, cross-checked before they are written, with a lint script.",
+    "stack": [
+      "Markdown",
+      "Python",
+      "git"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Moving-abroad checklist",
+    "summary": "A 51-item checklist in seven groups, planned backwards from the departure date: luggage, documents, things to cancel or pause, bag contents, expiry dates while away, and a checked-baggage weight budget.",
+    "stack": [
+      "Google Sheets",
+      "Markdown"
+    ],
+    "stage": "finished",
+    "started": "2026-07",
+    "ended": "2026-08"
+  },
+  {
+    "mode": "public",
+    "title": "Two-laptop setup",
+    "summary": "A way to send Claude work from a portable laptop to an always-on one at home, with machine identification hooks. Retired when the second laptop was sold.",
+    "stack": [
+      "Tailscale",
+      "SSH",
+      "Shell",
+      "tmux"
+    ],
+    "stage": "retired",
+    "started": "2026-07",
+    "ended": "2026-08"
+  },
+  {
+    "mode": "public",
+    "title": "wiki-ingest",
+    "summary": "A Claude Code skill that takes a URL or a topic through capture, a skeptic's cross-check and composition, with two human review gates, and adds the result to the wiki.",
+    "stack": [
+      "Claude Code skill",
+      "Python",
+      "yt-dlp",
+      "subagents"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "23-day English sprint",
+    "summary": "A plan for the three weeks before departure: no new material, three sessions a day of saying what I already had out loud, blunt roleplay with interruptions, and daily scoring.",
+    "stack": [
+      "Markdown"
+    ],
+    "stage": "finished",
+    "started": "2026-08"
+  },
+  {
+    "mode": "public",
+    "title": "at-keyboard",
+    "summary": "A command that estimates whether I am at the laptop from the last keyboard or trackpad input and the screen-lock state, for sessions driven from a phone.",
+    "stack": [
+      "Shell"
+    ],
+    "stage": "finished",
+    "started": "2026-08"
+  },
+  {
+    "mode": "public",
+    "title": "jd-analysis",
+    "summary": "A skill that reads a job description or a recruiter message, judges the employment structure first, records it in a numbered ledger and builds a tailored résumé per application, reviewed twice before it is published as a document.",
+    "stack": [
+      "Claude Code skill",
+      "Python",
+      "Gemini CLI",
+      "Google Docs"
+    ],
+    "stage": "running",
+    "started": "2026-08",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "vancouver-log",
+    "summary": "A skill that keeps diary-style entries about life in Vancouver exactly as told, backfills past days, checks settling-in progress and keeps a separate list of writing seeds.",
+    "stack": [
+      "Claude Code skill",
+      "Markdown"
+    ],
+    "stage": "running",
+    "started": "2026-08",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "whereami",
+    "summary": "A small macOS app and command that print where the laptop is: coordinates, accuracy and an address. Started after a location guessed from memory was 4.5 km off.",
+    "stack": [
+      "Swift",
+      "Shell"
+    ],
+    "stage": "finished",
+    "started": "2026-08"
+  },
+  {
+    "mode": "public",
+    "title": "Activity log and form filler",
+    "summary": "A log written at the moment each application is sent, and a script that fills a scanned report form with the rows and saves it as JPG and PDF.",
+    "stack": [
+      "Python",
+      "Google Sheets"
+    ],
+    "stage": "running",
+    "started": "2026-09",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "daily-routine",
+    "summary": "A weekly routine with a place and a time slot for each part of the day, and a cloud routine that posts the day's plan to Discord at 05:00 with three Canadian English expressions, plus a study guide page built from the same data.",
+    "stack": [
+      "Python",
+      "HTML",
+      "Discord webhook",
+      "Claude cloud routine"
+    ],
+    "stage": "running",
+    "started": "2026-09",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "dev-experience and career-facts",
+    "summary": "One ledger of what is true about my engineering career, a derived fact sheet that other skills read instead of re-analysing sources, and the only skill allowed to write either.",
+    "stack": [
+      "Claude Code skill",
+      "Markdown"
+    ],
+    "stage": "running",
+    "started": "2026-09",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Eight-week listening and shadowing program",
+    "summary": "An eight-week program around one TV drama: listening without subtitles, repeating, dictation and shadowing, scheduled by where I am each day and whether I can speak aloud there.",
+    "stack": [
+      "Markdown",
+      "HTML"
+    ],
+    "stage": "running",
+    "started": "2026-09",
+    "ended": "2026-11",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "interview-roleplay",
+    "summary": "A skill that runs a mock interview in English for one role, one stage and one interviewer persona, then debriefs in Korean.",
+    "stack": [
+      "Claude Code skill"
+    ],
+    "stage": "running",
+    "started": "2026-09",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "interview-script-review",
+    "summary": "A skill that checks a prepared self-introduction or answer against my recorded facts, Canadian interview norms and how it sounds spoken.",
+    "stack": [
+      "Claude Code skill"
+    ],
+    "stage": "running",
+    "started": "2026-09",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "job-search",
+    "summary": "A skill that scans LinkedIn, Job Bank and company boards for new developer postings, removes what was already seen, ranks the rest and posts a phone-readable board to Discord.",
+    "stack": [
+      "Claude Code skill",
+      "Python",
+      "Discord webhook"
+    ],
+    "stage": "running",
+    "started": "2026-09",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Studio job watch",
+    "summary": "A scheduled task that reads the career pages of a few game studios every day and reports new postings to Discord and Drive.",
+    "stack": [
+      "Claude scheduled task",
+      "Python",
+      "Discord webhook"
+    ],
+    "stage": "running",
+    "started": "2026-09",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
     "title": "AI news service",
     "summary": "An idea for a service with today's news, recent AI stories and recommended content: Reddit and live trend topics in, NotebookLM for analysis, Obsidian to keep it, Claude tying them together.",
     "stack": [
@@ -148,104 +1057,136 @@
   },
   {
     "mode": "public",
-    "title": "Mukbo DB",
-    "summary": "A C++ console maze game from an OOP course: steer DB through the map and eat every piece of bread. Monsters and stage select were never finished. Its title screen already said BNI Tech.",
+    "title": "branch-band",
+    "summary": "A Claude Code plugin that shows the current repository and branch above the prompt, in red on main, for checkouts shared by several sessions.",
     "stack": [
-      "C++",
-      "Windows console"
+      "TypeScript",
+      "Claude Code plugin"
     ],
-    "stage": "stopped",
-    "started": "2011-09",
-    "ended": "2011-10",
-    "repo": "bnitech-lab/mukbo-db-2011"
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10"
   },
   {
     "mode": "public",
-    "title": "BLUE DICE GAME",
-    "summary": "A two-player dice race on a 19-square board in Visual Basic 6, my first university team project (five students; I planned the program).",
+    "title": "Career dashboard",
+    "summary": "A claude.ai dashboard that reads my Drive markdown records each time it opens, so it is current without republishing.",
     "stack": [
-      "Visual Basic 6"
+      "claude.ai Dashboard",
+      "Markdown"
     ],
-    "stage": "finished",
-    "started": "2011-04",
-    "ended": "2011-06",
-    "repo": "bnitech-lab/blue-dice-game-2011"
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10"
   },
   {
     "mode": "public",
-    "title": "Rolly Poly",
-    "summary": "An unfinished two-player property-trading board game in VB.NET by a team of three; I wrote the ranking and buy screens.",
+    "title": "career-counseling",
+    "summary": "A skill for private career conversations whose notes stay in one owner-only folder and reach no other tool or record.",
     "stack": [
-      "VB.NET",
-      "Windows Forms"
+      "Claude Code skill"
     ],
-    "stage": "stopped",
-    "started": "2011-11",
-    "repo": "bnitech-lab/rolly-poly-2011"
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10"
   },
   {
     "mode": "public",
-    "title": "Space Shooter",
-    "summary": "A Galaga-style shooter in C++ on the plain Win32 API with double-buffered GDI drawing; one stage is playable. The art was redrawn for this release.",
-    "stack": [
-      "C++",
-      "Win32 GDI"
-    ],
-    "stage": "stopped",
-    "started": "2012-04",
-    "ended": "2012-07",
-    "repo": "bnitech-lab/space-shooter-2012"
-  },
-  {
-    "mode": "public",
-    "title": "PackMan plus",
-    "summary": "A Java Swing maze game: eat every coin while robots roam, with items and three difficulty levels. The art was redrawn for this release.",
+    "title": "coding-practice",
+    "summary": "I solve LeetCode problems by hand with no AI; Claude reads my submission history, commits the code under my name alone, drafts notes under its own mark and keeps the progress table.",
     "stack": [
       "Java",
-      "Swing"
+      "Kotlin",
+      "Python",
+      "Claude Code skill"
     ],
-    "stage": "finished",
-    "started": "2012-09",
-    "ended": "2012-11",
-    "repo": "bnitech-lab/packman-plus-2012"
+    "stage": "running",
+    "started": "2026-10",
+    "repo": "bnivibe/coding-practice"
   },
   {
     "mode": "public",
-    "title": "Angry Pokemons",
-    "summary": "An Android side-scrolling action game, an unofficial student fan game. The characters and music are removed from the published code.",
+    "title": "dawn-guard",
+    "summary": "A Claude Code plugin that denies risky deletes, commits and pushes on main, commits without a co-author line, and mail sending or deletion before they run, and lets a command through only after I confirm. It denies when it cannot decide.",
+    "stack": [
+      "TypeScript",
+      "Claude Code plugin"
+    ],
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "email-manage",
+    "summary": "A skill that labels a mailbox by an agreed scheme, reports the mail that matters first and drafts replies. It never sends or deletes; I do that.",
+    "stack": [
+      "Claude Code skill",
+      "Gmail connector"
+    ],
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "experience-posts",
+    "summary": "A skill that writes English posts about my real engineering work into a private repository first, unfiltered, and publishes a filtered version later.",
+    "stack": [
+      "Claude Code skill"
+    ],
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Online-assessment practice kits",
+    "summary": "Four small repositories that imitate timed coding assessments: a 40-minute Java REST problem, an RSVP bug fix, order quotas per user, and four hidden bugs in 60 minutes with a grading script.",
     "stack": [
       "Java",
-      "Android"
+      "Spring Boot",
+      "JPA",
+      "H2",
+      "Maven",
+      "JavaScript"
     ],
     "stage": "finished",
-    "started": "2014-10",
-    "ended": "2014-12",
-    "repo": "bnitech-lab/angry-pokemons-2014"
+    "started": "2026-10"
   },
   {
     "mode": "public",
-    "title": "3D Maze",
-    "summary": "A 3D maze escape game in C++ and OpenGL with three camera views, made by a team of three; I wrote the game code.",
+    "title": "Recruiter question drill page",
+    "summary": "A generator that reads each practice question in two macOS voices with different accents and bundles them into a single-file HTML drill page.",
     "stack": [
-      "C++",
-      "OpenGL",
-      "GLUT"
+      "Python",
+      "macOS say",
+      "HTML"
     ],
     "stage": "finished",
-    "started": "2016-12",
-    "repo": "bnitech-lab/maze-3d-2016"
+    "started": "2026-10"
   },
   {
     "mode": "public",
-    "title": "CrashTower",
-    "summary": "An unfinished real-time card battle prototype for Android by a student team; I wrote the battle screen.",
+    "title": "secret-redact",
+    "summary": "A Claude Code plugin that masks webhook tokens, API keys and private keys in what the screen draws, so a session can be watched from a phone or shared.",
     "stack": [
-      "Java",
-      "Android"
+      "TypeScript",
+      "Claude Code plugin"
     ],
-    "stage": "stopped",
-    "started": "2017-05",
-    "ended": "2017-08",
-    "repo": "bnitech-lab/crash-tower-2017"
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "transcribe-rec",
+    "summary": "A command that turns a screen recording or a call recording into a timestamped transcript and a frame sheet.",
+    "stack": [
+      "Python",
+      "Whisper"
+    ],
+    "stage": "finished",
+    "started": "2026-10"
   }
 ]
