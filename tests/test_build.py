@@ -84,11 +84,11 @@ class Render(unittest.TestCase):
         self.assertNotIn("Ideas by the year", page)
         self.assertNotIn("{{", page)
 
-    def test_rows_group_by_start_year_oldest_first(self):
+    def test_rows_group_by_start_year_newest_first(self):
         rows = [dict(private_row(), started="2016", code_name="K-02"),
                 dict(private_row(), started="2011", code_name="K-01")]
         page = build.render([], rows, "2026-01-02")
-        self.assertLess(page.index(">2011<"), page.index(">2016<"))
+        self.assertLess(page.index(">2016<"), page.index(">2011<"))
         self.assertIn("K-01", page)
 
     def test_years_read_first_run_then_restarts(self):
