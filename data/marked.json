@@ -396,15 +396,14 @@
     "started": "2019-12"
   },
   {
-    "mode": "public",
-    "title": "Nexon in-house survey service",
-    "summary": "An in-house survey service used on the web and inside games, which I maintained and improved at Nexon: a faster Excel export and a save history for questionnaires. Not my idea; my share was the upkeep and those improvements.",
+    "mode": "private",
+    "code_name": "IDEA-2019-1",
+    "title": "In-house survey service",
     "stack": [
       "Java",
       "Spring MVC",
       "Vue.js",
       "JPA",
-      "QueryDSL",
       "MySQL",
       "Redis",
       "AWS"
