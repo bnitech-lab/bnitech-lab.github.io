@@ -1,20 +1,30 @@
 #!/usr/bin/env python3
 """Build the BNI Tech lab page.
 
-  python3 build.py                 # write _site/index.html
+  python3 build.py                 # write _site/index.html (and an empty .nojekyll)
   python3 build.py --check         # validate data/*.json only, write nothing
   python3 build.py --out DIR       # write somewhere else
 
-The page shows the rows in data/marked.json, the ideas, works and notes Dawn has chosen to
-show: a year strip with the totals, topic and stack-family chips, and the History, where rows sit
-under the era they started in, one line per year, grouped by stage, each title with a detail card.
-Every row carries one topic from TOPICS. data/eras.json says what I was doing in each period,
-and data/stacks.json maps every tool name a row uses to one stack family; --check fails when a
-tool is in no family. The private master list never lives in this repo, and check_rows() rejects
-any field it does not know.
+Reads, all inside this repository:
+  data/marked.json   the rows Dawn chose to show: ideas, works and notes, each with one topic
+                     from TOPICS. The private master list never lives here, and check_rows()
+                     rejects any field it does not know.
+  data/eras.json     what Dawn was doing in each period; the History headers.
+  data/stacks.json   every tool name a row uses, mapped to one stack family.
+  page.html          the template, with the CSS and the small script that opens years and cards
+                     and filters by chip; render() fills its five placeholders.
+  git history        the date of the last commit that touched data/ ("Data changed" on the page).
 
-The build reads only the files in this repository. It makes no network call and needs no token.
-Standard library only.
+Writes one static page: a year strip and legend, topic and stack-family chips, and the History,
+where rows sit under the era they started in, one line per year, grouped by stage, each title
+with a detail card. Everything on the page is rendered here, at build time.
+
+--check fails when a row has a bad field, kind or topic, when an era is malformed, or when a tool
+a row uses is in no family or in two. A build also prints a "still running?" line for each running
+row without a repo whose as_of is more than twelve months old; that is the log only, not a failure.
+
+The build makes no network call and needs no token. It needs a git checkout with full history and
+fails on a shallow one. Standard library only.
 """
 import argparse
 import datetime as dt
