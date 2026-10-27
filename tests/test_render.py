@@ -1,5 +1,6 @@
 """Offline tests for the rendered page in build.py. Every value here is made up."""
 import os
+import re
 import sys
 import unittest
 
@@ -57,7 +58,8 @@ class RenderPage(unittest.TestCase):
         self.assertIn("Shown under the code name K-1.", p)
         self.assertIn('href="https://github.com/x/y">Code on GitHub', p)
         self.assertIn("since Mar 2019 · running", p)
-        self.assertNotIn("hidden", p[p.index('class="history"'):])
+        section = p[p.index('class="history"'):p.index("<footer>")]
+        self.assertIsNone(re.search(r'\shidden(\s|>|=)', section))
         self.assertEqual(p.count('aria-expanded="false"'), 2 + 3)  # two year toggles, three names
 
     def test_nothing_from_data_breaks_out_of_attributes(self):

@@ -170,6 +170,9 @@ code { font-family: var(--mono); font-size: .86em; background: var(--paper); bor
    instead of pushing them down. Without the script every card stays in the flow, so nothing overlaps. */
 @media (hover: hover) and (pointer: fine) {
   .js .card { position: absolute; left: 0; top: 100%; z-index: 20; width: min(296px, 100%); margin: 4px 0 0; }
+  /* Covers the 4px gap above a floating card, so the pointer can move from the name onto the card
+     (and its GitHub link) without leaving the row, which would close the card. */
+  .js .card::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 8px; }
 }
 
 /* Footer */
@@ -190,5 +193,200 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
   <div class="browse">{{FILTERS}}{{SUMMARIES}}{{HISTORY}}</div>
   <footer>Rebuilt every day from this repository. <a href="https://github.com/bnitech-lab/bnitech-lab.github.io">Source on GitHub</a>.</footer>
 </div>
+<script>
+/* One open year, one open card, chip filters and hash links (#2026, #topic=ai, #stack=java-and-spring).
+   Without this script every year and every card shows, so nothing here is needed to read the page. */
+(() => {
+  "use strict";
+  document.documentElement.classList.add("js"); // turns on the floating-card layout in the CSS
+
+  const STAGES = ["finished", "running", "stopped", "retired", "planned", "thought"]; // build.STAGE_ORDER
+  const DOT = " \u00b7 ";
+  const DASH = "\u2013";
+  const all = (selector, scope) => Array.from((scope || document).querySelectorAll(selector));
+  // card: the .row whose card shows; pinned: that card was opened by a click or tap, so leaving the row keeps it.
+  const state = {mode: "topic", pick: "all", open: "", card: null, pinned: false};
+
+  const rows = all(".row");
+  const blocks = all(".block");
+  const modes = all(".switch [data-mode]");
+  const chipRows = all(".chips[data-mode]");
+  const families = all(".family[data-family]");
+  const years = all(".year").map(el => {
+    const toggle = el.querySelector(".toggle");
+    return {el, toggle, year: el.getAttribute("data-year"), body: el.querySelector(".rows"),
+            tally: toggle.querySelector(".tally"), preview: toggle.querySelector(".preview"), n: toggle.querySelector(".n"),
+            items: all(".row", el), groups: all(".group", el).map(g => ({el: g, items: all(".row", g)}))};
+  });
+
+  const matches = row => {
+    if (state.pick === "all") return true;
+    if (state.mode === "topic") return row.getAttribute("data-topic") === state.pick;
+    return (row.getAttribute("data-families") || "").split(" ").indexOf(state.pick) !== -1;
+  };
+
+  // The same wording as build.tally and build.preview, from the rows that match.
+  const tally = list => STAGES.map(stage => {
+    const n = list.filter(r => r.getAttribute("data-stage") === stage).length;
+    if (!n) return "";
+    return n + " " + (stage !== "thought" ? stage : n === 1 ? "idea" : "ideas");
+  }).filter(Boolean).join(DOT);
+  const preview = list => list.slice(0, 3).map(r => r.getAttribute("data-title")).join(", ") +
+    (list.length > 3 ? " and " + (list.length - 3) + " more" : "");
+
+  // Puts the switch, chips, family boxes and history in line with state (the card has its own functions).
+  const render = () => {
+    modes.forEach(b => b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === state.mode)));
+    chipRows.forEach(row => {
+      const current = row.getAttribute("data-mode") === state.mode;
+      row.hidden = !current;
+      all(".chip[data-pick]", row).forEach(chip => chip.setAttribute(
+        "aria-pressed", String(chip.getAttribute("data-pick") === (current ? state.pick : "all"))));
+    });
+    families.forEach(f => { f.hidden = state.mode !== "stack" || f.getAttribute("data-family") !== state.pick; });
+    rows.forEach(r => { r.hidden = !matches(r); });
+    years.forEach(y => {
+      const shown = y.items.filter(r => !r.hidden);
+      const open = shown.length > 0 && y.year === state.open;
+      y.groups.forEach(g => { g.el.hidden = g.items.every(r => r.hidden); });
+      y.el.hidden = !shown.length;
+      y.toggle.setAttribute("aria-expanded", String(open));
+      y.body.hidden = !open;
+      y.tally.textContent = tally(shown); // a hidden year gets empty texts, never the unfiltered ones
+      y.preview.textContent = preview(shown);
+      y.n.textContent = shown.length + " " + (open ? DASH : "+");
+    });
+    blocks.forEach(b => { b.hidden = !b.querySelector(".year:not([hidden])"); });
+  };
+
+  const paint = (row, on) => {
+    const name = row.querySelector(".name");
+    const card = row.querySelector(".card");
+    if (card) card.hidden = !on;
+    if (name) {
+      name.setAttribute("aria-expanded", String(on));
+      name.classList.toggle("on", on);
+    }
+  };
+  const showCard = (row, pinned) => {
+    if (state.card && state.card !== row) paint(state.card, false);
+    state.card = row;
+    state.pinned = pinned;
+    paint(row, true);
+  };
+  const closeCard = () => {
+    if (state.card) paint(state.card, false);
+    state.card = null;
+    state.pinned = false;
+  };
+
+  const writeHash = hash => {
+    try {
+      history.replaceState(null, "", hash ? "#" + hash : location.pathname + location.search);
+    } catch (err) { /* a file:// page may refuse; the page itself is already right */ }
+  };
+  const filterHash = () => (state.mode === "topic" && state.pick === "all" ? "" : state.mode + "=" + state.pick);
+
+  // Opens one calendar year, every share of it under every era, and closes the rest; "" closes all.
+  const setOpen = year => {
+    state.open = year;
+    closeCard();
+    render();
+  };
+  // From a strip cell or a #2026 link: open the year and scroll to its first share. A filter that
+  // would hide the whole year is cleared first. A year with no rows (no .year) changes nothing.
+  const showYear = year => {
+    const shares = years.filter(y => y.year === year);
+    if (!shares.length) return false;
+    if (!shares.some(y => y.items.some(matches))) state.pick = "all";
+    setOpen(year);
+    const first = shares.find(y => !y.el.hidden);
+    if (first) first.el.scrollIntoView({block: "start"});
+    return true;
+  };
+  const setFilter = (mode, pick) => {
+    state.mode = mode;
+    state.pick = pick;
+    state.open = "";
+    closeCard();
+    render();
+  };
+
+  // #2026 opens that year; #topic=ai or #stack=java-and-spring picks that chip. Anything else is ignored.
+  const readHash = () => {
+    const hash = location.hash.slice(1);
+    if (/^\d{4}$/.test(hash)) return showYear(hash);
+    const m = /^(topic|stack)=([a-z0-9-]+)$/.exec(hash);
+    const known = m && chipRows.some(row => row.getAttribute("data-mode") === m[1] &&
+      all(".chip[data-pick]", row).some(chip => chip.getAttribute("data-pick") === m[2]));
+    if (known) setFilter(m[1], m[2]);
+    return Boolean(known);
+  };
+
+  document.addEventListener("click", e => {
+    const t = e.target instanceof Element ? e.target : null;
+    if (!t) return;
+    const name = t.closest(".name");
+    if (name) {
+      const row = name.closest(".row");
+      if (state.card === row && state.pinned) closeCard();
+      else showCard(row, true);
+      return;
+    }
+    if (!t.closest(".row")) closeCard();
+    const cell = t.closest(".cell[data-year]");
+    const toggle = t.closest(".toggle");
+    const mode = t.closest(".switch [data-mode]");
+    const chip = t.closest(".chip[data-pick]");
+    if (cell) {
+      if (showYear(cell.getAttribute("data-year"))) writeHash(state.open);
+    } else if (toggle) {
+      const year = toggle.closest(".year").getAttribute("data-year");
+      const before = toggle.getBoundingClientRect().top;
+      setOpen(state.open === year ? "" : year);
+      window.scrollBy(0, toggle.getBoundingClientRect().top - before); // a year closing above must not move the tapped row away
+      writeHash(state.open || filterHash());
+    } else if (mode && mode.getAttribute("data-mode") !== state.mode) {
+      setFilter(mode.getAttribute("data-mode"), "all");
+      writeHash(filterHash());
+    } else if (chip) {
+      const chipMode = chip.closest(".chips").getAttribute("data-mode");
+      const pick = chip.getAttribute("data-pick");
+      if (chipMode !== state.mode || pick !== state.pick) {
+        setFilter(chipMode, pick);
+        writeHash(filterHash());
+      }
+    }
+  });
+
+  rows.forEach(row => {
+    const show = () => { if (state.card !== row) showCard(row, false); };
+    const hide = () => { if (state.card === row && !state.pinned) closeCard(); };
+    // Mouse pointers only: a touch tap goes straight to the click handler, because iOS turns the first
+    // tap into a hover when a hover handler changes the page, and the tap would never reach the click.
+    row.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") show(); });
+    row.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") hide(); });
+    row.addEventListener("focusin", show);
+    row.addEventListener("focusout", e => { if (!row.contains(e.relatedTarget)) hide(); });
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape" || !state.card) return;
+    const row = state.card;
+    const name = row.querySelector(".name");
+    if (name && row.contains(document.activeElement)) name.focus(); // focus on the card's link would drop to the page
+    closeCard();
+  });
+
+  window.addEventListener("hashchange", () => {
+    if (location.hash.length > 1) readHash();
+    else setFilter("topic", "all"); // back to the bare address: the state a first visit sees
+  });
+
+  rows.forEach(row => paint(row, false));
+  render();
+  readHash();
+})();
+</script>
 </body>
 </html>
