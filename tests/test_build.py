@@ -100,10 +100,6 @@ class Render(unittest.TestCase):
         page = build.render([], rows, "2026-01-02")
         self.assertNotIn("<script>x", page)
 
-
-if __name__ == "__main__":
-    unittest.main()
-
     def test_rows_within_a_year_finished_first_then_stage_order(self):
         rows = [dict(private_row(stage="stopped", started="2016-01"), code_name="K-02"),
                 dict(private_row(stage="finished", started="2016-03"), code_name="K-01"),
@@ -155,3 +151,6 @@ if __name__ == "__main__":
         self.assertEqual(spans, ["to Jul", "from Aug"])
         self.assertEqual([e["span"] for e in build.eras_for_year(eras, "2020")], [""])
 
+
+if __name__ == "__main__":
+    unittest.main()
