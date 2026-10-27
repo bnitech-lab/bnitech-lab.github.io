@@ -1,6 +1,34 @@
 [
   {
     "mode": "public",
+    "title": "Course exercises, 2011 to 2017",
+    "summary": "The class exercises behind the bigger projects: VB.NET forms, Flash pieces, OA and object-oriented examples, SQL for a registration system, VC++ assignments, Android basics, Java programs, ERwin data modelling, and C problems.",
+    "stack": [
+      "VB.NET",
+      "Flash",
+      "SQL",
+      "C++",
+      "Android",
+      "Java",
+      "C"
+    ],
+    "stage": "finished",
+    "started": "2011",
+    "ended": "2017",
+    "kind": "note"
+  },
+  {
+    "mode": "public",
+    "title": "One game per new language",
+    "summary": "My rule as a student, from a club senior's advice that the textbook for a new language is making a game: every new language gets a game with a made-up company logo on it. C, C++, Java, Android and Unity each got one.",
+    "stack": [],
+    "stage": "finished",
+    "started": "2011",
+    "ended": "2017",
+    "kind": "note"
+  },
+  {
+    "mode": "public",
     "title": "BLUE DICE GAME",
     "summary": "A two-player dice race on a 19-square board in Visual Basic 6, my first university team project (five students; I planned the program).",
     "stack": [
@@ -115,6 +143,25 @@
   },
   {
     "mode": "public",
+    "title": "Study repositories",
+    "summary": "Code written to learn, not to ship: C pointer and data-structure studies (where Teris started), a game club's Unity study, coding-test practice, a daily learning log, and book examples on Kotlin, Spring Batch, Spring REST Docs, Kafka, React and building an LLM.",
+    "stack": [
+      "C",
+      "Unity",
+      "Java",
+      "Kotlin",
+      "Spring",
+      "Kafka",
+      "React",
+      "Python"
+    ],
+    "stage": "finished",
+    "started": "2012",
+    "ended": "2026-01",
+    "kind": "note"
+  },
+  {
+    "mode": "public",
     "title": "Campus guide",
     "summary": "A Flash app for parents, new students and visitors: pick a start and a destination and a character walks the path to the building; it also finds restrooms, ATMs and departments. A five-person graduation project; I led the team.",
     "stack": [
@@ -164,6 +211,16 @@
   },
   {
     "mode": "public",
+    "title": "Snack vending machine design",
+    "summary": "A class design for a vending machine: pick candy, noodles, snacks or drinks, see the description, enter a quantity, watch the balance, get change at any time. Three or more classes required; no code is kept.",
+    "stack": [
+      "Java"
+    ],
+    "stage": "planned",
+    "started": "2012-05"
+  },
+  {
+    "mode": "public",
     "title": "Bookstore manager",
     "summary": "A bookstore program with a login window and tabs to search, edit and add or remove books by ISBN, title, author, category, publisher and stock. The edit and add tabs stayed empty.",
     "stack": [
@@ -185,6 +242,17 @@
     "started": "2012-09",
     "ended": "2012-11",
     "repo": "bnitech-lab/packman-plus-2012"
+  },
+  {
+    "mode": "public",
+    "title": "Piano app",
+    "summary": "An Android class exercise: eight note images that play an mp3 when tapped.",
+    "stack": [
+      "Android",
+      "Java"
+    ],
+    "stage": "finished",
+    "started": "2012-11"
   },
   {
     "mode": "public",
@@ -241,6 +309,66 @@
   },
   {
     "mode": "public",
+    "title": "Motorbike rental",
+    "summary": "One of six app candidates for a public-data contest in 2015. Only the title survives.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2015-10"
+  },
+  {
+    "mode": "public",
+    "title": "What to eat nearby",
+    "summary": "A nearby-food app, one of six public-data contest candidates in 2015. Only the title survives.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2015-10"
+  },
+  {
+    "mode": "public",
+    "title": "Full parking lot",
+    "summary": "One of six public-data contest candidates in 2015. Only the title survives, and what it meant was not written down.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2015-10"
+  },
+  {
+    "mode": "public",
+    "title": "Automatic wayfinding",
+    "summary": "A route-finding app, one of six public-data contest candidates in 2015. Only the title survives.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2015-10"
+  },
+  {
+    "mode": "public",
+    "title": "Look after my own health",
+    "summary": "A health app, marked lower priority among six public-data contest candidates in 2015. Only the title survives.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2015-10"
+  },
+  {
+    "mode": "public",
+    "title": "Protect our baby",
+    "summary": "An infant-safety app, marked lower priority among six public-data contest candidates in 2015. Only the title survives.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2015-10"
+  },
+  {
+    "mode": "public",
+    "title": "Mobile stamp tour",
+    "summary": "A paper stamp tour moved to a phone: a stamp is earned only by taking a photo within range of a sight, with routes, place information, sharing, completion points and photo spots suggested from earlier visitors' pictures. Screen mockups only.",
+    "stack": [
+      "Android",
+      "Photoshop"
+    ],
+    "stage": "planned",
+    "started": "2015-10",
+    "ended": "2015-11"
+  },
+  {
+    "mode": "public",
     "title": "WarmyLand",
     "summary": "A first-person 3D exploration adventure on a penguin planet, built by a three-person university game club team. I led the Unity development.",
     "stack": [
@@ -281,6 +409,23 @@
   },
   {
     "mode": "public",
+    "title": "Two goals on a dream mind map",
+    "summary": "Two goals written on a mind map in 2016: make a program everyone uses, and build a company everyone knows. Which program and which company was never written down.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2016-05"
+  },
+  {
+    "mode": "public",
+    "title": "Thesis: smartphone game UI comparison",
+    "summary": "My graduation thesis: a comparison of smartphone games centred on their user interface, among the factors behind a game's success and staying power, meant to help later game development. Three drafts; the submitted copy is not kept.",
+    "stack": [],
+    "stage": "finished",
+    "started": "2016-11",
+    "kind": "note"
+  },
+  {
+    "mode": "public",
     "title": "3D Maze",
     "summary": "A 3D maze escape game in C++ and OpenGL with three camera views, made by a team of three; I wrote the game code.",
     "stack": [
@@ -291,6 +436,33 @@
     "stage": "finished",
     "started": "2016-12",
     "repo": "bnitech-lab/maze-3d-2016"
+  },
+  {
+    "mode": "public",
+    "title": "Media genre trend prediction",
+    "summary": "A big-data class plan: mine Amazon co-purchase metadata with association rules to predict which media genres will rise, with review text analysis and a recommender sketched on top.",
+    "stack": [
+      "Association rules",
+      "CSV"
+    ],
+    "stage": "planned",
+    "started": "2016-12"
+  },
+  {
+    "mode": "public",
+    "title": "Rebuild a phone maker's stock apps",
+    "summary": "A line from a job application draft: the stock apps on my phone were clumsy, and I wanted to join the maker and rebuild them.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2017"
+  },
+  {
+    "mode": "public",
+    "title": "A bowling club, then a bowling alley",
+    "summary": "Start a bowling club at my first job, and open a bowling alley after retiring. From the hobby field of a job application.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2017"
   },
   {
     "mode": "public",
@@ -321,6 +493,46 @@
   },
   {
     "mode": "public",
+    "title": "Smarter phone auto-rotate",
+    "summary": "One of five contest idea candidates in 2017. Only the title survives.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2017-04"
+  },
+  {
+    "mode": "public",
+    "title": "A social network for couples",
+    "summary": "A couples' SNS or blog, one of five contest idea candidates in 2017. Only the title survives.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2017-04"
+  },
+  {
+    "mode": "public",
+    "title": "Smart devices for the disabled",
+    "summary": "One of five contest idea candidates in 2017. Only the title survives.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2017-04"
+  },
+  {
+    "mode": "public",
+    "title": "Find a free parking space",
+    "summary": "One of five contest idea candidates in 2017, and my third parking idea after 2011 and 2015. Only the title survives.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2017-04"
+  },
+  {
+    "mode": "public",
+    "title": "Phone-based inventory",
+    "summary": "Keep track of belongings with a phone, one of five contest idea candidates in 2017. Only the title survives.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2017-04"
+  },
+  {
+    "mode": "public",
     "title": "CrashTower",
     "summary": "An unfinished real-time card battle prototype for Android by a student team; I wrote the battle screen.",
     "stack": [
@@ -331,6 +543,27 @@
     "started": "2017-05",
     "ended": "2017-08",
     "repo": "bnitech-lab/crash-tower-2017"
+  },
+  {
+    "mode": "public",
+    "title": "Summer survival app for Gyeonggi",
+    "summary": "A contest entry: help residents get through summer with campsites, cooling shelters, festivals, food safety alerts, free fan and air-conditioner lending and repair, and a sharing board for people in need.",
+    "stack": [
+      "Public data"
+    ],
+    "stage": "planned",
+    "started": "2017-05"
+  },
+  {
+    "mode": "public",
+    "title": "Rail-trip promotion proposal",
+    "summary": "A proposal to promote a rural county on a five-day rail trip with friends who were job hunting, with a day-by-day route. Whether it was selected is not recorded.",
+    "stack": [
+      "PowerPoint"
+    ],
+    "stage": "planned",
+    "started": "2017-07",
+    "kind": "note"
   },
   {
     "mode": "public",
@@ -363,6 +596,17 @@
     "stage": "finished",
     "started": "2018",
     "kind": "contribution"
+  },
+  {
+    "mode": "public",
+    "title": "Dexchange",
+    "summary": "A Netty ping-pong server and client, an edited version of the Netty user guide example. The name suggests an exchange, but no exchange code was ever written.",
+    "stack": [
+      "Java",
+      "Netty"
+    ],
+    "stage": "thought",
+    "started": "2018"
   },
   {
     "mode": "public",
@@ -450,6 +694,30 @@
   },
   {
     "mode": "public",
+    "title": "Run an online store",
+    "summary": "An entry on a 2021 side-income plan: run a store on a marketplace. An online course was in progress; the store never opened.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2021-01"
+  },
+  {
+    "mode": "public",
+    "title": "Sell stock photos",
+    "summary": "An entry on a 2021 side-income plan, marked not started.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2021-01"
+  },
+  {
+    "mode": "public",
+    "title": "Monetize a blog, \"TLI\"",
+    "summary": "An entry on a 2021 side-income plan, marked not started. What TLI stood for was not written down.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2021-01"
+  },
+  {
+    "mode": "public",
     "title": "API documentation from tests",
     "summary": "Found Spring Auto REST Docs for a Nexon project that had no tests, wired it into CI so the API docs come from tests, and presented it to the team. Another project adopted it.",
     "stack": [
@@ -461,6 +729,17 @@
     "started": "2021-02",
     "ended": "2021-04",
     "repo": "bnitech/spring-rest-docs"
+  },
+  {
+    "mode": "public",
+    "title": "Game company take-home assignment",
+    "summary": "A take-home assignment for a technical product role at a game company: sequence diagrams and script problems, answered in a slide deck.",
+    "stack": [
+      "PowerPoint"
+    ],
+    "stage": "finished",
+    "started": "2021-03",
+    "kind": "note"
   },
   {
     "mode": "public",
@@ -487,6 +766,14 @@
   },
   {
     "mode": "public",
+    "title": "Video editing",
+    "summary": "One line on a 2021 list of things I wanted to do. No subject or format was written down.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2021-07"
+  },
+  {
+    "mode": "public",
     "title": "Themeparkers backend",
     "summary": "A theme-park app someone else started, with attraction guides and wait-time statistics. I did the backend and led the move from a Node monolith to Spring Boot services; my part ended in 2022.",
     "stack": [
@@ -501,6 +788,37 @@
     "started": "2021-08",
     "ended": "2022-10",
     "kind": "contribution"
+  },
+  {
+    "mode": "public",
+    "title": "Freelance contracts",
+    "summary": "A square on a 2022 goal chart: take contract work and run personal projects. No contract followed.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2022"
+  },
+  {
+    "mode": "public",
+    "title": "Web publishing study plan",
+    "summary": "A four-week study plan on semantic HTML, cloning a design and modern JavaScript, with weekly missions. Week four was left undecided; whether it ran is not recorded.",
+    "stack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "stage": "planned",
+    "started": "2022-05",
+    "kind": "note"
+  },
+  {
+    "mode": "public",
+    "title": "Coin API architecture sketch",
+    "summary": "One hand-drawn page: users, a front end, an external coin API, and inside AWS a login and security layer, API servers, a queue, a database and a cache. What the service was for is not recorded.",
+    "stack": [
+      "AWS"
+    ],
+    "stage": "planned",
+    "started": "2022-07"
   },
   {
     "mode": "public",
@@ -560,6 +878,28 @@
   },
   {
     "mode": "public",
+    "title": "In-house darts tournament",
+    "summary": "An office event I designed and ran: a darts tournament on an in-office Monday with random teams by skill level, four-player brackets, and two rounds of sign-ups.",
+    "stack": [
+      "Notion"
+    ],
+    "stage": "finished",
+    "started": "2024-06",
+    "kind": "note"
+  },
+  {
+    "mode": "public",
+    "title": "App template and launch service",
+    "summary": "A note from a side team in 2024: build one base Android app with a convention plugin, billing and login modules, then offer in-app purchase, ads, chat, push, web-app and launch help to others.",
+    "stack": [
+      "Android",
+      "Kotlin"
+    ],
+    "stage": "thought",
+    "started": "2024-08"
+  },
+  {
+    "mode": "public",
     "title": "LMK",
     "summary": "Three service skeletons in one go, a core API, a webhook receiver and a web app, one commit each. What LMK stands for is not recorded.",
     "stack": [
@@ -571,6 +911,14 @@
     ],
     "stage": "stopped",
     "started": "2025-01"
+  },
+  {
+    "mode": "public",
+    "title": "Game development in Canada",
+    "summary": "A diary note from 2025: game development was my childhood dream and one reason I joined a game company; maybe Canada is where I try it. No concrete plan.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2025-10"
   },
   {
     "mode": "public",
@@ -662,14 +1010,55 @@
   },
   {
     "mode": "public",
+    "title": "BNI Tech lab page",
+    "summary": "This page: my ideas, works and content from 2011 to today, rebuilt every day from data files. Started in 2026-03 as an empty ideas document and became a site in 2026-10.",
+    "stack": [
+      "Python",
+      "GitHub Pages",
+      "GitHub Actions"
+    ],
+    "stage": "running",
+    "started": "2026-03",
+    "restarted": [
+      "2026-10"
+    ],
+    "repo": "bnitech-lab/bnitech-lab.github.io"
+  },
+  {
+    "mode": "public",
+    "title": "git workflow commands",
+    "summary": "Slash commands for the branch, pull-request and commit rules I kept repeating: push a branch the right way, clean up merged branches. A README-update command was retired in 2026-10.",
+    "stack": [
+      "Claude Code command",
+      "gh CLI"
+    ],
+    "stage": "running",
+    "started": "2026-03",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "notebooklm command",
+    "summary": "A slash command that sends outside content to NotebookLM through a CLI and returns a structured analysis.",
+    "stack": [
+      "Claude Code command",
+      "NotebookLM CLI"
+    ],
+    "stage": "running",
+    "started": "2026-03",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
     "title": "dooray-analyze",
     "summary": "A Claude Code skill that pulls Dooray tasks and wiki pages through a CLI, keeps the originals and writes an insight analysis of each.",
     "stack": [
       "Claude Code skill",
       "dooray CLI"
     ],
-    "stage": "finished",
-    "started": "2026-06"
+    "stage": "retired",
+    "started": "2026-06",
+    "ended": "2026-10"
   },
   {
     "mode": "public",
@@ -732,9 +1121,9 @@
     "stack": [
       "Claude Code command"
     ],
-    "stage": "running",
+    "stage": "retired",
     "started": "2026-07",
-    "as_of": "2026-10"
+    "ended": "2026-10"
   },
   {
     "mode": "public",
@@ -817,6 +1206,44 @@
   },
   {
     "mode": "public",
+    "title": "Departure checklist",
+    "summary": "A 51-item checklist in seven groups, planned backwards from a departure date: luggage by bag, documents, things to cancel, expiry dates while abroad, and a checked-baggage weight budget.",
+    "stack": [
+      "Google Sheets",
+      "Markdown"
+    ],
+    "stage": "finished",
+    "started": "2026-07",
+    "ended": "2026-08",
+    "kind": "note"
+  },
+  {
+    "mode": "public",
+    "title": "Household ledger",
+    "summary": "Actual spending kept as one CSV per month (date, currency, amount, category, item, payment method, note) with rules for the columns, compared against the plan.",
+    "stack": [
+      "CSV",
+      "Markdown"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "as_of": "2026-10",
+    "kind": "note"
+  },
+  {
+    "mode": "private",
+    "code_name": "IDEA-2026-2",
+    "title": "Budget scenario model",
+    "stack": [
+      "Markdown",
+      "HTML"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
     "title": "at-keyboard",
     "summary": "A command that estimates whether I am at the laptop from the last keyboard or trackpad input and the screen-lock state, for sessions driven from a phone.",
     "stack": [
@@ -861,6 +1288,17 @@
     ],
     "stage": "finished",
     "started": "2026-08"
+  },
+  {
+    "mode": "public",
+    "title": "23-day English sprint",
+    "summary": "A study plan for the 23 days before a move: no new material, three sessions a day (speaking from cards, listening, role play), with unfriendly role plays that interrupt and ask back.",
+    "stack": [
+      "Markdown"
+    ],
+    "stage": "finished",
+    "started": "2026-08",
+    "kind": "note"
   },
   {
     "mode": "public",
@@ -931,6 +1369,47 @@
       "Claude scheduled task",
       "Python",
       "Discord webhook"
+    ],
+    "stage": "running",
+    "started": "2026-09",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Score recorded English calls",
+    "summary": "Record my English phone calls, score each one and compare it with the next to track my level. Past calls were scored once; no repeating setup was built.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2026-09"
+  },
+  {
+    "mode": "public",
+    "title": "Transcript keeper for video links",
+    "summary": "Give it a YouTube or Reels link and get the English transcript with a Korean translation, kept in one place; study-method videos become HTML notes. Done by hand inside sessions, never built.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2026-09"
+  },
+  {
+    "mode": "public",
+    "title": "Eight-week listening and shadowing program",
+    "summary": "Silent listening, retelling, dictation and shadowing with one TV drama, scheduled by weekday and by where I can make noise. Eight weeks from 2026-09.",
+    "stack": [
+      "Markdown",
+      "HTML"
+    ],
+    "stage": "running",
+    "started": "2026-09",
+    "as_of": "2026-10",
+    "kind": "note"
+  },
+  {
+    "mode": "private",
+    "code_name": "IDEA-2026-3",
+    "title": "Activity report generator",
+    "stack": [
+      "Python",
+      "Google Sheets"
     ],
     "stage": "running",
     "started": "2026-09",
@@ -1081,5 +1560,78 @@
     ],
     "stage": "finished",
     "started": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Auto-publishing blog with ads",
+    "summary": "Since AI assistants read blogs too, publish an ad-supported blog and post to every social network at once. A 2026 note.",
+    "stack": [
+      "Claude"
+    ],
+    "stage": "thought",
+    "started": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Analyze my blog data",
+    "summary": "A one-line note from 2026: analyze my blog's data. Which analysis was not written down.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Dooray document tree visualizer",
+    "summary": "A one-line note from 2026: draw the structure of Dooray documents as a picture.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Verified interview answer cards",
+    "summary": "Keep each answer cs-prep has checked as one card file: the question, a short English answer, sources and version, traps, and a pointer to the record behind it, read from the career dashboard.",
+    "stack": [
+      "Markdown",
+      "claude.ai Dashboard"
+    ],
+    "stage": "planned",
+    "started": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "engineering-notes",
+    "summary": "English posts about work I actually did at two companies, in a public repository that stands in for a portfolio site. An unfiltered private original comes first; the first draft is written.",
+    "stack": [
+      "Markdown",
+      "GitHub"
+    ],
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "github-profile skill",
+    "summary": "A Claude Code skill that owns everything I show on GitHub: the profile README, this organization and its page, and each public repository's README and visibility.",
+    "stack": [
+      "Claude Code skill",
+      "gh CLI"
+    ],
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10"
+  },
+  {
+    "mode": "public",
+    "title": "Interview English track",
+    "summary": "A weekly plan for interview English: write answers to technical and computer-science questions three days a week, say them aloud the other three, and three quick questions every day.",
+    "stack": [
+      "Markdown"
+    ],
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10",
+    "kind": "note"
   }
 ]
