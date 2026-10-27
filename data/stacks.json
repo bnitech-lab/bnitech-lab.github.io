@@ -18,7 +18,8 @@
         "H2",
         "WebFlux",
         "JWT",
-        "Netty"
+        "Netty",
+        "FreeMarker"
       ]
     },
     {
@@ -50,7 +51,8 @@
         "Playwright",
         "Vitest",
         "HTML",
-        "CSS"
+        "CSS",
+        "Chart.js"
       ]
     },
     {
@@ -102,7 +104,8 @@
         "MongoDB",
         "SQLite",
         "Redis",
-        "SQL"
+        "SQL",
+        "SQL Server"
       ]
     },
     {
@@ -122,7 +125,16 @@
         "GitHub",
         "GitHub Pages",
         "GitHub Actions",
-        "Kafka"
+        "Kafka",
+        "Docker",
+        "VirtualBox",
+        "OpenStack",
+        "Cloud Foundry",
+        "Ansible",
+        "Vagrant",
+        "Heroku",
+        "Wireshark",
+        "Fiddler"
       ]
     },
     {
@@ -187,7 +199,9 @@
         "Photoshop",
         "Public data",
         "Association rules",
-        "Suwon open data"
+        "Suwon open data",
+        "Evernote",
+        "Confluence"
       ]
     }
   ]
