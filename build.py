@@ -5,11 +5,13 @@
   python3 build.py --check         # validate data/*.json only, write nothing
   python3 build.py --out DIR       # write somewhere else
 
-The page lists the rows in data/marked.json, the ideas, works and notes Dawn has chosen to
-show, by the year they started. Every row carries one topic from TOPICS. data/eras.json says
-what I was doing in each period, and data/stacks.json maps every tool name a row uses to one
-stack family; --check fails when a tool is in no family. The private master list never lives
-in this repo, and check_rows() rejects any field it does not know.
+The page shows the rows in data/marked.json, the ideas, works and notes Dawn has chosen to
+show: a year strip with the totals, topic and stack-family chips, and the History, where rows sit
+under the era they started in, one line per year, grouped by stage, each title with a detail card.
+Every row carries one topic from TOPICS. data/eras.json says what I was doing in each period,
+and data/stacks.json maps every tool name a row uses to one stack family; --check fails when a
+tool is in no family. The private master list never lives in this repo, and check_rows() rejects
+any field it does not know.
 
 The build reads only the files in this repository. It makes no network call and needs no token.
 Standard library only.
@@ -183,28 +185,6 @@ def month_name(ym):
     return MONTHS[int(ym[5:7]) - 1] if len(ym) == 7 else ""
 
 
-def eras_for_year(eras, year):
-    """The eras that overlap a calendar year, oldest first, each with the months it covers
-    inside that year when it starts or ends there ("to Jul", "from Aug", "Mar to Jul")."""
-    out = []
-    for e in eras:
-        start, end = str(e["from"]), str(e.get("to", "9999"))
-        if not (start[:4] <= year <= end[:4]):
-            continue
-        begins = month_name(start) if start[:4] == year else ""
-        ends = month_name(end) if end[:4] == year else ""
-        if begins and ends:
-            span = f"{begins} to {ends}"
-        elif begins:
-            span = f"from {begins}"
-        elif ends:
-            span = f"to {ends}"
-        else:
-            span = ""
-        out.append(dict(e, span=span))
-    return out
-
-
 GAP_LABEL = "Between school and work"
 
 
@@ -342,10 +322,14 @@ def counts(rows):
 
 def data_changed_date(run=subprocess.check_output):
     """The date (YYYY-MM-DD) of the last commit that touched data/, read from git. A shallow
-    checkout would give the wrong answer, so it is refused. `run` is a parameter only so tests can fake git."""
+    checkout, or a history with no commit touching data/, would give a wrong or empty date, so
+    both are refused. `run` is a parameter only so tests can fake git."""
     if run(["git", "rev-parse", "--is-shallow-repository"], cwd=HERE, text=True).strip() == "true":
         raise RuntimeError("shallow checkout: set fetch-depth: 0 in the workflow")
-    return run(["git", "log", "-1", "--format=%cs", "--", "data"], cwd=HERE, text=True).strip()
+    date = run(["git", "log", "-1", "--format=%cs", "--", "data"], cwd=HERE, text=True).strip()
+    if not date:
+        raise RuntimeError("no commit touches data/")
+    return date
 
 
 def stale_running(rows, today):
@@ -430,75 +414,184 @@ def years(row):
     return span
 
 
-def render_row(r):
-    """One row: the title line is always visible; the summary opens on a tap."""
-    stage = STAGES[r["stage"]]
-    stack = ", ".join(html.escape(s) for s in r.get("stack", []))
-    if r["mode"] == "private":
-        name = f'<span class="code-name">{html.escape(r["code_name"])}</span> {html.escape(r["title"])}'
-    elif r.get("repo"):
-        name = f'<a href="https://github.com/{html.escape(r["repo"])}">{html.escape(r["title"])}</a>'
+STAGE_WORD = {"finished": "finished", "running": "running", "stopped": "stopped", "retired": "retired",
+              "planned": "planned", "thought": "idea"}  # the word a card and a group label use for each stage
+TAGGED_KINDS = ("contribution", "note")  # kinds that get a small tag after the title
+PLACEHOLDER = re.compile(r"\{\{(STRIP|LEGEND|FILTERS|SUMMARIES|HISTORY)\}\}")
+
+
+def attr(value):
+    """Text made safe inside a double-quoted HTML attribute."""
+    return html.escape(str(value), quote=True)
+
+
+def _plural(n, word):
+    return f"{n} {word}" if n == 1 else f"{n} {word}s"
+
+
+def _axis(year_list):
+    """Year labels under a row of per-year cells: the first, middle and last year, each under its own cell."""
+    marks = {year_list[0], year_list[(len(year_list) - 1) // 2], year_list[-1]} if year_list else set()
+    spans = "".join(f"<span>{y}</span>" if y in marks else "<span></span>" for y in year_list)
+    return f'<div class="axis" aria-hidden="true">{spans}</div>'
+
+
+def render_strip(cells):
+    """The year strip: one button per year, a bar scaled to the busiest year with its running share
+    in yellow, and the count under it. A year with rows never drops below 3%; an empty year is 0."""
+    if not cells:
+        return ""
+    top = max(c["count"] for c in cells)
+    out = []
+    for c in cells:
+        bar = max(3, round(100 * c["count"] / top)) if c["count"] else 0
+        run = round(100 * c["running"] / c["count"]) if c["count"] else 0
+        label = f'{c["year"]}: {_plural(c["count"], "row")}, {c["running"]} running'
+        out.append(f'<button type="button" class="cell" data-year="{attr(c["year"])}" aria-label="{attr(label)}">'
+                   f'<span class="bar" style="height: {bar}%"><span class="run" style="height: {run}%"></span></span>'
+                   f'<span class="n">{c["count"]}</span></button>')
+    return f'<div class="strip" role="group" aria-label="Rows per year">{"".join(out)}</div>{_axis([c["year"] for c in cells])}'
+
+
+def render_legend(rows, built, changed):
+    """Two lines under the strip: the totals, with the running count in the yellow tag that also
+    explains the yellow bars, then the two dates."""
+    c = counts(rows)
+    if not c["total"]:
+        return ""
+    return (f'<p class="legend"><span>{_plural(c["total"], "thing")} since {attr(c["first_year"])}</span> · '
+            f'<span class="tag">{c["running"]} running</span> · <span>{c["finished"]} finished</span></p>'
+            f'<p class="legend dates">Data changed {attr(changed)} · page built {attr(built)}</p>')
+
+
+def _chip(pick, label, n, pressed=False):
+    return (f'<button type="button" class="chip" data-pick="{attr(pick)}" aria-pressed="{"true" if pressed else "false"}">'
+            f'{html.escape(label)} <span class="count">{n}</span></button>')
+
+
+def render_filters(rows, stacks):
+    """The By topic / By stack switch and one chip row per mode; the stack row starts hidden."""
+    if not rows:
+        return ""
+    first = _chip("all", "All", len(rows), pressed=True)
+    topics = "".join(_chip(key, label, n) for key, label, n in topic_counts(rows))
+    families = "".join(_chip(key, name, n) for key, name, n in family_counts(rows, stacks))
+    return ('<div class="switch" role="group" aria-label="Group the history">'
+            '<button type="button" data-mode="topic" aria-pressed="true">By topic</button>'
+            '<button type="button" data-mode="stack" aria-pressed="false">By stack</button></div>'
+            f'<div class="chips" data-mode="topic">{first}{topics}</div>'
+            f'<div class="chips" data-mode="stack" hidden>{first}{families}</div>')
+
+
+def render_summaries(rows, stacks, year_list):
+    """One hidden summary box per stack family that has rows; the page script shows the picked one."""
+    out = []
+    for _, name, _ in family_counts(rows, stacks):
+        s = family_summary(name, rows, stacks, year_list)
+        if s["first"] == s["last"]:
+            span = f'only {s["first"]}'
+        else:
+            span = f'{s["first"]} to {s["last"]} · used in {s["used"]} of {len(year_list)} years'
+        used = ", ".join(year for year, level in s["cells"] if level)
+        cells = "".join(f'<span class="l{level}"></span>' for _, level in s["cells"])
+        tools = " · ".join(f"{html.escape(tool)} {n}" for tool, n in s["tools"])
+        out.append(f'<div class="family" data-family="{attr(s["slug"])}" hidden>'
+                   f'<p class="fhead"><span class="fname">{html.escape(name)}</span>'
+                   f'<span class="made">{s["count"]} made</span></p>'
+                   f'<p class="fspan">{html.escape(span)}</p>'
+                   f'<div class="use" role="img" aria-label="{attr(name + " used in " + used)}">{cells}</div>'
+                   f'{_axis(year_list)}'
+                   f'<p class="tools">{tools}</p></div>')
+    return "".join(out)
+
+
+def _card_when(r):
+    """The date line on a detail card: "since Mar 2019" for running work, else years(row); then the stage."""
+    if r["stage"] == "running":
+        started = r["started"]
+        date = f"since {month_name(started)} {started[:4]}" if len(started) == 7 else f"since {started}"
     else:
-        name = html.escape(r["title"])
-    meta = f'<span class="stage stage-{r["stage"]}">{stage}</span> {years(r)}{(" &middot; " + stack) if stack else ""}'
-    if not r.get("summary"):
-        return f"""
-        <li class="row">
-          <p class="row-title">{name}</p>
-          <p class="row-meta">{meta}</p>
-        </li>"""
-    return f"""
-        <li class="row">
-          <details>
-            <summary><span class="row-title">{name}</span><span class="row-meta">{meta}</span></summary>
-            <p class="summary">{inline(r["summary"])}</p>
-          </details>
-        </li>"""
+        date = years(r)
+    return f'{date} · {STAGE_WORD[r["stage"]]}'
 
 
-def kind_of(r):
-    if r["stage"] in ("thought", "planned"):
-        return "note"
-    return r.get("kind", "project")
+def render_row(r, family_by_tool):
+    """One row: its title is a button, and the detail card under it holds the dates, the summary,
+    the stack and the GitHub link. Private rows show the code name and a fixed sentence instead."""
+    families = []
+    for tool in r.get("stack", []):
+        key = slug(family_by_tool[tool]) if tool in family_by_tool else ""
+        if key and key not in families:
+            families.append(key)
+    private = r["mode"] == "private"
+    code = f'<span class="code">{html.escape(r["code_name"])}</span> ' if private else ""
+    kind = f' <span class="kind">{html.escape(r["kind"])}</span>' if r.get("kind") in TAGGED_KINDS else ""
+    if private:
+        summary = (f'Shown under the code name {html.escape(r["code_name"])}. '
+                   "Only the title, stack, stage and dates are public.")
+    else:
+        summary = inline(r.get("summary", ""))
+    stack = ", ".join(html.escape(s) for s in r.get("stack", []))
+    card = (f'<span class="cwhen">{_card_when(r)}</span>'
+            + (f"<p>{summary}</p>" if summary else "")
+            + (f'<span class="cstack">{stack}</span>' if stack else "")
+            + (f'<a href="https://github.com/{attr(r["repo"])}">Code on GitHub</a>' if r.get("repo") else ""))
+    return (f'<div class="row" data-stage="{attr(r["stage"])}" data-topic="{attr(r.get("topic", ""))}" '
+            f'data-families="{attr(" ".join(families))}" data-title="{attr(r["title"])}">'
+            f'<button type="button" class="name" aria-expanded="false">{code}{html.escape(r["title"])}{kind}</button>'
+            f'<div class="card" role="tooltip">{card}</div></div>')
 
 
-def render_year(year, items, eras=()):
-    groups = [("project", None), ("contribution", "Contributions"), ("note", "Ideas and notes")]
-    labels = "".join(
-        f'<p class="era">{html.escape(e["label"])}{("<br>" + html.escape(e["where"])) if e.get("where") else ""}'
-        f'{("<br><span class=\"era-span\">" + html.escape(e["span"]) + "</span>") if e["span"] else ""}</p>'
-        for e in eras_for_year(eras, year))
-    out = f'\n      <section class="year"><div class="year-head"><h3>{year}</h3>{labels}</div><div class="year-body">'
-    for kind, label in groups:
-        rs = [r for r in items if kind_of(r) == kind]
-        if not rs:
-            continue
-        if label:
-            out += f'<p class="label">{label}</p>'
-        out += f'<ul class="{kind}s">{"".join(render_row(r) for r in rs)}\n      </ul>'
-    return out + "</div></section>"
+def render_year(entry, family_by_tool):
+    """One year inside a block: the toggle with the tally, the preview and the count, then the rows
+    grouped by stage in STAGE_ORDER. Rows keep history()'s order inside each group."""
+    groups = []
+    for stage in STAGE_ORDER:
+        rs = [r for r in entry["rows"] if r["stage"] == stage]
+        if rs:
+            groups.append(f'<div class="group" data-stage="{stage}">'
+                          f'<p class="glabel">{STAGE_WORD[stage].capitalize()} · {len(rs)}</p>'
+                          f'{"".join(render_row(r, family_by_tool) for r in rs)}</div>')
+    return (f'<div class="year" data-year="{attr(entry["year"])}" data-count="{entry["count"]}">'
+            f'<button type="button" class="toggle" aria-expanded="false"><span class="y">{attr(entry["year"])}</span>'
+            f'<span class="sum"><span class="tally">{html.escape(entry["tally"])}</span>'
+            f'<span class="preview">{html.escape(entry["preview"])}</span></span>'
+            f'<span class="n">{entry["count"]} +</span></button>'
+            f'<div class="rows">{"".join(groups)}</div></div>')
 
 
-def render(rows, built, eras=()):
-    by_year = {}
-    # Years newest first. Inside a year: finished work first, then the other stages in STAGE_ORDER,
-    # and within a stage the later start first.
-    rank = {s: i for i, s in enumerate(STAGE_ORDER)}
-    ordered = sorted(sorted(rows, key=lambda r: r["started"], reverse=True),
-                     key=lambda r: (-int(r["started"][:4]), rank.get(r["stage"], len(rank))))
-    for r in ordered:
-        by_year.setdefault(r["started"][:4], []).append(r)
-    ideas = ""
-    if rows:
-        groups = "".join(render_year(y, items, eras) for y, items in by_year.items())
-        ideas = f"""
-    <section class="ideas" aria-labelledby="ideas-h">
-      <h2 id="ideas-h">Ideas by the year they started</h2>
-      <p class="note">Beside each year: what I was doing then. Some ideas are shown under a code name, with only a title, stack, stage and dates.</p>{groups}
-    </section>"""
+def render_block(block, family_by_tool):
+    """One era (or gap) block: its header, then one year row per year, newest first."""
+    return (f'<section class="block" data-key="{attr(block["key"])}">'
+            f'<header><span class="when">{html.escape(block["when"])}</span>'
+            f'<span class="label">{html.escape(block["label"])}</span></header>'
+            f'{"".join(render_year(y, family_by_tool) for y in block["years"])}</section>')
+
+
+def render_history(rows, eras, stacks):
+    if not rows:
+        return ""
+    family_by_tool = family_of(stacks)
+    blocks = "".join(render_block(b, family_by_tool) for b in history(rows, eras))
+    return ('<section class="history"><h2>History</h2>'
+            '<p class="hint">One year opens at a time. Point at a name, or tap it, for details.</p>'
+            f'{blocks}</section>')
+
+
+def render(rows, eras, stacks, built, changed, today=None):
+    """The whole page: page.html with its five placeholders filled. `built` and `changed` are the
+    page-built and data-changed dates for the legend; `today` (default `built`) ends the year strip."""
+    years_shown = all_years(rows, today or built)
+    parts = {
+        "STRIP": render_strip(strip(rows, years_shown)),
+        "LEGEND": render_legend(rows, built, changed),
+        "FILTERS": render_filters(rows, stacks),
+        "SUMMARIES": render_summaries(rows, stacks, years_shown),
+        "HISTORY": render_history(rows, eras, stacks),
+    }
     with open(os.path.join(HERE, "page.html"), encoding="utf-8") as f:
         page = f.read()
-    return page.replace("{{IDEAS}}", ideas).replace("{{BUILT}}", built)
+    return PLACEHOLDER.sub(lambda m: parts[m.group(1)], page)  # one pass, so data text is never re-read as a placeholder
 
 
 def load(name):
@@ -523,12 +616,12 @@ def main(argv=None):
               % (len(rows), len(eras), len(stacks["families"])))
         return 0
     built = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
-    changed = data_changed_date()  # Task 8 hands this to render(); computing it now fails a shallow checkout early
+    changed = data_changed_date()  # fails a shallow checkout before anything is written
     for line in stale_running(rows, built):
         print(line)
     os.makedirs(a.out, exist_ok=True)
     with open(os.path.join(a.out, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render(rows, built, eras))
+        f.write(render(rows, eras, stacks, built, changed))
     open(os.path.join(a.out, ".nojekyll"), "w").close()
     print("built %s: %d row(s)" % (a.out, len(rows)))
     return 0

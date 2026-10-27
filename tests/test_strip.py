@@ -34,6 +34,11 @@ class Strip(unittest.TestCase):
         answers = iter(["false\n", "2026-10-26\n"])
         self.assertEqual(build.data_changed_date(run=lambda *a, **k: next(answers)), "2026-10-26")
 
+    def test_data_changed_date_refuses_a_history_without_data_commits(self):
+        answers = iter(["false\n", ""])
+        with self.assertRaisesRegex(RuntimeError, "no commit touches data/"):
+            build.data_changed_date(run=lambda *a, **k: next(answers))
+
     def test_stale_running_uses_a_twelve_month_line(self):
         rows = [private_row(title="Old", stage="running", as_of="2025-09"),
                 private_row(title="Edge", stage="running", as_of="2025-10"),
