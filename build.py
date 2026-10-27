@@ -111,6 +111,70 @@ def family_of(stacks):
     return {tool: fam["name"] for fam in stacks["families"] for tool in fam["tools"]}
 
 
+def slug(name):
+    """Lowercase name with every run of characters outside a-z and 0-9 turned into one hyphen."""
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+
+def topic_counts(rows):
+    """(key, label, count) for each topic that has rows, most rows first; ties keep TOPICS order."""
+    counts = {key: 0 for key in TOPICS}
+    for row in rows:
+        if row.get("topic") in counts:
+            counts[row["topic"]] += 1
+    found = [(key, label, counts[key]) for key, label in TOPICS.items() if counts[key]]
+    return sorted(found, key=lambda t: -t[2])  # sorted() is stable, so equal counts keep TOPICS order
+
+
+def _uses(row, tools):
+    return bool(tools.intersection(row.get("stack", [])))
+
+
+def family_counts(rows, stacks):
+    """(slug, name, count) for each stack family that has rows, most rows first, then by name.
+    A row counts once for a family however many of its tools the row lists."""
+    found = []
+    for fam in stacks["families"]:
+        tools = set(fam["tools"])
+        n = sum(1 for row in rows if _uses(row, tools))
+        if n:
+            found.append((slug(fam["name"]), fam["name"], n))
+    return sorted(found, key=lambda t: (-t[2], t[1]))
+
+
+def _level(n):
+    """Shade of one year in the family box: 0 none, 1 one row, 2 two or three, 3 four or more."""
+    return 0 if n == 0 else 1 if n == 1 else 2 if n <= 3 else 3
+
+
+def family_summary(name, rows, stacks, years):
+    """What one stack family looks like across the years: how many rows use it, the first and last
+    year it was used, the number of distinct years, a shade level for every year in `years`, and
+    how many rows use each of its tools (tools no row uses are left out)."""
+    fam = next((f for f in stacks["families"] if f["name"] == name), None)
+    if fam is None:
+        raise ValueError("no stack family named %s" % name)
+    mine = [row for row in rows if _uses(row, set(fam["tools"]))]
+    per_year = {}
+    for row in mine:
+        year = row["started"][:4]
+        per_year[year] = per_year.get(year, 0) + 1
+    per_tool = {}
+    for row in mine:
+        for tool in set(row["stack"]) & set(fam["tools"]):
+            per_tool[tool] = per_tool.get(tool, 0) + 1
+    return {
+        "name": name,
+        "slug": slug(name),
+        "count": len(mine),
+        "first": min(per_year) if per_year else None,
+        "last": max(per_year) if per_year else None,
+        "used": len(per_year),
+        "cells": [(year, _level(per_year.get(year, 0))) for year in years],
+        "tools": sorted(per_tool.items(), key=lambda t: (-t[1], t[0])),
+    }
+
+
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
