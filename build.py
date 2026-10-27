@@ -20,6 +20,7 @@ import html
 import json
 import os
 import re
+import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -315,6 +316,54 @@ def history(rows, eras):
     return sorted(blocks, key=lambda b: b["key"], reverse=True)
 
 
+def all_years(rows, today):
+    """Every year from the earliest start to today's year, inclusive; no rows, no years."""
+    if not rows:
+        return []
+    first = min(int(r["started"][:4]) for r in rows)
+    return [str(y) for y in range(first, int(today[:4]) + 1)]
+
+
+def strip(rows, years):
+    """One cell per year for the year strip: how many rows started then, and how many of those are running."""
+    return [{"year": y,
+             "count": sum(1 for r in rows if r["started"][:4] == y),
+             "running": sum(1 for r in rows if r["started"][:4] == y and r["stage"] == "running")}
+            for y in years]
+
+
+def counts(rows):
+    """The legend totals; `first_year` is empty when there are no rows."""
+    return {"total": len(rows),
+            "running": sum(1 for r in rows if r["stage"] == "running"),
+            "finished": sum(1 for r in rows if r["stage"] == "finished"),
+            "first_year": min((r["started"][:4] for r in rows), default="")}
+
+
+def data_changed_date(run=subprocess.check_output):
+    """The date (YYYY-MM-DD) of the last commit that touched data/, read from git. A shallow
+    checkout would give the wrong answer, so it is refused. `run` is a parameter only so tests can fake git."""
+    if run(["git", "rev-parse", "--is-shallow-repository"], cwd=HERE, text=True).strip() == "true":
+        raise RuntimeError("shallow checkout: set fetch-depth: 0 in the workflow")
+    return run(["git", "log", "-1", "--format=%cs", "--", "data"], cwd=HERE, text=True).strip()
+
+
+def stale_running(rows, today):
+    """Log lines for running ideas without a repo whose as_of is older than twelve months: the
+    month 12 months before today's month is the line, and as_of strictly before it is stale.
+    A bare-year as_of counts as January. These go to the build log, never to the page."""
+    line = "%04d-%s" % (int(today[:4]) - 1, today[5:7])
+    out = []
+    for r in rows:
+        as_of = r.get("as_of")
+        if r["stage"] != "running" or r.get("repo") or not as_of:
+            continue
+        month = as_of if len(as_of) == 7 else as_of + "-01"
+        if month < line:
+            out.append("still running? %s (as_of %s)" % (r["title"], as_of))
+    return out
+
+
 def check_rows(rows):
     """Return a list of problems with the marked rows; empty means valid."""
     problems = []
@@ -474,6 +523,9 @@ def main(argv=None):
               % (len(rows), len(eras), len(stacks["families"])))
         return 0
     built = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
+    changed = data_changed_date()  # Task 8 hands this to render(); computing it now fails a shallow checkout early
+    for line in stale_running(rows, built):
+        print(line)
     os.makedirs(a.out, exist_ok=True)
     with open(os.path.join(a.out, "index.html"), "w", encoding="utf-8") as f:
         f.write(render(rows, built, eras))
