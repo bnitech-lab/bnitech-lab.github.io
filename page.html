@@ -98,6 +98,9 @@ h1 { margin: 0; font-family: var(--pixel); font-weight: 400; font-size: clamp(48
 }
 .switch button::after { content: ""; position: absolute; inset: -3px 0; } /* 38px button plus the bar's padding: a 44px target */
 .switch button[aria-pressed="true"] { background: var(--yellow); color: var(--on-yellow); }
+/* The page-wide ring would sit on the ink bar itself; draw it inside the segment instead, paper on the bar, ink on yellow. */
+.switch button:focus-visible { outline: 2px solid var(--paper); outline-offset: -5px; }
+.switch button[aria-pressed="true"]:focus-visible { outline-color: var(--on-yellow); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
   min-height: 44px; padding: 6px 14px; border: 1px solid var(--chip-edge); border-radius: 3px; background: transparent;
@@ -147,11 +150,12 @@ h2::before { content: ""; box-sizing: border-box; width: 10px; height: 10px; bac
 }
 .name.on { background: var(--yellow); color: var(--on-yellow); text-decoration-style: solid; text-decoration-color: var(--on-yellow); text-decoration-thickness: 2px; }
 .name .code { display: inline-block; font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 2px; }
-.name.on .code { color: var(--on-yellow); }
 .name .kind {
   display: inline-block; margin-left: 2px; padding: 0 5px; border: 1px solid var(--chip-edge); border-radius: 2px;
   font-family: var(--mono); font-size: 10px; letter-spacing: .04em; line-height: 1.5; text-transform: uppercase; color: var(--muted); vertical-align: 1px;
 }
+.name.on .code, .name.on .kind { color: var(--on-yellow); } /* yellow always carries black text */
+.name.on .kind { border-color: var(--on-yellow); }
 .card {
   display: flex; flex-direction: column; gap: 6px; margin: 4px 4px 10px 0; padding: 12px 14px;
   background: var(--panel); border: 1px solid var(--ink); border-radius: 3px; box-shadow: 4px 4px 0 #111111;
@@ -159,7 +163,8 @@ h2::before { content: ""; box-sizing: border-box; width: 10px; height: 10px; bac
 .card p { font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
 @media (prefers-color-scheme: dark) { .card { box-shadow: 4px 4px 0 var(--ink); } } /* a black shadow would vanish on dark paper */
 .card .cstack { font-family: var(--mono); font-size: 11px; line-height: 1.5; color: var(--muted); }
-.card a { align-self: flex-start; font-size: 14px; font-weight: 600; }
+/* The link is a 44px touch target; the negative margins give the extra height back to the gap and the card's padding. */
+.card a { align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; margin: -6px 0 -12px; font-size: 14px; font-weight: 600; }
 code { font-family: var(--mono); font-size: .86em; background: var(--paper); border: 1px solid var(--hair); border-radius: 2px; padding: 0 4px; }
 /* With the page script running (it sets class "js" on <html>), a card shown by pointing floats over the rows below
    instead of pushing them down. Without the script every card stays in the flow, so nothing overlaps. */
