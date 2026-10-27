@@ -24,6 +24,7 @@
   --on-yellow: #111111;
   --chip-edge: #a3a39b;
   --chip-on-edge: #b89a00;
+  --bar: var(--ink);
   --l0: #dcdcd5; --l1: #a3a39b; --l2: #55554f; --l3: #111111;
   --pixel: "Silkscreen", "Space Mono", ui-monospace, monospace;
   --body: "Space Grotesk", -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -34,6 +35,7 @@
   :root {
     --paper: #131313; --ink: #ecebe6; --muted: #a3a39b; --second: #cfcec8; --panel: #1d1d1b; --hair: #33332f;
     --dots: #77776f; --chip-edge: #55554f;
+    --bar: #706f68; /* mid grey: 3.5:1 against the yellow share and 3.7:1 against the paper */
     --l0: #2a2a27; --l1: #55554f; --l2: #a3a39b; --l3: #ecebe6;
     color-scheme: dark;
   }
@@ -77,7 +79,7 @@ h1 { margin: 0; font-family: var(--pixel); font-weight: 400; font-size: clamp(48
   background-image: linear-gradient(var(--hair), var(--hair)); background-size: 100% 1px; background-position: 0 100px; background-repeat: no-repeat;
 }
 .cell:hover { background-color: var(--panel); }
-.cell .bar { align-self: end; display: flex; flex-direction: column; justify-content: flex-end; background: var(--ink); }
+.cell .bar { align-self: end; display: flex; flex-direction: column; justify-content: flex-end; background: var(--bar); }
 .cell .run { display: block; background: var(--yellow); }
 .cell .n { font-family: var(--mono); font-size: 10px; font-weight: 700; line-height: 1.4; text-align: center; padding-bottom: 2px; }
 .axis { display: flex; gap: 2px; font-family: var(--mono); font-size: 10px; line-height: 1.4; color: var(--muted); }
