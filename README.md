@@ -73,8 +73,9 @@ history, because it reads the date of the last change to `data/` from git.
 
 ## Known limits
 
-- GitHub turns off scheduled workflows in a public repository after 60 days without activity.
-  If that happens, the daily rebuild stops until the next push or a manual run.
+- GitHub turns off a workflow that has a schedule after 60 days without activity in a public
+  repository. It then does not run at all, on a push either, until I enable it again in the
+  Actions tab or with `gh workflow enable pages.yml`.
 - A running idea without a repository stays "running" until I change its row. The only sign is
   the `still running?` line in the build log.
 - A hash link opens one year (`#2026`) or picks one filter (`#topic=ai`,
