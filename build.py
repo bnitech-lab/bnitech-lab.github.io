@@ -204,6 +204,117 @@ def eras_for_year(eras, year):
     return out
 
 
+GAP_LABEL = "Between school and work"
+
+
+def _first_month(date):
+    """The first month an era covers on its `from` side; a bare year means January."""
+    return date if len(date) == 7 else date + "-01"
+
+
+def _last_month(date):
+    """The last month an era covers on its `to` side; a bare year means December."""
+    return date if len(date) == 7 else date + "-12"
+
+
+def _covers(e, ym):
+    return _first_month(str(e["from"])) <= ym <= _last_month(str(e.get("to", "9999")))
+
+
+def era_of(eras, started):
+    """The era a row belongs to, or None when it belongs to none of them.
+
+    A month (YYYY-MM) goes to the era that contains it. A bare year goes to the era covering the
+    most of its twelve months (the earlier era on a tie), but only if that is more months than no
+    era covers at all; otherwise the year sits between eras and the row has no era."""
+    ordered = sorted(eras, key=lambda e: str(e["from"]))
+    if len(started) == 7:
+        return next((e for e in ordered if _covers(e, started)), None)
+    months = [f"{started}-{m:02d}" for m in range(1, 13)]
+    best, best_count = None, 0
+    for e in ordered:
+        count = sum(_covers(e, ym) for ym in months)
+        if count > best_count:
+            best, best_count = e, count
+    uncovered = sum(not any(_covers(e, ym) for e in ordered) for ym in months)
+    return best if best_count > uncovered else None
+
+
+def era_key(e):
+    return str(e["from"])
+
+
+def tally(rows):
+    """Counts by stage in STAGE_ORDER, e.g. "5 finished · 19 running · 1 idea"; empty stages are left out."""
+    parts = []
+    for stage in STAGE_ORDER:
+        n = sum(1 for r in rows if r["stage"] == stage)
+        if not n:
+            continue
+        word = stage if stage != "thought" else ("idea" if n == 1 else "ideas")
+        parts.append(f"{n} {word}")
+    return " · ".join(parts)
+
+
+def preview(rows):
+    """The first three titles, then "and N more"."""
+    text = ", ".join(r["title"] for r in rows[:3])
+    return text + (f" and {len(rows) - 3} more" if len(rows) > 3 else "")
+
+
+def _when(e):
+    def part(ym):
+        return f"{month_name(ym)} {ym[:4]}" if len(ym) == 7 else ym
+    return f"{part(str(e['from']))} to {part(str(e['to'])) if 'to' in e else 'now'}"
+
+
+def _gap_key(eras, year):
+    """Where a gap block sorts: the month after the latest era that ends inside the year
+    (December has no month after inside the year), else the year's January."""
+    ends = [str(e["to"]) for e in eras
+            if len(str(e.get("to", ""))) == 7 and str(e["to"])[:4] == year and str(e["to"])[5:] != "12"]
+    if not ends:
+        return f"{year}-01"
+    last = max(ends)
+    return f"{year}-{int(last[5:]) + 1:02d}"
+
+
+def _year_entries(rows):
+    """One entry per year, newest first; inside a year finished work first, then the other stages
+    in STAGE_ORDER, and within a stage the later start first (the order render() uses)."""
+    rank = {s: i for i, s in enumerate(STAGE_ORDER)}
+    ordered = sorted(sorted(rows, key=lambda r: r["started"], reverse=True),
+                     key=lambda r: rank.get(r["stage"], len(rank)))
+    by_year = {}
+    for r in ordered:
+        by_year.setdefault(r["started"][:4], []).append(r)
+    return [{"year": y, "rows": rs, "count": len(rs), "tally": tally(rs), "preview": preview(rs)}
+            for y, rs in sorted(by_year.items(), reverse=True)]
+
+
+def history(rows, eras):
+    """The History as data: blocks newest first, one per era, plus one per year that falls between
+    eras. Each block is {"key", "label", "when", "years"}; a block with no rows is left out."""
+    members = {}
+    for r in rows:
+        e = era_of(eras, r["started"])
+        if e is not None:
+            members.setdefault(("era", era_key(e)), []).append(r)
+        else:
+            members.setdefault(("gap", r["started"][:4]), []).append(r)
+    blocks = []
+    for e in eras:
+        rs = members.get(("era", era_key(e)))
+        if rs:
+            label = f"{e['label']} · {e['where']}" if e.get("where") else e["label"]
+            blocks.append({"key": era_key(e), "label": label, "when": _when(e), "years": _year_entries(rs)})
+    for (kind, year), rs in members.items():
+        if kind == "gap":
+            blocks.append({"key": _gap_key(eras, year), "label": GAP_LABEL, "when": year,
+                           "years": _year_entries(rs)})
+    return sorted(blocks, key=lambda b: b["key"], reverse=True)
+
+
 def check_rows(rows):
     """Return a list of problems with the marked rows; empty means valid."""
     problems = []
