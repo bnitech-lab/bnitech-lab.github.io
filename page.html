@@ -201,6 +201,8 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
   document.documentElement.classList.add("js"); // turns on the floating-card layout in the CSS
 
   const STAGES = ["finished", "running", "stopped", "retired", "planned", "thought"]; // build.STAGE_ORDER
+  // The group label word per stage, as build.py writes it (STAGE_WORD[stage].capitalize()).
+  const LABEL = {finished: "Finished", running: "Running", stopped: "Stopped", retired: "Retired", planned: "Planned", thought: "Idea"};
   const DOT = " \u00b7 ";
   const DASH = "\u2013";
   const all = (selector, scope) => Array.from((scope || document).querySelectorAll(selector));
@@ -208,6 +210,7 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
   const state = {mode: "topic", pick: "all", open: "", card: null, pinned: false};
 
   const rows = all(".row");
+  const cells = all(".cell[data-year]");
   const blocks = all(".block");
   const modes = all(".switch [data-mode]");
   const chipRows = all(".chips[data-mode]");
@@ -216,7 +219,8 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
     const toggle = el.querySelector(".toggle");
     return {el, toggle, year: el.getAttribute("data-year"), body: el.querySelector(".rows"),
             tally: toggle.querySelector(".tally"), preview: toggle.querySelector(".preview"), n: toggle.querySelector(".n"),
-            items: all(".row", el), groups: all(".group", el).map(g => ({el: g, items: all(".row", g)}))};
+            items: all(".row", el),
+            groups: all(".group", el).map(g => ({el: g, stage: g.getAttribute("data-stage"), label: g.querySelector(".glabel"), items: all(".row", g)}))};
   });
 
   const matches = row => {
@@ -245,10 +249,16 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
     });
     families.forEach(f => { f.hidden = state.mode !== "stack" || f.getAttribute("data-family") !== state.pick; });
     rows.forEach(r => { r.hidden = !matches(r); });
+    let opened = "";
     years.forEach(y => {
       const shown = y.items.filter(r => !r.hidden);
       const open = shown.length > 0 && y.year === state.open;
-      y.groups.forEach(g => { g.el.hidden = g.items.every(r => r.hidden); });
+      if (open) opened = y.year;
+      y.groups.forEach(g => {
+        const count = g.items.filter(r => !r.hidden).length;
+        g.el.hidden = !count;
+        if (g.label) g.label.textContent = LABEL[g.stage] + DOT + count; // with no filter, the build's own label
+      });
       y.el.hidden = !shown.length;
       y.toggle.setAttribute("aria-expanded", String(open));
       y.body.hidden = !open;
@@ -257,6 +267,7 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
       y.n.textContent = shown.length + " " + (open ? DASH : "+");
     });
     blocks.forEach(b => { b.hidden = !b.querySelector(".year:not([hidden])"); });
+    cells.forEach(c => c.setAttribute("aria-expanded", String(opened !== "" && c.getAttribute("data-year") === opened)));
   };
 
   const paint = (row, on) => {
