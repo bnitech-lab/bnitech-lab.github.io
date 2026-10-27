@@ -39,6 +39,16 @@ class CheckRows(unittest.TestCase):
         problems = build.check_rows([private_row(stage="maybe", started="last year")])
         self.assertEqual(len(problems), 2)
 
+    def test_months_must_exist(self):
+        for bad in ("2011-13", "2011-00", "2011-1", "2011-99"):
+            problems = build.check_rows([private_row(started=bad)])
+            self.assertTrue(any("started" in p for p in problems), bad)
+        for good in ("2011", "2011-01", "2011-12"):
+            self.assertEqual(build.check_rows([private_row(started=good)]), [], good)
+        self.assertTrue(build.check_rows([private_row(started="2011-12\n")]))  # no trailing newline
+        self.assertTrue(build.check_eras([{"from": "2011-13", "label": "x"}]))
+        self.assertTrue(build.check_eras([{"from": "2011-01", "to": "2012-00", "label": "x"}]))
+
     def test_running_without_repo_needs_as_of(self):
         self.assertTrue(build.check_rows([private_row(stage="running")]))
         self.assertEqual(build.check_rows([private_row(stage="running", as_of="2026-10")]), [])

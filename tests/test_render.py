@@ -30,7 +30,8 @@ class RenderPage(unittest.TestCase):
         p = page(rows, today="2017-01-01")
         self.assertEqual(p.count('class="cell"'), 3)
         self.assertIn('data-year="2017"', p)
-        self.assertIn('aria-label="2016: 2 rows, 1 running"', p)
+        self.assertIn('aria-label="2016: 2 things, 1 running"', p)
+        self.assertIn('aria-label="2015: 1 thing, 0 running"', p)
         self.assertIn('<span class="tag">1 running</span>', p)
         self.assertIn("3 things since 2015", p)
         self.assertIn("Data changed 2026-10-26 · page built 2026-10-27", p)
@@ -55,12 +56,20 @@ class RenderPage(unittest.TestCase):
         self.assertLess(p.index('data-title="Done"'), p.index('data-title="Live"'))
         self.assertIn('data-families="python"', p)
         self.assertIn('<span class="kind">contribution</span>', p)
+        self.assertEqual(p.count('class="kind"'), 1)  # the public row only
         self.assertIn("Shown under the code name K-1.", p)
         self.assertIn('href="https://github.com/x/y">Code on GitHub', p)
         self.assertIn("since Mar 2019 · running", p)
         section = p[p.index('class="history"'):p.index("<footer>")]
         self.assertIsNone(re.search(r'\shidden(\s|>|=)', section))
         self.assertEqual(p.count('aria-expanded="false"'), 2 + 3)  # two year toggles, three names
+
+    def test_private_row_never_shows_a_kind_tag(self):
+        p = page([private_row(kind="contribution", title="Quiet one")])
+        self.assertIn('data-title="Quiet one"', p)
+        self.assertNotIn('class="kind"', p)
+        p = page([private_row(kind="note", title="Quiet note")])
+        self.assertNotIn('class="kind"', p)
 
     def test_nothing_from_data_breaks_out_of_attributes(self):
         p = page([private_row(title='a"b<c')])

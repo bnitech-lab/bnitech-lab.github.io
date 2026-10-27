@@ -31,8 +31,19 @@ class Strip(unittest.TestCase):
         answers = iter(["true\n"])
         with self.assertRaises(RuntimeError):
             build.data_changed_date(run=lambda *a, **k: next(answers))
-        answers = iter(["false\n", "2026-10-26\n"])
+        answers = iter(["false\n", "1792973100\n"])  # 2026-10-26 00:05 UTC
         self.assertEqual(build.data_changed_date(run=lambda *a, **k: next(answers)), "2026-10-26")
+
+    def test_data_changed_date_is_utc_not_the_committers_timezone(self):
+        # 2026-11-13 08:30 in Korea (+0900) is 2026-11-12 23:30 UTC; the page says "page built" in UTC.
+        seen = []
+
+        def fake(cmd, **kwargs):
+            seen.append(cmd)
+            return "false\n" if cmd[:2] == ["git", "rev-parse"] else "1794526200\n"
+
+        self.assertEqual(build.data_changed_date(run=fake), "2026-11-12")
+        self.assertIn("--format=%ct", seen[1])
 
     def test_data_changed_date_refuses_a_history_without_data_commits(self):
         answers = iter(["false\n", ""])

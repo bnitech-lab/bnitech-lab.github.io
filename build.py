@@ -53,7 +53,7 @@ ALLOWED = {
     "private": COMMON_FIELDS | {"code_name"},
     "public": COMMON_FIELDS | {"summary", "repo"},
 }
-DATE = re.compile(r"^\d{4}(-\d{2})?$")
+DATE = re.compile(r"^\d{4}(-(0[1-9]|1[0-2]))?\Z")
 REPO = re.compile(r"^[A-Za-z0-9-]+/[A-Za-z0-9._-]+$")
 
 
@@ -272,7 +272,7 @@ def _gap_key(eras, year):
 
 def _year_entries(rows):
     """One entry per year, newest first; inside a year finished work first, then the other stages
-    in STAGE_ORDER, and within a stage the later start first (the order render() uses)."""
+    in STAGE_ORDER, and within a stage the later start first (the order the History shows)."""
     rank = {s: i for i, s in enumerate(STAGE_ORDER)}
     ordered = sorted(sorted(rows, key=lambda r: r["started"], reverse=True),
                      key=lambda r: rank.get(r["stage"], len(rank)))
@@ -331,15 +331,16 @@ def counts(rows):
 
 
 def data_changed_date(run=subprocess.check_output):
-    """The date (YYYY-MM-DD) of the last commit that touched data/, read from git. A shallow
-    checkout, or a history with no commit touching data/, would give a wrong or empty date, so
-    both are refused. `run` is a parameter only so tests can fake git."""
+    """The date (YYYY-MM-DD, in UTC like the "page built" date) of the last commit that touched
+    data/, read from git as a Unix timestamp. A shallow checkout, or a history with no commit
+    touching data/, would give a wrong or empty date, so both are refused. `run` is a parameter
+    only so tests can fake git."""
     if run(["git", "rev-parse", "--is-shallow-repository"], cwd=HERE, text=True).strip() == "true":
         raise RuntimeError("shallow checkout: set fetch-depth: 0 in the workflow")
-    date = run(["git", "log", "-1", "--format=%cs", "--", "data"], cwd=HERE, text=True).strip()
-    if not date:
+    stamp = run(["git", "log", "-1", "--format=%ct", "--", "data"], cwd=HERE, text=True).strip()
+    if not stamp:
         raise RuntimeError("no commit touches data/")
-    return date
+    return dt.datetime.fromtimestamp(int(stamp), dt.timezone.utc).strftime("%Y-%m-%d")
 
 
 def stale_running(rows, today):
@@ -456,11 +457,11 @@ def render_strip(cells):
     for c in cells:
         bar = max(3, round(100 * c["count"] / top)) if c["count"] else 0
         run = round(100 * c["running"] / c["count"]) if c["count"] else 0
-        label = f'{c["year"]}: {_plural(c["count"], "row")}, {c["running"]} running'
+        label = f'{c["year"]}: {_plural(c["count"], "thing")}, {c["running"]} running'
         out.append(f'<button type="button" class="cell" data-year="{attr(c["year"])}" aria-label="{attr(label)}">'
                    f'<span class="bar" style="height: {bar}%"><span class="run" style="height: {run}%"></span></span>'
                    f'<span class="n">{c["count"]}</span></button>')
-    return f'<div class="strip" role="group" aria-label="Rows per year">{"".join(out)}</div>{_axis([c["year"] for c in cells])}'
+    return f'<div class="strip" role="group" aria-label="Things per year">{"".join(out)}</div>{_axis([c["year"] for c in cells])}'
 
 
 def render_legend(rows, built, changed):
@@ -535,7 +536,8 @@ def render_row(r, family_by_tool):
             families.append(key)
     private = r["mode"] == "private"
     code = f'<span class="code">{html.escape(r["code_name"])}</span> ' if private else ""
-    kind = f' <span class="kind">{html.escape(r["kind"])}</span>' if r.get("kind") in TAGGED_KINDS else ""
+    kind = (f' <span class="kind">{html.escape(r["kind"])}</span>'
+            if r.get("kind") in TAGGED_KINDS and not private else "")
     if private:
         summary = (f'Shown under the code name {html.escape(r["code_name"])}. '
                    "Only the title, stack, stage and dates are public.")

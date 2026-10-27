@@ -37,8 +37,8 @@ flowchart LR
 4. `build.py` reads those three files and writes the whole page as static HTML with `page.html`
    as the template: the year strip with its legend, the By topic and By stack chips, the History
    and a detail card for every row. It makes no network call and needs no token. It also asks
-   git for the date of the last commit that touched `data/`, shown on the page as "Data
-   changed" beside the "page built" date. On a shallow checkout that date would be wrong, so
+   git for the date of the last commit that touched `data/`, in UTC like the "page built" date,
+   and shows it on the page as "Data changed". On a shallow checkout that date would be wrong, so
    the build fails instead.
 5. The small script inside `page.html` only opens and closes one year or one card at a time, and
    filters by the picked chip. It never creates rows. With JavaScript off, every year and every
