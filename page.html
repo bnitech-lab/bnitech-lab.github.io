@@ -9,101 +9,397 @@
 <meta property="og:description" content="My lab: every idea, work and note since 2011, by Dawn.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
 <style>
-/* Layout: a small games maker's catalogue. Pixel wordmark from the 2011 title screens, then plain cards to try, then ideas by year. */
+/* D6-1: grey paper, black ink, one hazard yellow that always carries black text. Phone first (390px), one column up to 720px. */
 :root {
-  --paper: #f4f5f7;
-  --surface: #ffffff;
-  --ink: #16181d;
-  --muted: #5a6070;
-  --rule: #d9dce3;
-  --accent: #2a46c9;
-  --accent-soft: #e6eafb;
-  --wordmark: "Silkscreen", ui-monospace, Menlo, monospace;
-  --body: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --paper: #e8e8e4;
+  --ink: #111111;
+  --muted: #55554f;
+  --second: #2b2b28;
+  --panel: #f5f5f2;
+  --hair: #c8c8c1;
+  --dots: #9a9a92;
+  --yellow: #ffd400;
+  --on-yellow: #111111;
+  --chip-edge: #a3a39b;
+  --chip-on-edge: #b89a00;
+  --bar: var(--ink);
+  --l0: #dcdcd5; --l1: #a3a39b; --l2: #55554f; --l3: #111111;
+  --pixel: "Silkscreen", "Space Mono", ui-monospace, monospace;
+  --body: "Space Grotesk", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "Space Mono", ui-monospace, Menlo, monospace;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #101217; --surface: #171a21; --ink: #e7e9ef; --muted: #9aa1b2; --rule: #2a2f3a;
-    --accent: #93a6ff; --accent-soft: #1f2640;
+    --paper: #131313; --ink: #ecebe6; --muted: #a3a39b; --second: #cfcec8; --panel: #1d1d1b; --hair: #33332f;
+    --dots: #77776f; --chip-edge: #55554f;
+    --bar: #706f68; /* mid grey: 3.5:1 against the yellow share and 3.7:1 against the paper */
+    --l0: #2a2a27; --l1: #55554f; --l2: #a3a39b; --l3: #ecebe6;
     color-scheme: dark;
   }
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--paper); color: var(--ink);
-  font-family: var(--body); font-size: 17px; line-height: 1.6;
+  font-family: var(--body); font-size: 16px; line-height: 1.55;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-a { color: var(--accent); text-underline-offset: 2px; }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
-.wrap { max-width: 1040px; margin: 0 auto; padding-block: 56px 40px; display: grid; gap: 56px; }
-header { display: grid; gap: 14px; max-width: 680px; }
-h1 { font-family: var(--wordmark); font-weight: 400; font-size: clamp(2.6rem, 9vw, 4.4rem); line-height: 1; margin: 0; letter-spacing: .02em; }
-.not-company { font-family: var(--mono); font-size: .92rem; color: var(--muted); margin: 0; }
-.intro { margin: 8px 0 0; font-size: 1.08rem; max-width: 62ch; }
-h2 { font-size: 1.05rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0; }
-.cards { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
-.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 22px 22px 18px; display: grid; gap: 12px; align-content: start; min-width: 0; }
-.card h3 { margin: 0; font-size: 1.2rem; line-height: 1.3; }
-.card h3 a { color: var(--ink); text-decoration: none; }
-.card h3 a:hover { color: var(--accent); }
-.card p { margin: 0; overflow-wrap: anywhere; }
-.problem { font-size: 1.02rem; }
-.label { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
-.who { color: var(--muted); font-size: .95rem; }
-.try { background: var(--accent-soft); border-radius: 4px; padding: 12px 14px; display: grid; gap: 6px; font-size: .95rem; }
-.try-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-.minutes { font-family: var(--mono); font-size: .8rem; color: var(--accent); font-variant-numeric: tabular-nums; }
-code { font-family: var(--mono); font-size: .86em; background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: 0 4px; }
-.meta { font-family: var(--mono); font-size: .78rem; color: var(--muted); }
-.meta a { color: var(--muted); }
-section { display: grid; gap: 18px; }
-.note { margin: 0; color: var(--muted); font-size: .95rem; }
-.year { display: grid; grid-template-columns: 7.5rem 1fr; gap: 14px; border-top: 1px solid var(--rule); padding-top: 14px; }
-.year-head { display: grid; gap: 6px; align-content: start; }
-.era { margin: 0; font-family: var(--mono); font-size: .72rem; line-height: 1.35; color: var(--muted); }
-.era-span { color: var(--accent); }
-.year h3 { margin: 0; font-family: var(--mono); font-weight: 500; font-size: 1rem; color: var(--accent); font-variant-numeric: tabular-nums; }
-.year ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; min-width: 0; }
-.year-body { display: grid; gap: 10px; min-width: 0; }
-.label { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 8px 0 0; }
-.notes .row-title { font-weight: 400; }
-.row details > summary { list-style: none; cursor: pointer; display: grid; gap: 2px; padding-right: 1.4rem; position: relative; }
-.row details > summary::-webkit-details-marker { display: none; }
-.row details > summary::after { content: "+"; position: absolute; right: 0; top: 0; font-family: var(--mono); color: var(--accent); }
-.row details[open] > summary::after { content: "\2013"; }
-.row details > .summary { margin-top: 6px; }
-.row details > summary a { position: relative; z-index: 1; }
-.row p { margin: 0; }
-.row-title { font-weight: 500; }
-.code-name { font-family: var(--mono); font-size: .85rem; color: var(--muted); margin-right: 4px; }
-.summary { font-size: .95rem; }
-.row-meta { font-size: .88rem; color: var(--muted); }
-.stage { font-family: var(--mono); font-size: .72rem; letter-spacing: .04em; border: 1px solid var(--rule); border-radius: 999px; padding: 0 7px; margin-right: 6px; white-space: nowrap; }
-.stage-running { color: var(--accent); border-color: var(--accent); }
-footer { border-top: 1px solid var(--rule); padding-top: 18px; font-size: .85rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px; }
-@media (max-width: 520px) { .year { grid-template-columns: 1fr; gap: 6px; } .year-head { grid-template-columns: auto 1fr; align-items: baseline; gap: 4px 12px; } .era { grid-column: 2; } .wrap { padding-block: 36px 28px; gap: 44px; } }
+p { margin: 0; }
+a { color: var(--ink); text-decoration-color: var(--ink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { background: var(--yellow); color: var(--on-yellow); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.wrap { max-width: 720px; margin: 0 auto; padding-block: 36px 28px; display: flex; flex-direction: column; gap: 32px; }
+
+/* Header */
+.top { display: flex; flex-direction: column; gap: 12px; }
+h1 { margin: 0; font-family: var(--pixel); font-weight: 400; font-size: clamp(48px, 9vw, 72px); line-height: 1; letter-spacing: .02em; }
+.line { font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--muted); }
+.intro { margin-top: 4px; font-size: 17px; line-height: 1.5; }
+.stripe { height: 10px; margin: -8px 0; background: repeating-linear-gradient(-45deg, #111111 0 8px, #ffd400 8px 16px); }
+
+/* The yellow tag: dates, the running count in the legend */
+.tag, .block > header .when, .cwhen {
+  align-self: flex-start; padding: 1px 6px; background: var(--yellow); color: var(--on-yellow);
+  font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+}
+
+/* Year strip and legend */
+.glance { display: flex; flex-direction: column; gap: 6px; }
+.glance:empty { display: none; }
+.strip { display: flex; gap: 2px; }
+.cell {
+  flex: 1 1 0; min-width: 0; min-height: 44px; display: grid; grid-template-rows: 100px auto; gap: 4px;
+  padding: 0; border: 0; border-radius: 2px; cursor: pointer; background: transparent;
+  background-image: linear-gradient(var(--hair), var(--hair)); background-size: 100% 1px; background-position: 0 100px; background-repeat: no-repeat;
+}
+.cell:hover { background-color: var(--panel); }
+.cell .bar { align-self: end; display: flex; flex-direction: column; justify-content: flex-end; background: var(--bar); }
+.cell .run { display: block; background: var(--yellow); }
+.cell .n { font-family: var(--mono); font-size: 10px; font-weight: 700; line-height: 1.4; text-align: center; padding-bottom: 2px; }
+.axis { display: flex; gap: 2px; font-family: var(--mono); font-size: 10px; line-height: 1.4; color: var(--muted); }
+.axis span { flex: 1 1 0; min-width: 0; display: flex; justify-content: center; white-space: nowrap; }
+.axis span:first-child { justify-content: flex-start; }
+.axis span:last-child { justify-content: flex-end; }
+.legend { font-family: var(--mono); font-size: 11px; line-height: 1.8; margin-top: 4px; }
+.legend > span { white-space: nowrap; } /* a narrow screen breaks the line only between the three totals */
+.legend.dates { margin-top: 0; color: var(--muted); }
+
+/* Switch, chips and the family summary */
+.browse { display: flex; flex-direction: column; gap: 14px; }
+.browse:empty { display: none; }
+.switch { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 240px; padding: 3px; background: var(--ink); border-radius: 4px; }
+.switch button {
+  position: relative; min-height: 38px; border: 0; border-radius: 2px; cursor: pointer; background: transparent; color: var(--paper);
+  font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+}
+.switch button::after { content: ""; position: absolute; inset: -3px 0; } /* 38px button plus the bar's padding: a 44px target */
+.switch button[aria-pressed="true"] { background: var(--yellow); color: var(--on-yellow); }
+/* The page-wide ring would sit on the ink bar itself; draw it inside the segment instead, paper on the bar, ink on yellow. */
+.switch button:focus-visible { outline: 2px solid var(--paper); outline-offset: -5px; }
+.switch button[aria-pressed="true"]:focus-visible { outline-color: var(--on-yellow); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  min-height: 44px; padding: 6px 14px; border: 1px solid var(--chip-edge); border-radius: 3px; background: transparent;
+  cursor: pointer; font-size: 15px; font-weight: 500; line-height: 1.3; text-align: left;
+}
+.chip[aria-pressed="true"] { background: var(--yellow); border-color: var(--chip-on-edge); color: var(--on-yellow); }
+.chip .count { font-family: var(--mono); font-size: 12px; margin-left: 4px; opacity: .75; }
+.family { display: flex; flex-direction: column; gap: 8px; background: var(--panel); border: 1px solid var(--ink); border-radius: 3px; padding: 12px 14px; }
+.fhead { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.fname { font-weight: 600; font-size: 17px; }
+.made { font-family: var(--mono); font-size: 13px; font-weight: 700; white-space: nowrap; }
+.fspan, .tools { font-family: var(--mono); font-size: 11px; line-height: 1.5; color: var(--muted); }
+.use { display: flex; gap: 2px; height: 16px; }
+.use span { flex: 1 1 0; }
+.l0 { background: var(--l0); } .l1 { background: var(--l1); } .l2 { background: var(--l2); } .l3 { background: var(--l3); }
+
+/* History */
+h2 {
+  margin: 8px 0 0; display: flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+}
+h2::before { content: ""; box-sizing: border-box; width: 10px; height: 10px; background: var(--yellow); border: 1px solid var(--ink); }
+.hint { margin: 4px 0 20px; font-size: 13px; color: var(--muted); }
+.block + .block { margin-top: 28px; }
+.block > header { display: flex; flex-direction: column; gap: 2px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+.block > header .label { font-weight: 600; font-size: 18px; letter-spacing: -0.01em; line-height: 1.35; }
+.year { border-bottom: 1px solid var(--hair); }
+.toggle {
+  width: 100%; min-height: 64px; display: grid; grid-template-columns: 52px minmax(0, 1fr) 40px; align-items: start; gap: 10px;
+  padding: 10px 0; border: 0; background: transparent; text-align: left; cursor: pointer;
+}
+.toggle[aria-expanded="true"] { background: var(--panel); }
+.toggle .y { font-family: var(--mono); font-size: 15px; font-weight: 700; line-height: 1.5; }
+.toggle .sum { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.toggle .tally { font-family: var(--mono); font-size: 11px; line-height: 1.5; color: var(--muted); }
+.toggle .preview { font-size: 14px; line-height: 1.45; color: var(--second); overflow-wrap: anywhere; }
+.toggle .n { font-family: var(--mono); font-size: 13px; font-weight: 700; line-height: 1.5; text-align: right; white-space: nowrap; }
+.rows { display: flex; flex-direction: column; gap: 12px; padding: 4px 0 16px 62px; }
+.group { display: flex; flex-direction: column; }
+.glabel { margin-bottom: 2px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.group[data-stage="running"] .glabel { color: var(--ink); }
+.row { position: relative; }
+.name {
+  display: block; width: 100%; min-height: 44px; padding: 8px 0; border: 0; background: transparent; text-align: left; cursor: pointer;
+  font-size: 15px; line-height: 1.45; overflow-wrap: anywhere;
+  text-decoration-line: underline; text-decoration-style: dotted; text-decoration-color: var(--dots); text-underline-offset: 4px;
+}
+.name.on { background: var(--yellow); color: var(--on-yellow); text-decoration-style: solid; text-decoration-color: var(--on-yellow); text-decoration-thickness: 2px; }
+.name .code { display: inline-block; font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 2px; }
+.name .kind {
+  display: inline-block; margin-left: 2px; padding: 0 5px; border: 1px solid var(--chip-edge); border-radius: 2px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .04em; line-height: 1.5; text-transform: uppercase; color: var(--muted); vertical-align: 1px;
+}
+.name.on .code, .name.on .kind { color: var(--on-yellow); } /* yellow always carries black text */
+.name.on .kind { border-color: var(--on-yellow); }
+.card {
+  display: flex; flex-direction: column; gap: 6px; margin: 4px 4px 10px 0; padding: 12px 14px;
+  background: var(--panel); border: 1px solid var(--ink); border-radius: 3px; box-shadow: 4px 4px 0 #111111;
+}
+.card p { font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+@media (prefers-color-scheme: dark) { .card { box-shadow: 4px 4px 0 var(--ink); } } /* a black shadow would vanish on dark paper */
+.card .cstack { font-family: var(--mono); font-size: 11px; line-height: 1.5; color: var(--muted); }
+/* The link is a 44px touch target; the negative margins give the extra height back to the gap and the card's padding. */
+.card a { align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; margin: -6px 0 -12px; font-size: 14px; font-weight: 600; }
+code { font-family: var(--mono); font-size: .86em; background: var(--paper); border: 1px solid var(--hair); border-radius: 2px; padding: 0 4px; }
+/* With the page script running (it sets class "js" on <html>), a card shown by pointing floats over the rows below
+   instead of pushing them down. Without the script every card stays in the flow, so nothing overlaps. */
+@media (hover: hover) and (pointer: fine) {
+  .js .card { position: absolute; left: 0; top: 100%; z-index: 20; width: min(296px, 100%); margin: 4px 0 0; }
+  /* Covers the 4px gap above a floating card, so the pointer can move from the name onto the card
+     (and its GitHub link) without leaving the row, which would close the card. */
+  .js .card::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 8px; }
+}
+
+/* Footer */
+footer { border-top: 1px solid var(--ink); padding-top: 14px; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+footer a { color: var(--muted); text-decoration-color: currentColor; text-decoration-thickness: 1px; }
+@media (min-width: 600px) { .wrap { padding-block: 56px 40px; } }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
+  <header class="top">
     <h1>BNI Tech</h1>
-    <p class="not-company">BNI is me. Tech is what I build with. Lab is where I work on it. Not a company.</p>
+    <p class="line">BNI is me. Tech is what I build with. Lab is where I work on it. Not a company.</p>
     <p class="intro">My lab, by <a href="https://github.com/bnivibe">Dawn</a>. From my first game in 2011 to what I am working on today. You are welcome to look around.</p>
   </header>
-{{IDEAS}}
-  <footer>
-    <span>Rebuilt every day from public repositories by a GitHub Action.</span>
-    <span>Last built {{BUILT}}.</span>
-    <a href="https://github.com/bnitech-lab/bnitech-lab.github.io">Source</a>
-  </footer>
+  <div class="stripe" aria-hidden="true"></div>
+  <div class="glance">{{STRIP}}{{LEGEND}}</div>
+  <div class="browse">{{FILTERS}}{{SUMMARIES}}{{HISTORY}}</div>
+  <footer>Rebuilt every day from this repository. <a href="https://github.com/bnitech-lab/bnitech-lab.github.io">Source on GitHub</a>.</footer>
 </div>
+<script>
+/* One open year, one open card, chip filters and hash links (#2026, #topic=ai, #stack=java-and-spring).
+   Without this script every year and every card shows, so nothing here is needed to read the page. */
+(() => {
+  "use strict";
+  document.documentElement.classList.add("js"); // turns on the floating-card layout in the CSS
+
+  const STAGES = ["finished", "running", "stopped", "retired", "planned", "thought"]; // build.STAGE_ORDER
+  // The group label word per stage, as build.py writes it (STAGE_WORD[stage].capitalize()).
+  const LABEL = {finished: "Finished", running: "Running", stopped: "Stopped", retired: "Retired", planned: "Planned", thought: "Idea"};
+  const DOT = " \u00b7 ";
+  const DASH = "\u2013";
+  const all = (selector, scope) => Array.from((scope || document).querySelectorAll(selector));
+  // card: the .row whose card shows; pinned: that card was opened by a click or tap, so leaving the row keeps it.
+  const state = {mode: "topic", pick: "all", open: "", card: null, pinned: false};
+
+  const rows = all(".row");
+  const cells = all(".cell[data-year]");
+  const blocks = all(".block");
+  const modes = all(".switch [data-mode]");
+  const chipRows = all(".chips[data-mode]");
+  const families = all(".family[data-family]");
+  const years = all(".year").map(el => {
+    const toggle = el.querySelector(".toggle");
+    return {el, toggle, year: el.getAttribute("data-year"), body: el.querySelector(".rows"),
+            tally: toggle.querySelector(".tally"), preview: toggle.querySelector(".preview"), n: toggle.querySelector(".n"),
+            items: all(".row", el),
+            groups: all(".group", el).map(g => ({el: g, stage: g.getAttribute("data-stage"), label: g.querySelector(".glabel"), items: all(".row", g)}))};
+  });
+
+  const matches = row => {
+    if (state.pick === "all") return true;
+    if (state.mode === "topic") return row.getAttribute("data-topic") === state.pick;
+    return (row.getAttribute("data-families") || "").split(" ").indexOf(state.pick) !== -1;
+  };
+
+  // The same wording as build.tally and build.preview, from the rows that match.
+  const tally = list => STAGES.map(stage => {
+    const n = list.filter(r => r.getAttribute("data-stage") === stage).length;
+    if (!n) return "";
+    return n + " " + (stage !== "thought" ? stage : n === 1 ? "idea" : "ideas");
+  }).filter(Boolean).join(DOT);
+  const preview = list => list.slice(0, 3).map(r => r.getAttribute("data-title")).join(", ") +
+    (list.length > 3 ? " and " + (list.length - 3) + " more" : "");
+
+  // Puts the switch, chips, family boxes and history in line with state (the card has its own functions).
+  const render = () => {
+    modes.forEach(b => b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === state.mode)));
+    chipRows.forEach(row => {
+      const current = row.getAttribute("data-mode") === state.mode;
+      row.hidden = !current;
+      all(".chip[data-pick]", row).forEach(chip => chip.setAttribute(
+        "aria-pressed", String(chip.getAttribute("data-pick") === (current ? state.pick : "all"))));
+    });
+    families.forEach(f => { f.hidden = state.mode !== "stack" || f.getAttribute("data-family") !== state.pick; });
+    rows.forEach(r => { r.hidden = !matches(r); });
+    let opened = "";
+    years.forEach(y => {
+      const shown = y.items.filter(r => !r.hidden);
+      const open = shown.length > 0 && y.year === state.open;
+      if (open) opened = y.year;
+      y.groups.forEach(g => {
+        const count = g.items.filter(r => !r.hidden).length;
+        g.el.hidden = !count;
+        if (g.label) g.label.textContent = LABEL[g.stage] + DOT + count; // with no filter, the build's own label
+      });
+      y.el.hidden = !shown.length;
+      y.toggle.setAttribute("aria-expanded", String(open));
+      y.body.hidden = !open;
+      y.tally.textContent = tally(shown); // a hidden year gets empty texts, never the unfiltered ones
+      y.preview.textContent = preview(shown);
+      y.n.textContent = shown.length + " " + (open ? DASH : "+");
+    });
+    blocks.forEach(b => { b.hidden = !b.querySelector(".year:not([hidden])"); });
+    cells.forEach(c => c.setAttribute("aria-expanded", String(opened !== "" && c.getAttribute("data-year") === opened)));
+  };
+
+  const paint = (row, on) => {
+    const name = row.querySelector(".name");
+    const card = row.querySelector(".card");
+    if (card) card.hidden = !on;
+    if (name) {
+      name.setAttribute("aria-expanded", String(on));
+      name.classList.toggle("on", on);
+    }
+  };
+  const showCard = (row, pinned) => {
+    if (state.card && state.card !== row) paint(state.card, false);
+    state.card = row;
+    state.pinned = pinned;
+    paint(row, true);
+  };
+  const closeCard = () => {
+    if (state.card) paint(state.card, false);
+    state.card = null;
+    state.pinned = false;
+  };
+
+  const writeHash = hash => {
+    try {
+      history.replaceState(null, "", hash ? "#" + hash : location.pathname + location.search);
+    } catch (err) { /* a file:// page may refuse; the page itself is already right */ }
+  };
+  const filterHash = () => (state.mode === "topic" && state.pick === "all" ? "" : state.mode + "=" + state.pick);
+
+  // Opens one calendar year, every share of it under every era, and closes the rest; "" closes all.
+  const setOpen = year => {
+    state.open = year;
+    closeCard();
+    render();
+  };
+  // From a strip cell or a #2026 link: open the year and scroll to its first share. A filter that
+  // would hide the whole year is cleared first. A year with no rows (no .year) changes nothing.
+  const showYear = year => {
+    const shares = years.filter(y => y.year === year);
+    if (!shares.length) return false;
+    if (!shares.some(y => y.items.some(matches))) state.pick = "all";
+    setOpen(year);
+    const first = shares.find(y => !y.el.hidden);
+    if (first) first.el.scrollIntoView({block: "start"});
+    return true;
+  };
+  const setFilter = (mode, pick) => {
+    state.mode = mode;
+    state.pick = pick;
+    state.open = "";
+    closeCard();
+    render();
+  };
+
+  // #2026 opens that year; #topic=ai or #stack=java-and-spring picks that chip. Anything else is ignored.
+  const readHash = () => {
+    const hash = location.hash.slice(1);
+    if (/^\d{4}$/.test(hash)) return showYear(hash);
+    const m = /^(topic|stack)=([a-z0-9-]+)$/.exec(hash);
+    const known = m && chipRows.some(row => row.getAttribute("data-mode") === m[1] &&
+      all(".chip[data-pick]", row).some(chip => chip.getAttribute("data-pick") === m[2]));
+    if (known) setFilter(m[1], m[2]);
+    return Boolean(known);
+  };
+
+  document.addEventListener("click", e => {
+    const t = e.target instanceof Element ? e.target : null;
+    if (!t) return;
+    const name = t.closest(".name");
+    if (name) {
+      const row = name.closest(".row");
+      if (state.card === row && state.pinned) closeCard();
+      else showCard(row, true);
+      return;
+    }
+    if (!t.closest(".row")) closeCard();
+    const cell = t.closest(".cell[data-year]");
+    const toggle = t.closest(".toggle");
+    const mode = t.closest(".switch [data-mode]");
+    const chip = t.closest(".chip[data-pick]");
+    if (cell) {
+      if (showYear(cell.getAttribute("data-year"))) writeHash(state.open);
+    } else if (toggle) {
+      const year = toggle.closest(".year").getAttribute("data-year");
+      const before = toggle.getBoundingClientRect().top;
+      setOpen(state.open === year ? "" : year);
+      window.scrollBy(0, toggle.getBoundingClientRect().top - before); // a year closing above must not move the tapped row away
+      writeHash(state.open || filterHash());
+    } else if (mode && mode.getAttribute("data-mode") !== state.mode) {
+      setFilter(mode.getAttribute("data-mode"), "all");
+      writeHash(filterHash());
+    } else if (chip) {
+      const chipMode = chip.closest(".chips").getAttribute("data-mode");
+      const pick = chip.getAttribute("data-pick");
+      if (chipMode !== state.mode || pick !== state.pick) {
+        setFilter(chipMode, pick);
+        writeHash(filterHash());
+      }
+    }
+  });
+
+  rows.forEach(row => {
+    const show = () => { if (state.card !== row) showCard(row, false); };
+    const hide = () => { if (state.card === row && !state.pinned) closeCard(); };
+    // Mouse pointers only: a touch tap goes straight to the click handler, because iOS turns the first
+    // tap into a hover when a hover handler changes the page, and the tap would never reach the click.
+    row.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") show(); });
+    row.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") hide(); });
+    row.addEventListener("focusin", show);
+    row.addEventListener("focusout", e => { if (!row.contains(e.relatedTarget)) hide(); });
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape" || !state.card) return;
+    const row = state.card;
+    const name = row.querySelector(".name");
+    if (name && row.contains(document.activeElement)) name.focus(); // focus on the card's link would drop to the page
+    closeCard();
+  });
+
+  window.addEventListener("hashchange", () => {
+    if (location.hash.length > 1) readHash();
+    else setFilter("topic", "all"); // back to the bare address: the state a first visit sees
+  });
+
+  rows.forEach(row => paint(row, false));
+  render();
+  readHash();
+})();
+</script>
 </body>
 </html>
