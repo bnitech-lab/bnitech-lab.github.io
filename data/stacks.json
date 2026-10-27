@@ -1,0 +1,194 @@
+{
+  "families": [
+    {
+      "name": "Java and Spring",
+      "tools": [
+        "Java",
+        "Java Swing",
+        "Spring",
+        "Spring Boot",
+        "Spring MVC",
+        "JPA",
+        "MyBatis",
+        "JSP",
+        "Maven",
+        "JUnit 5",
+        "Spring Auto REST Docs",
+        "Apache POI",
+        "H2",
+        "WebFlux",
+        "JWT",
+        "Netty"
+      ]
+    },
+    {
+      "name": "Kotlin",
+      "tools": [
+        "Kotlin",
+        "Exposed"
+      ]
+    },
+    {
+      "name": "JavaScript and TypeScript",
+      "tools": [
+        "JavaScript",
+        "TypeScript",
+        "Node.js",
+        "Express",
+        "Vue.js",
+        "React",
+        "Next.js",
+        "Remix",
+        "jQuery",
+        "Bootstrap",
+        "Tailwind",
+        "Vite",
+        "EJS",
+        "TypeORM",
+        "Drizzle",
+        "Auth.js",
+        "Playwright",
+        "Vitest",
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      "name": "Python",
+      "tools": [
+        "Python",
+        "Whisper",
+        "yt-dlp"
+      ]
+    },
+    {
+      "name": "Claude and AI",
+      "tools": [
+        "Claude Code skill",
+        "Claude Code plugin",
+        "Claude Code hook",
+        "Claude Code command",
+        "Claude Code",
+        "Claude scheduled task",
+        "Claude cloud routine",
+        "claude.ai Dashboard",
+        "Claude",
+        "subagents",
+        "Gemini CLI",
+        "Vertex AI",
+        "NotebookLM",
+        "NotebookLM CLI",
+        "LSP",
+        "Lovable"
+      ]
+    },
+    {
+      "name": "Android and mobile",
+      "tools": [
+        "Android",
+        "Capacitor",
+        "Parse",
+        "Naver Maps API",
+        "AWS Cognito Sync",
+        "Swift"
+      ]
+    },
+    {
+      "name": "Databases",
+      "tools": [
+        "MySQL",
+        "PostgreSQL",
+        "Supabase",
+        "MongoDB",
+        "SQLite",
+        "Redis",
+        "SQL"
+      ]
+    },
+    {
+      "name": "Cloud, shell and ops",
+      "tools": [
+        "AWS EC2",
+        "AWS S3",
+        "AWS",
+        "Jenkins",
+        "launchd",
+        "Tailscale",
+        "SSH",
+        "tmux",
+        "Shell",
+        "git",
+        "gh CLI",
+        "GitHub",
+        "GitHub Pages",
+        "GitHub Actions",
+        "Kafka"
+      ]
+    },
+    {
+      "name": "C, C++ and Unity",
+      "tools": [
+        "C",
+        "C++",
+        "C++ Win32",
+        "Win32 GDI",
+        "Windows console",
+        "ncurses",
+        "OpenGL",
+        "GLUT",
+        "Unity",
+        "C#",
+        "3ds Max"
+      ]
+    },
+    {
+      "name": "Visual Basic",
+      "tools": [
+        "Visual Basic 6",
+        "VB.NET",
+        "Windows Forms"
+      ]
+    },
+    {
+      "name": "PHP, ASP and Flash",
+      "tools": [
+        "PHP",
+        "Classic ASP",
+        "Adobe Flash",
+        "ActionScript"
+      ]
+    },
+    {
+      "name": "Docs, notes and services",
+      "tools": [
+        "Markdown",
+        "Markdown question bank",
+        "Markdown corpus",
+        "Notion",
+        "PowerPoint",
+        "XMind",
+        "AsciiDoc",
+        "Tistory",
+        "Jekyll",
+        "Zanata",
+        "Gerrit",
+        "rst",
+        "Google Drive",
+        "Google Docs",
+        "Google Sheets",
+        "CSV",
+        "Gmail connector",
+        "Discord webhook",
+        "Obsidian",
+        "Leitner boxes",
+        "macOS say",
+        "dooray CLI",
+        "SVG",
+        "Photoshop",
+        "Public data",
+        "Association rules",
+        "Suwon open data"
+      ]
+    }
+  ]
+}

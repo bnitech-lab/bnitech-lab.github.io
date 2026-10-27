@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-"""Build the BNI Tech idea page.
+"""Build the BNI Tech lab page.
 
-  python3 build.py                 # fetch cards from GitHub, write _site/index.html
-  python3 build.py --check         # validate data/*.json only, no network
+  python3 build.py                 # write _site/index.html
+  python3 build.py --check         # validate data/*.json only, write nothing
   python3 build.py --out DIR       # write somewhere else
 
-Cards come from the README of each repo in data/cards.json: the lines between
-<!-- bnitech:card --> and <!-- /bnitech:card -->. Ideas by year come from
-data/marked.json, rows Dawn has chosen to show. The private master list never
-lives in this repo, and check_rows() rejects any field it does not know.
+The page lists the rows in data/marked.json, the ideas, works and notes Dawn has chosen to
+show, by the year they started. Every row carries one topic from TOPICS. data/eras.json says
+what I was doing in each period, and data/stacks.json maps every tool name a row uses to one
+stack family; --check fails when a tool is in no family. The private master list never lives
+in this repo, and check_rows() rejects any field it does not know.
 
-Standard library only. GITHUB_TOKEN, when set, raises the API rate limit.
+The build reads only the files in this repository. It makes no network call and needs no token.
+Standard library only.
 """
 import argparse
 import datetime as dt
@@ -19,10 +21,8 @@ import json
 import os
 import re
 import sys
-import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-API = "https://api.github.com"
 
 STAGE_ORDER = ["finished", "running", "stopped", "retired", "planned", "thought"]  # order inside a year
 STAGES = {
@@ -33,17 +33,15 @@ STAGES = {
     "running": "Running",
     "retired": "Retired",
 }
-COMMON_FIELDS = {"mode", "title", "stack", "stage", "started", "restarted", "ended", "as_of", "kind"}
+COMMON_FIELDS = {"mode", "title", "stack", "stage", "started", "restarted", "ended", "as_of", "kind", "topic"}
 KINDS = {"project", "contribution", "note"}  # contribution: my part in someone else's work; note: writing, study, not software
+TOPICS = {"games": "Games", "apps": "Apps", "web": "Web and backend", "ai": "AI tools", "study": "Study", "life": "Life"}  # insertion order is the display order for ties
 ALLOWED = {
     "private": COMMON_FIELDS | {"code_name"},
     "public": COMMON_FIELDS | {"summary", "repo"},
 }
 DATE = re.compile(r"^\d{4}(-\d{2})?$")
 REPO = re.compile(r"^[A-Za-z0-9-]+/[A-Za-z0-9._-]+$")
-CARD = re.compile(r"<!--\s*bnitech:card\s*-->(.*?)<!--\s*/bnitech:card\s*-->", re.S)
-LINE = re.compile(r"^\s*-\s*\*\*(.+?):\*\*\s*(.+?)\s*$")
-MINUTES = re.compile(r"^Try it \(about (\d+) minutes?\)$")
 
 
 ERA_FIELDS = {"from", "to", "label", "where"}
@@ -69,6 +67,48 @@ def check_eras(eras):
         if not e.get("label"):
             problems.append("%s: label is required" % where)
     return problems
+
+
+def check_stacks(stacks, rows):
+    """Return problems with data/stacks.json: every tool belongs to exactly one family, and every
+    tool a marked row uses is mapped."""
+    if not isinstance(stacks, dict) or not isinstance(stacks.get("families"), list):
+        return ["stacks.json must hold an object with a families list"]
+    problems = []
+    seen = {}  # tool -> family that claimed it first
+    for i, fam in enumerate(stacks["families"]):
+        where = "family %d" % (i + 1)
+        if not isinstance(fam, dict):
+            problems.append("%s: not an object" % where)
+            continue
+        name = fam.get("name")
+        if not name or not isinstance(name, str):
+            problems.append("%s: name is required" % where)
+        else:
+            where = "family %s" % name
+        tools = fam.get("tools")
+        if not isinstance(tools, list) or not tools or not all(isinstance(t, str) for t in tools):
+            problems.append("%s: tools must be a non-empty list of names" % where)
+            continue
+        for tool in tools:
+            if tool in seen:
+                problems.append("%s: tool %s is already in family %s" % (where, tool, seen[tool]))
+            else:
+                seen[tool] = name
+    if isinstance(rows, list):
+        used = set()
+        for row in rows:
+            stack = row.get("stack", []) if isinstance(row, dict) else []
+            if isinstance(stack, list):
+                used.update(s for s in stack if isinstance(s, str))
+        for tool in sorted(used - set(seen)):
+            problems.append("tool %s is used in marked.json but is in no stack family" % tool)
+    return problems
+
+
+def family_of(stacks):
+    """Map each tool name to the name of the family that holds it."""
+    return {tool: fam["name"] for fam in stacks["families"] for tool in fam["tools"]}
 
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -139,60 +179,11 @@ def check_rows(rows):
             problems.append("%s: a running idea without a repo needs as_of" % where)
         if "kind" in row and row["kind"] not in KINDS:
             problems.append("%s: kind must be one of %s" % (where, ", ".join(sorted(KINDS))))
+        if not row.get("topic"):
+            problems.append("%s: topic is required" % where)
+        elif row["topic"] not in TOPICS:
+            problems.append("%s: topic must be one of %s" % (where, ", ".join(TOPICS)))
     return problems
-
-
-def parse_card(readme):
-    """Pull problem, audience, try-it text and minutes out of a README card block."""
-    m = CARD.search(readme)
-    if not m:
-        raise ValueError("no bnitech:card block")
-    fields = {}
-    for line in m.group(1).strip().splitlines():
-        lm = LINE.match(line)
-        if lm:
-            fields[lm.group(1).strip()] = lm.group(2)
-    card = {"problem": fields.get("Problem"), "who": fields.get("Who it helps")}
-    for key, value in fields.items():
-        mm = MINUTES.match(key)
-        if mm:
-            card["minutes"] = int(mm.group(1))
-            card["try"] = value
-    missing = [k for k in ("problem", "who", "try") if not card.get(k)]
-    if missing:
-        raise ValueError("card block is missing: %s" % ", ".join(missing))
-    return card
-
-
-def get(path, raw=False):
-    req = urllib.request.Request(API + path)
-    req.add_header("Accept", "application/vnd.github.raw" if raw else "application/vnd.github+json")
-    req.add_header("User-Agent", "bnitech-lab-build")
-    token = os.environ.get("GITHUB_TOKEN")
-    if token:
-        req.add_header("Authorization", "Bearer " + token)
-    with urllib.request.urlopen(req, timeout=30) as r:
-        body = r.read().decode("utf-8")
-    return body if raw else json.loads(body)
-
-
-def last_commit(repo):
-    commits = get("/repos/%s/commits?per_page=1" % repo)
-    return commits[0]["commit"]["committer"]["date"][:10]
-
-
-def fetch_card(entry):
-    repo = entry["repo"]
-    meta = get("/repos/" + repo)
-    card = parse_card(get("/repos/%s/readme" % repo, raw=True))
-    card.update({
-        "repo": repo,
-        "title": entry.get("title") or meta["name"],
-        "url": meta["html_url"],
-        "license": (meta.get("license") or {}).get("spdx_id"),
-        "updated": last_commit(repo),
-    })
-    return card
 
 
 def inline(text):
@@ -210,27 +201,9 @@ def years(row):
         span += " to " + row["ended"]
     for d in row.get("restarted", []):
         span += " &middot; again " + d
-    if row.get("stage") == "running":
-        if row.get("updated"):
-            span += " &middot; last commit " + row["updated"]
-        elif row.get("as_of"):
-            span += " &middot; as of " + row["as_of"]
+    if row.get("stage") == "running" and row.get("as_of"):
+        span += " &middot; as of " + row["as_of"]
     return span
-
-
-def render_card(c):
-    lic = " &middot; %s licence" % html.escape(c["license"]) if c.get("license") and c["license"] != "NOASSERTION" else ""
-    return f"""
-      <article class="card">
-        <h3><a href="{html.escape(c['url'])}">{html.escape(c['title'])}</a></h3>
-        <p class="problem">{inline(c['problem'])}</p>
-        <p class="who"><span class="label">For</span> {inline(c['who'])}</p>
-        <div class="try">
-          <p class="try-head"><span class="label">Try it</span><span class="minutes">about {c['minutes']} min</span></p>
-          <p>{inline(c['try'])}</p>
-        </div>
-        <p class="meta"><a href="{html.escape(c['url'])}">{html.escape(c['repo'])}</a> &middot; last commit {c['updated']}{lic}</p>
-      </article>"""
 
 
 def render_row(r):
@@ -282,7 +255,7 @@ def render_year(year, items, eras=()):
     return out + "</div></section>"
 
 
-def render(cards, rows, built, eras=()):
+def render(rows, built, eras=()):
     by_year = {}
     # Years newest first. Inside a year: finished work first, then the other stages in STAGE_ORDER,
     # and within a stage the later start first.
@@ -301,9 +274,7 @@ def render(cards, rows, built, eras=()):
     </section>"""
     with open(os.path.join(HERE, "page.html"), encoding="utf-8") as f:
         page = f.read()
-    return (page.replace("{{CARDS}}", "".join(render_card(c) for c in cards))
-                .replace("{{IDEAS}}", ideas)
-                .replace("{{BUILT}}", built))
+    return page.replace("{{IDEAS}}", ideas).replace("{{BUILT}}", built)
 
 
 def load(name):
@@ -318,23 +289,21 @@ def main(argv=None):
     a = p.parse_args(argv)
     rows = load("marked.json")
     eras = load("eras.json") if os.path.exists(os.path.join(HERE, "data", "eras.json")) else []
-    problems = check_rows(rows) + check_eras(eras)
+    stacks = load("stacks.json")
+    problems = check_rows(rows) + check_eras(eras) + check_stacks(stacks, rows)
     if problems:
         print("\n".join(problems), file=sys.stderr)
         return 1
     if a.check:
-        print("data ok: %d marked row(s), %d era(s)" % (len(rows), len(eras)))
+        print("data ok: %d marked row(s), %d era(s), %d stack famil(ies)"
+              % (len(rows), len(eras), len(stacks["families"])))
         return 0
-    cards = [fetch_card(e) for e in load("cards.json")]
-    for r in rows:
-        if r.get("repo"):
-            r["updated"] = last_commit(r["repo"])
     built = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     os.makedirs(a.out, exist_ok=True)
     with open(os.path.join(a.out, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render(cards, rows, built, eras))
+        f.write(render(rows, built, eras))
     open(os.path.join(a.out, ".nojekyll"), "w").close()
-    print("built %s: %d card(s), %d row(s)" % (a.out, len(cards), len(rows)))
+    print("built %s: %d row(s)" % (a.out, len(rows)))
     return 0
 
 
