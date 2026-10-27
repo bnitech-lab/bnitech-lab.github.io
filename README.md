@@ -24,12 +24,14 @@ flowchart LR
    `web`, `ai`, `study` or `life`. An optional `kind` of `contribution` (my part in someone
    else's work) or `note` (writing or study, not software) adds a small tag after the title.
 2. `data/eras.json` says what I was doing in each period (studying where, working where, or on
-   my own projects). The History shows one header per period, newest first, with one line per
-   year under it. A row goes under the period that holds its start month (a row that gives only
-   a year goes under the period that covers most of that year). An open year lists its rows by
-   stage: finished, running, stopped, retired, planned, idea. One calendar year opens at a time,
-   even when two periods share it. A year that falls in no period is shown under "Between
-   school and work".
+   my own projects). The History shows a header for each period that has rows, newest first,
+   with one line per year under it. A row goes under the period that holds its start month. If
+   no period holds that month, it goes under "Between school and work". A row that gives only a
+   year goes under the period that covers the most months of that year, but only if that is
+   more months than no period covers. In 2018, Chung-Ang covers two months, Nexon one, and nine
+   are in no period, so the two rows that give only "2018" go under "Between school and work".
+   An open year lists its rows by stage: finished, running, stopped, retired, planned, idea. One
+   calendar year opens at a time, even when two periods share it.
 3. `data/stacks.json` puts every tool name a row lists into one stack family: "Java" and
    "Spring Boot" both sit under "Java and Spring". A tool belongs to exactly one family.
 4. `build.py` reads those three files and writes the whole page as static HTML with `page.html`
@@ -40,12 +42,13 @@ flowchart LR
    the build fails instead.
 5. The small script inside `page.html` only opens and closes one year or one card at a time, and
    filters by the picked chip. It never creates rows. With JavaScript off, every year and every
-   card is open and the chips do nothing.
+   card is open. The By topic chips show and do nothing, and the By stack chips and the family
+   boxes stay hidden.
 6. A GitHub Action rebuilds and publishes the page on every push to `main`, and also once a day
    on a schedule. Its checkout fetches full history, for the date above. A second workflow runs
    the tests, `--check` and a build on every pull request.
 
-`python3 build.py --check` validates the data and writes nothing. It rejects:
+`python3 build.py --check` validates the data and writes nothing. Among other things, it rejects:
 
 - a row with a field it is not allowed to have, a `kind` that is not `project`, `contribution`
   or `note`, and a `topic` that is missing or not one of the six;
