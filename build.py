@@ -72,6 +72,48 @@ def check_eras(eras):
     return problems
 
 
+def check_stacks(stacks, rows):
+    """Return problems with data/stacks.json: every tool belongs to exactly one family, and every
+    tool a marked row uses is mapped."""
+    if not isinstance(stacks, dict) or not isinstance(stacks.get("families"), list):
+        return ["stacks.json must hold an object with a families list"]
+    problems = []
+    seen = {}  # tool -> family that claimed it first
+    for i, fam in enumerate(stacks["families"]):
+        where = "family %d" % (i + 1)
+        if not isinstance(fam, dict):
+            problems.append("%s: not an object" % where)
+            continue
+        name = fam.get("name")
+        if not name or not isinstance(name, str):
+            problems.append("%s: name is required" % where)
+        else:
+            where = "family %s" % name
+        tools = fam.get("tools")
+        if not isinstance(tools, list) or not tools or not all(isinstance(t, str) for t in tools):
+            problems.append("%s: tools must be a non-empty list of names" % where)
+            continue
+        for tool in tools:
+            if tool in seen:
+                problems.append("%s: tool %s is already in family %s" % (where, tool, seen[tool]))
+            else:
+                seen[tool] = name
+    if isinstance(rows, list):
+        used = set()
+        for row in rows:
+            stack = row.get("stack", []) if isinstance(row, dict) else []
+            if isinstance(stack, list):
+                used.update(s for s in stack if isinstance(s, str))
+        for tool in sorted(used - set(seen)):
+            problems.append("tool %s is used in marked.json but is in no stack family" % tool)
+    return problems
+
+
+def family_of(stacks):
+    """Map each tool name to the name of the family that holds it."""
+    return {tool: fam["name"] for fam in stacks["families"] for tool in fam["tools"]}
+
+
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
@@ -323,12 +365,14 @@ def main(argv=None):
     a = p.parse_args(argv)
     rows = load("marked.json")
     eras = load("eras.json") if os.path.exists(os.path.join(HERE, "data", "eras.json")) else []
-    problems = check_rows(rows) + check_eras(eras)
+    stacks = load("stacks.json")
+    problems = check_rows(rows) + check_eras(eras) + check_stacks(stacks, rows)
     if problems:
         print("\n".join(problems), file=sys.stderr)
         return 1
     if a.check:
-        print("data ok: %d marked row(s), %d era(s)" % (len(rows), len(eras)))
+        print("data ok: %d marked row(s), %d era(s), %d stack famil(ies)"
+              % (len(rows), len(eras), len(stacks["families"])))
         return 0
     cards = [fetch_card(e) for e in load("cards.json")]
     for r in rows:

@@ -5,7 +5,7 @@
     "summary": "The class exercises behind the bigger projects: VB.NET forms, Flash pieces, OA and object-oriented examples, SQL for a registration system, VC++ assignments, Android basics, Java programs, ERwin data modelling, and C problems.",
     "stack": [
       "VB.NET",
-      "Flash",
+      "Adobe Flash",
       "SQL",
       "C++",
       "Android",
@@ -218,7 +218,7 @@
     "title": "Shell phone book",
     "summary": "A menu-driven bash script that keeps a phone book in a file, in two versions.",
     "stack": [
-      "Bash"
+      "Shell"
     ],
     "stage": "finished",
     "started": "2012-05",
@@ -254,7 +254,7 @@
     "summary": "A Java Swing maze game: eat every coin while robots roam, with items and three difficulty levels. The art was redrawn for this release.",
     "stack": [
       "Java",
-      "Swing"
+      "Java Swing"
     ],
     "stage": "finished",
     "started": "2012-09",
@@ -924,7 +924,7 @@
     "title": "Drawli coloring service",
     "summary": "A drawing and coloring service at a friend's company. I helped unpaid for a few months on the coloring AI model, the Kakao login setup and a server improvement plan.",
     "stack": [
-      "Vue",
+      "Vue.js",
       "Node.js",
       "Express",
       "TypeScript",

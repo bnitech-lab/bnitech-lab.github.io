@@ -81,6 +81,29 @@ class CheckRows(unittest.TestCase):
         self.assertEqual(build.check_rows([private_row(topic="life")]), [])
 
 
+STACKS = {"families": [{"name": "Java and Spring", "tools": ["Java", "Spring Boot"]},
+                       {"name": "Databases", "tools": ["MySQL"]}]}
+
+
+class CheckStacks(unittest.TestCase):
+    def test_valid_map_and_lookup(self):
+        rows = [private_row(stack=["Java", "MySQL"])]
+        self.assertEqual(build.check_stacks(STACKS, rows), [])
+        self.assertEqual(build.family_of(STACKS)["MySQL"], "Databases")
+
+    def test_unmapped_tool_fails_check(self):
+        problems = build.check_stacks(STACKS, [private_row(stack=["Kotlin"])])
+        self.assertTrue(any("Kotlin" in p for p in problems))
+
+    def test_tool_in_two_families_fails_check(self):
+        twice = {"families": [{"name": "A", "tools": ["Java"]}, {"name": "B", "tools": ["Java"]}]}
+        self.assertTrue(any("Java" in p for p in build.check_stacks(twice, [])))
+
+    def test_bad_shape_fails_check(self):
+        self.assertTrue(build.check_stacks([], []))
+        self.assertTrue(build.check_stacks({"families": [{"name": "A"}]}, []))
+
+
 class Render(unittest.TestCase):
     def test_page_without_rows_has_no_ideas_section(self):
         card = dict(build.parse_card(README), repo="example/example-repo", title="Example",
