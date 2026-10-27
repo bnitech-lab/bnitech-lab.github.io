@@ -2074,9 +2074,9 @@
       "SQL Server",
       "Chart.js"
     ],
-    "stage": "stopped",
+    "stage": "finished",
     "started": "2019-06",
-    "ended": "2019-09",
+    "ended": "2019",
     "topic": "web"
   }
 ]
