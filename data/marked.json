@@ -652,7 +652,7 @@
   {
     "mode": "public",
     "title": "Dexchange",
-    "summary": "A Netty ping-pong server and client, an edited version of the Netty user guide example. The name suggests an exchange, but no exchange code was ever written.",
+    "summary": "A Netty ping-pong server and client, an edited version of the Netty user guide example, plus a July 2018 design memo on packet framing, log levels and broadcast for an exchange feed. No exchange code was ever written.",
     "stack": [
       "Java",
       "Netty"
@@ -1813,5 +1813,270 @@
     "as_of": "2026-10",
     "kind": "note",
     "topic": "study"
+  },
+  {
+    "mode": "public",
+    "title": "Stove fire-prevention timer",
+    "summary": "A timer and cut-off for a gas stove left on too long.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2016-11",
+    "topic": "apps"
+  },
+  {
+    "mode": "public",
+    "title": "Smart wardrobe and fridge",
+    "summary": "A wardrobe and a fridge that know what is inside and suggest what to wear or cook.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2016-11",
+    "topic": "apps"
+  },
+  {
+    "mode": "public",
+    "title": "Posture-correcting insoles and socks",
+    "summary": "Insoles and socks with sensors that nudge you when your posture or gait goes wrong.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2016-11",
+    "topic": "apps"
+  },
+  {
+    "mode": "public",
+    "title": "Braille elevator guide",
+    "summary": "Braille and sound guidance in elevators for blind passengers.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2016-11",
+    "topic": "apps"
+  },
+  {
+    "mode": "public",
+    "title": "Smart power strip with a live bill",
+    "summary": "A power strip that measures each outlet and shows the electricity bill as it grows, with the app, the meter and the sensor as the three parts to build.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2016-11",
+    "topic": "apps"
+  },
+  {
+    "mode": "public",
+    "title": "Dog toilet-training sound",
+    "summary": "A device that plays a sound to train a dog where to go.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2016-11",
+    "topic": "apps"
+  },
+  {
+    "mode": "public",
+    "title": "Event social network by place and hashtag",
+    "summary": "A social network where posts are tied to GPS and a hashtag, so an event has its own live feed.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2016-11",
+    "topic": "web"
+  },
+  {
+    "mode": "public",
+    "title": "City-gas inspection and power-usage app",
+    "summary": "A public-data app: the time window of the next gas inspection visit, live and expected power usage, and a comparison with homes of the same size nearby.",
+    "stack": [
+      "Public data"
+    ],
+    "stage": "planned",
+    "started": "2017-04",
+    "topic": "apps"
+  },
+  {
+    "mode": "public",
+    "title": "National budget at a glance",
+    "summary": "A public-data site that shows where the national budget goes, with the spending record and a question board.",
+    "stack": [
+      "Public data"
+    ],
+    "stage": "planned",
+    "started": "2017-04",
+    "topic": "web"
+  },
+  {
+    "mode": "public",
+    "title": "Gyeonggi all-in-one guide",
+    "summary": "One app over the province's open data sets, the seed that became the summer survival app.",
+    "stack": [
+      "Public data"
+    ],
+    "stage": "thought",
+    "started": "2017-04",
+    "topic": "apps"
+  },
+  {
+    "mode": "public",
+    "title": "Baekjoon practice notes",
+    "summary": "Algorithm practice in Java on Baekjoon Online Judge: DP recurrences, graph searches, two pointers and heaps, kept as idea notes rather than code.",
+    "stack": [
+      "Java"
+    ],
+    "stage": "stopped",
+    "started": "2017-02",
+    "ended": "2018-10",
+    "kind": "note",
+    "topic": "study"
+  },
+  {
+    "mode": "public",
+    "title": "Interview knowledge index",
+    "summary": "A hand-linked index of about 25 notes on REST, HTTP, GC, OSI, TCP, DNS, design patterns and ORMs, built for 2018 interviews on top of a 2017 glossary of 90 terms; the same idea as the wiki I keep now.",
+    "stack": [
+      "Evernote"
+    ],
+    "stage": "stopped",
+    "started": "2017-10",
+    "ended": "2018-09",
+    "kind": "note",
+    "topic": "study"
+  },
+  {
+    "mode": "public",
+    "title": "Talks and courses, 2017 to 2018",
+    "summary": "An open-source talk at university, a six-session winter job-search programme, a blockchain day with geth and Solidity, Naver Cloud's CI/CD and serverless class, the Samsung Security Tech Forum, if(kakao) 2018 and the Open SW Governance Academy, each with notes.",
+    "stack": [
+      "Evernote"
+    ],
+    "stage": "finished",
+    "started": "2017-11",
+    "ended": "2018-09",
+    "kind": "note",
+    "topic": "study"
+  },
+  {
+    "mode": "public",
+    "title": "Cloud and DevOps lab notebooks",
+    "summary": "Eleven days of courses and 23 online lessons in the summer of 2018: OpenStack installed with DevStack up to an instance I could ping and SSH into, a Heroku deploy, Cloud Foundry on BOSH-lite up to cf push, a three-node Ansible lab and Docker Swarm. Course exercises, not production.",
+    "stack": [
+      "OpenStack",
+      "Cloud Foundry",
+      "Ansible",
+      "Docker",
+      "Vagrant",
+      "Heroku"
+    ],
+    "stage": "finished",
+    "started": "2018-07",
+    "ended": "2018-09",
+    "kind": "note",
+    "topic": "study"
+  },
+  {
+    "mode": "public",
+    "title": "Game launcher comparison",
+    "summary": "A bootcamp exercise in my first week at Nexon: used five PC game launchers side by side and wrote up what each did well and badly.",
+    "stack": [
+      "Confluence"
+    ],
+    "stage": "finished",
+    "started": "2018-12",
+    "ended": "2018-12",
+    "kind": "note",
+    "topic": "study"
+  },
+  {
+    "mode": "public",
+    "title": "Time zone check app",
+    "summary": "My first task on a team at Nexon: a C# console app and a SQL Server container in a CentOS VM to see how a date stored in one time zone reads in another. Set up and documented; the final comparison was never finished.",
+    "stack": [
+      "C#",
+      "SQL Server",
+      "Docker",
+      "VirtualBox"
+    ],
+    "stage": "stopped",
+    "started": "2019-02",
+    "ended": "2019-03",
+    "topic": "apps"
+  },
+  {
+    "mode": "private",
+    "code_name": "IDEA-2019-2",
+    "title": "Client SDK sample and a new auth call",
+    "stack": [
+      "C++ Win32"
+    ],
+    "stage": "finished",
+    "started": "2019-03",
+    "ended": "2019-04",
+    "topic": "apps"
+  },
+  {
+    "mode": "public",
+    "title": "Character encoding talk",
+    "summary": "A team talk on ASCII, code pages, Unicode and UTF-8 and UTF-16 with C++ experiments on Korean text, given 2019-04-22; the notes grew into a four-part glossary (summary, source, translation, references).",
+    "stack": [
+      "C++",
+      "PowerPoint"
+    ],
+    "stage": "finished",
+    "started": "2019-04",
+    "ended": "2019-05",
+    "kind": "note",
+    "topic": "study"
+  },
+  {
+    "mode": "public",
+    "title": "HTTP/2 talks",
+    "summary": "Two team talks on HTTP/2 (frames, streams, head-of-line blocking, server push, priority trees, header tables) with a written follow-up for the questions asked, after a month of network basics: Wireshark captures of the TCP handshake and a CORS block reproduced on a test server.",
+    "stack": [
+      "PowerPoint",
+      "Wireshark",
+      "Fiddler"
+    ],
+    "stage": "finished",
+    "started": "2019-05",
+    "ended": "2019-06",
+    "kind": "note",
+    "topic": "study"
+  },
+  {
+    "mode": "private",
+    "code_name": "IDEA-2019-3",
+    "title": "Web login flow trace and QR login sample",
+    "stack": [
+      "JavaScript"
+    ],
+    "stage": "finished",
+    "started": "2019-06",
+    "ended": "2019-06",
+    "kind": "note",
+    "topic": "web"
+  },
+  {
+    "mode": "private",
+    "code_name": "IDEA-2019-4",
+    "title": "Login service release runbook",
+    "stack": [
+      "Evernote"
+    ],
+    "stage": "finished",
+    "started": "2019-06",
+    "ended": "2019-06",
+    "kind": "note",
+    "topic": "web"
+  },
+  {
+    "mode": "private",
+    "code_name": "IDEA-2019-5",
+    "title": "Login service admin back office",
+    "stack": [
+      "Java",
+      "Spring Boot",
+      "FreeMarker",
+      "Redis",
+      "SQL Server",
+      "Chart.js"
+    ],
+    "stage": "stopped",
+    "started": "2019-06",
+    "ended": "2019-09",
+    "topic": "web"
   }
 ]
