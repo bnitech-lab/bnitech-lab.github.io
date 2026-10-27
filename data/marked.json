@@ -1347,6 +1347,21 @@
   },
   {
     "mode": "public",
+    "title": "Persona debate lab",
+    "summary": "A method for developing an idea in a meeting of job-based personas with me in the room, scored later against what actually happened. The method, the roster and the counts are public; the transcripts are not.",
+    "stack": [
+      "Claude Code skill",
+      "Python",
+      "GitHub Actions",
+      "subagents"
+    ],
+    "stage": "running",
+    "started": "2026-07",
+    "repo": "bnivibe/persona-debate-lab",
+    "topic": "ai"
+  },
+  {
+    "mode": "public",
     "title": "at-keyboard",
     "summary": "A command that estimates whether I am at the laptop from the last keyboard or trackpad input and the screen-lock state, for sessions driven from a phone.",
     "stack": [
@@ -1407,6 +1422,20 @@
     "started": "2026-08",
     "kind": "note",
     "topic": "study"
+  },
+  {
+    "mode": "public",
+    "title": "Vancouver room hunt",
+    "summary": "How I found a room share in Vancouver with Claude Code: the skill that searched and scored listings by total monthly cost, and the field notes behind it.",
+    "stack": [
+      "Claude Code skill",
+      "Python"
+    ],
+    "stage": "finished",
+    "started": "2026-08",
+    "ended": "2026-10",
+    "repo": "bnivibe/vancouver-room-hunt",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1532,6 +1561,20 @@
     "started": "2026-09",
     "as_of": "2026-10",
     "topic": "apps"
+  },
+  {
+    "mode": "public",
+    "title": "AI trend digest",
+    "summary": "A daily digest of AI developer news to Discord, collected from RSS, Hacker News, GitHub trending and Reddit and written by a Claude cloud routine.",
+    "stack": [
+      "Python",
+      "Claude cloud routine",
+      "Discord webhook"
+    ],
+    "stage": "running",
+    "started": "2026-09",
+    "repo": "bnivibe/ai-trend-digest",
+    "topic": "ai"
   },
   {
     "mode": "public",

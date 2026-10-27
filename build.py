@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-"""Build the BNI Tech idea page.
+"""Build the BNI Tech lab page.
 
-  python3 build.py                 # fetch cards from GitHub, write _site/index.html
-  python3 build.py --check         # validate data/*.json only, no network
+  python3 build.py                 # write _site/index.html
+  python3 build.py --check         # validate data/*.json only, write nothing
   python3 build.py --out DIR       # write somewhere else
 
-Cards come from the README of each repo in data/cards.json: the lines between
-<!-- bnitech:card --> and <!-- /bnitech:card -->. Ideas by year come from
-data/marked.json, rows Dawn has chosen to show. The private master list never
-lives in this repo, and check_rows() rejects any field it does not know.
+The page lists the rows in data/marked.json, the ideas, works and notes Dawn has chosen to
+show, by the year they started. Every row carries one topic from TOPICS. data/eras.json says
+what I was doing in each period, and data/stacks.json maps every tool name a row uses to one
+stack family; --check fails when a tool is in no family. The private master list never lives
+in this repo, and check_rows() rejects any field it does not know.
 
-Standard library only. GITHUB_TOKEN, when set, raises the API rate limit.
+The build reads only the files in this repository. It makes no network call and needs no token.
+Standard library only.
 """
 import argparse
 import datetime as dt
@@ -19,10 +21,8 @@ import json
 import os
 import re
 import sys
-import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-API = "https://api.github.com"
 
 STAGE_ORDER = ["finished", "running", "stopped", "retired", "planned", "thought"]  # order inside a year
 STAGES = {
@@ -42,9 +42,6 @@ ALLOWED = {
 }
 DATE = re.compile(r"^\d{4}(-\d{2})?$")
 REPO = re.compile(r"^[A-Za-z0-9-]+/[A-Za-z0-9._-]+$")
-CARD = re.compile(r"<!--\s*bnitech:card\s*-->(.*?)<!--\s*/bnitech:card\s*-->", re.S)
-LINE = re.compile(r"^\s*-\s*\*\*(.+?):\*\*\s*(.+?)\s*$")
-MINUTES = re.compile(r"^Try it \(about (\d+) minutes?\)$")
 
 
 ERA_FIELDS = {"from", "to", "label", "where"}
@@ -189,59 +186,6 @@ def check_rows(rows):
     return problems
 
 
-def parse_card(readme):
-    """Pull problem, audience, try-it text and minutes out of a README card block."""
-    m = CARD.search(readme)
-    if not m:
-        raise ValueError("no bnitech:card block")
-    fields = {}
-    for line in m.group(1).strip().splitlines():
-        lm = LINE.match(line)
-        if lm:
-            fields[lm.group(1).strip()] = lm.group(2)
-    card = {"problem": fields.get("Problem"), "who": fields.get("Who it helps")}
-    for key, value in fields.items():
-        mm = MINUTES.match(key)
-        if mm:
-            card["minutes"] = int(mm.group(1))
-            card["try"] = value
-    missing = [k for k in ("problem", "who", "try") if not card.get(k)]
-    if missing:
-        raise ValueError("card block is missing: %s" % ", ".join(missing))
-    return card
-
-
-def get(path, raw=False):
-    req = urllib.request.Request(API + path)
-    req.add_header("Accept", "application/vnd.github.raw" if raw else "application/vnd.github+json")
-    req.add_header("User-Agent", "bnitech-lab-build")
-    token = os.environ.get("GITHUB_TOKEN")
-    if token:
-        req.add_header("Authorization", "Bearer " + token)
-    with urllib.request.urlopen(req, timeout=30) as r:
-        body = r.read().decode("utf-8")
-    return body if raw else json.loads(body)
-
-
-def last_commit(repo):
-    commits = get("/repos/%s/commits?per_page=1" % repo)
-    return commits[0]["commit"]["committer"]["date"][:10]
-
-
-def fetch_card(entry):
-    repo = entry["repo"]
-    meta = get("/repos/" + repo)
-    card = parse_card(get("/repos/%s/readme" % repo, raw=True))
-    card.update({
-        "repo": repo,
-        "title": entry.get("title") or meta["name"],
-        "url": meta["html_url"],
-        "license": (meta.get("license") or {}).get("spdx_id"),
-        "updated": last_commit(repo),
-    })
-    return card
-
-
 def inline(text):
     """Escape text, then turn `code` spans into <code>."""
     parts = text.split("`")
@@ -257,27 +201,9 @@ def years(row):
         span += " to " + row["ended"]
     for d in row.get("restarted", []):
         span += " &middot; again " + d
-    if row.get("stage") == "running":
-        if row.get("updated"):
-            span += " &middot; last commit " + row["updated"]
-        elif row.get("as_of"):
-            span += " &middot; as of " + row["as_of"]
+    if row.get("stage") == "running" and row.get("as_of"):
+        span += " &middot; as of " + row["as_of"]
     return span
-
-
-def render_card(c):
-    lic = " &middot; %s licence" % html.escape(c["license"]) if c.get("license") and c["license"] != "NOASSERTION" else ""
-    return f"""
-      <article class="card">
-        <h3><a href="{html.escape(c['url'])}">{html.escape(c['title'])}</a></h3>
-        <p class="problem">{inline(c['problem'])}</p>
-        <p class="who"><span class="label">For</span> {inline(c['who'])}</p>
-        <div class="try">
-          <p class="try-head"><span class="label">Try it</span><span class="minutes">about {c['minutes']} min</span></p>
-          <p>{inline(c['try'])}</p>
-        </div>
-        <p class="meta"><a href="{html.escape(c['url'])}">{html.escape(c['repo'])}</a> &middot; last commit {c['updated']}{lic}</p>
-      </article>"""
 
 
 def render_row(r):
@@ -329,7 +255,7 @@ def render_year(year, items, eras=()):
     return out + "</div></section>"
 
 
-def render(cards, rows, built, eras=()):
+def render(rows, built, eras=()):
     by_year = {}
     # Years newest first. Inside a year: finished work first, then the other stages in STAGE_ORDER,
     # and within a stage the later start first.
@@ -348,9 +274,7 @@ def render(cards, rows, built, eras=()):
     </section>"""
     with open(os.path.join(HERE, "page.html"), encoding="utf-8") as f:
         page = f.read()
-    return (page.replace("{{CARDS}}", "".join(render_card(c) for c in cards))
-                .replace("{{IDEAS}}", ideas)
-                .replace("{{BUILT}}", built))
+    return page.replace("{{IDEAS}}", ideas).replace("{{BUILT}}", built)
 
 
 def load(name):
@@ -374,16 +298,12 @@ def main(argv=None):
         print("data ok: %d marked row(s), %d era(s), %d stack famil(ies)"
               % (len(rows), len(eras), len(stacks["families"])))
         return 0
-    cards = [fetch_card(e) for e in load("cards.json")]
-    for r in rows:
-        if r.get("repo"):
-            r["updated"] = last_commit(r["repo"])
     built = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     os.makedirs(a.out, exist_ok=True)
     with open(os.path.join(a.out, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render(cards, rows, built, eras))
+        f.write(render(rows, built, eras))
     open(os.path.join(a.out, ".nojekyll"), "w").close()
-    print("built %s: %d card(s), %d row(s)" % (a.out, len(cards), len(rows)))
+    print("built %s: %d row(s)" % (a.out, len(rows)))
     return 0
 
 

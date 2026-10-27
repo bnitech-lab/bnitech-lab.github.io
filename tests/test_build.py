@@ -6,36 +6,6 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import build  # noqa: E402
 
-README = """# example-repo
-
-<!-- bnitech:card -->
-- **Problem:** Example problem with `a command`.
-- **Who it helps:** Example readers.
-- **Try it (about 7 minutes):** Run `python3 example.py` and read the output.
-<!-- /bnitech:card -->
-
-Body text.
-"""
-
-
-class ParseCard(unittest.TestCase):
-    def test_reads_three_fields_and_minutes(self):
-        card = build.parse_card(README)
-        self.assertEqual(card["problem"], "Example problem with `a command`.")
-        self.assertEqual(card["who"], "Example readers.")
-        self.assertEqual(card["minutes"], 7)
-        self.assertIn("python3 example.py", card["try"])
-
-    def test_missing_block_fails(self):
-        with self.assertRaises(ValueError):
-            build.parse_card("# no card here\n")
-
-    def test_missing_field_fails(self):
-        broken = README.replace("- **Who it helps:** Example readers.\n", "")
-        with self.assertRaises(ValueError):
-            build.parse_card(broken)
-
-
 def private_row(**extra):
     row = {"mode": "private", "code_name": "K-01", "title": "Example idea",
            "stack": ["Java"], "stage": "planned", "started": "2015", "topic": "apps"}
@@ -106,19 +76,15 @@ class CheckStacks(unittest.TestCase):
 
 class Render(unittest.TestCase):
     def test_page_without_rows_has_no_ideas_section(self):
-        card = dict(build.parse_card(README), repo="example/example-repo", title="Example",
-                    url="https://github.com/example/example-repo", license="MIT", updated="2026-01-01")
-        page = build.render([card], [], "2026-01-02")
+        page = build.render([], "2026-01-02")
         self.assertIn("Not a company.", page)
-        self.assertIn("about 7 min", page)
-        self.assertIn("<code>python3 example.py</code>", page)
         self.assertNotIn("Ideas by the year", page)
         self.assertNotIn("{{", page)
 
     def test_rows_group_by_start_year_newest_first(self):
         rows = [dict(private_row(), started="2016", code_name="K-02"),
                 dict(private_row(), started="2011", code_name="K-01")]
-        page = build.render([], rows, "2026-01-02")
+        page = build.render(rows, "2026-01-02")
         self.assertLess(page.index(">2016<"), page.index(">2011<"))
         self.assertIn("K-01", page)
 
@@ -126,16 +92,21 @@ class Render(unittest.TestCase):
         row = private_row(started="2011-12", ended="2012-01", restarted=["2012-07", "2026-03"])
         self.assertEqual(build.years(row), "2011-12 to 2012-01 &middot; again 2012-07 &middot; again 2026-03")
 
+    def test_years_never_mentions_a_last_commit(self):
+        row = private_row(stage="running", as_of="2026-10")
+        row["updated"] = "2026-10-20"
+        self.assertEqual(build.years(row), "2015 &middot; as of 2026-10")
+
     def test_html_in_data_is_escaped(self):
         rows = [private_row(title="<script>x</script>")]
-        page = build.render([], rows, "2026-01-02")
+        page = build.render(rows, "2026-01-02")
         self.assertNotIn("<script>x", page)
 
     def test_rows_within_a_year_finished_first_then_stage_order(self):
         rows = [dict(private_row(stage="stopped", started="2016-01"), code_name="K-02"),
                 dict(private_row(stage="finished", started="2016-03"), code_name="K-01"),
                 dict(private_row(stage="running", as_of="2026-10", started="2016-05"), code_name="K-03")]
-        page = build.render([], rows, "2026-01-02")
+        page = build.render(rows, "2026-01-02")
         self.assertLess(page.index("K-01"), page.index("K-03"))
         self.assertLess(page.index("K-03"), page.index("K-02"))
 
@@ -148,7 +119,7 @@ class Render(unittest.TestCase):
         rows = [dict(private_row(stage="planned", started="2016-01"), code_name="K-IDEA"),
                 dict(private_row(stage="finished", started="2016-02", kind="contribution"), code_name="K-CONTRIB"),
                 dict(private_row(stage="finished", started="2016-03"), code_name="K-PROJ")]
-        page = build.render([], rows, "2026-01-02")
+        page = build.render(rows, "2026-01-02")
         self.assertLess(page.index("K-PROJ"), page.index("Contributions"))
         self.assertLess(page.index("Contributions"), page.index("K-CONTRIB"))
         self.assertLess(page.index("K-CONTRIB"), page.index("Ideas and notes"))
@@ -158,7 +129,7 @@ class Render(unittest.TestCase):
         rows = [{"mode": "public", "title": "Open me", "stack": [], "stage": "finished", "started": "2016",
                  "summary": "The details."},
                 private_row(started="2016")]
-        page = build.render([], rows, "2026-01-02")
+        page = build.render(rows, "2026-01-02")
         self.assertIn("<details>", page)
         self.assertEqual(page.count("<details>"), 1)
 
@@ -171,7 +142,7 @@ class Render(unittest.TestCase):
         self.assertEqual([e["where"] for e in build.eras_for_year(eras, "2012")], ["Example University"])
         self.assertEqual(build.eras_for_year(eras, "2015"), [])
         rows = [dict(private_row(started="2012"), code_name="K-A"), dict(private_row(started="2019"), code_name="K-B")]
-        page = build.render([], rows, "2026-01-02", eras)
+        page = build.render(rows, "2026-01-02", eras)
         self.assertIn("Example University", page)
         self.assertIn("Example Corp", page)
 
