@@ -15,7 +15,8 @@
     "stage": "finished",
     "started": "2011",
     "ended": "2017",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -25,7 +26,8 @@
     "stage": "finished",
     "started": "2011",
     "ended": "2017",
-    "kind": "note"
+    "kind": "note",
+    "topic": "games"
   },
   {
     "mode": "public",
@@ -37,7 +39,8 @@
     "stage": "finished",
     "started": "2011-04",
     "ended": "2011-06",
-    "repo": "bnitech-lab/blue-dice-game-2011"
+    "repo": "bnitech-lab/blue-dice-game-2011",
+    "topic": "games"
   },
   {
     "mode": "public",
@@ -51,7 +54,8 @@
     ],
     "stage": "finished",
     "started": "2011-05",
-    "ended": "2012-12"
+    "ended": "2012-12",
+    "topic": "web"
   },
   {
     "mode": "private",
@@ -59,7 +63,8 @@
     "title": "Mobile parking payment",
     "stack": [],
     "stage": "planned",
-    "started": "2011-05"
+    "started": "2011-05",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -70,7 +75,8 @@
       "JavaScript"
     ],
     "stage": "finished",
-    "started": "2011-09"
+    "started": "2011-09",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -87,7 +93,8 @@
     "restarted": [
       "2012-07",
       "2012-09"
-    ]
+    ],
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -100,7 +107,8 @@
     "stage": "stopped",
     "started": "2011-09",
     "ended": "2011-10",
-    "repo": "bnitech-lab/mukbo-db-2011"
+    "repo": "bnitech-lab/mukbo-db-2011",
+    "topic": "games"
   },
   {
     "mode": "public",
@@ -110,7 +118,8 @@
       "VB.NET"
     ],
     "stage": "finished",
-    "started": "2011-09"
+    "started": "2011-09",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -122,7 +131,8 @@
     ],
     "stage": "stopped",
     "started": "2011-11",
-    "repo": "bnitech-lab/rolly-poly-2011"
+    "repo": "bnitech-lab/rolly-poly-2011",
+    "topic": "games"
   },
   {
     "mode": "public",
@@ -139,7 +149,8 @@
     "restarted": [
       "2026-03"
     ],
-    "repo": "bnitech/Teris_2011"
+    "repo": "bnitech/Teris_2011",
+    "topic": "games"
   },
   {
     "mode": "public",
@@ -158,7 +169,8 @@
     "stage": "finished",
     "started": "2012",
     "ended": "2026-01",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -170,7 +182,8 @@
     ],
     "stage": "finished",
     "started": "2012-03",
-    "ended": "2012-10"
+    "ended": "2012-10",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -183,7 +196,8 @@
     ],
     "stage": "finished",
     "started": "2012-04",
-    "ended": "2012-06"
+    "ended": "2012-06",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -196,7 +210,8 @@
     "stage": "stopped",
     "started": "2012-04",
     "ended": "2012-07",
-    "repo": "bnitech-lab/space-shooter-2012"
+    "repo": "bnitech-lab/space-shooter-2012",
+    "topic": "games"
   },
   {
     "mode": "public",
@@ -207,7 +222,8 @@
     ],
     "stage": "finished",
     "started": "2012-05",
-    "ended": "2012-06"
+    "ended": "2012-06",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -217,7 +233,8 @@
       "Java"
     ],
     "stage": "planned",
-    "started": "2012-05"
+    "started": "2012-05",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -228,7 +245,8 @@
       "MySQL"
     ],
     "stage": "stopped",
-    "started": "2012-06"
+    "started": "2012-06",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -241,7 +259,8 @@
     "stage": "finished",
     "started": "2012-09",
     "ended": "2012-11",
-    "repo": "bnitech-lab/packman-plus-2012"
+    "repo": "bnitech-lab/packman-plus-2012",
+    "topic": "games"
   },
   {
     "mode": "public",
@@ -252,7 +271,8 @@
       "Java"
     ],
     "stage": "finished",
-    "started": "2012-11"
+    "started": "2012-11",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -266,7 +286,8 @@
     ],
     "stage": "stopped",
     "started": "2014-09",
-    "ended": "2015-06"
+    "ended": "2015-06",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -279,7 +300,8 @@
     "stage": "finished",
     "started": "2014-10",
     "ended": "2014-12",
-    "repo": "bnitech-lab/angry-pokemons-2014"
+    "repo": "bnitech-lab/angry-pokemons-2014",
+    "topic": "games"
   },
   {
     "mode": "private",
@@ -292,7 +314,8 @@
     ],
     "stage": "finished",
     "started": "2015-06",
-    "ended": "2015-11"
+    "ended": "2015-11",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -305,7 +328,8 @@
     ],
     "stage": "finished",
     "started": "2015-09",
-    "ended": "2015-12"
+    "ended": "2015-12",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -313,7 +337,8 @@
     "summary": "One of six app candidates for a public-data contest in 2015. Only the title survives.",
     "stack": [],
     "stage": "thought",
-    "started": "2015-10"
+    "started": "2015-10",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -321,7 +346,8 @@
     "summary": "A nearby-food app, one of six public-data contest candidates in 2015. Only the title survives.",
     "stack": [],
     "stage": "thought",
-    "started": "2015-10"
+    "started": "2015-10",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -329,7 +355,8 @@
     "summary": "One of six public-data contest candidates in 2015. Only the title survives, and what it meant was not written down.",
     "stack": [],
     "stage": "thought",
-    "started": "2015-10"
+    "started": "2015-10",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -337,7 +364,8 @@
     "summary": "A route-finding app, one of six public-data contest candidates in 2015. Only the title survives.",
     "stack": [],
     "stage": "thought",
-    "started": "2015-10"
+    "started": "2015-10",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -345,7 +373,8 @@
     "summary": "A health app, marked lower priority among six public-data contest candidates in 2015. Only the title survives.",
     "stack": [],
     "stage": "thought",
-    "started": "2015-10"
+    "started": "2015-10",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -353,7 +382,8 @@
     "summary": "An infant-safety app, marked lower priority among six public-data contest candidates in 2015. Only the title survives.",
     "stack": [],
     "stage": "thought",
-    "started": "2015-10"
+    "started": "2015-10",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -365,7 +395,8 @@
     ],
     "stage": "planned",
     "started": "2015-10",
-    "ended": "2015-11"
+    "ended": "2015-11",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -379,7 +410,8 @@
     "stage": "finished",
     "started": "2015-11",
     "ended": "2016-02",
-    "repo": "CienProject2015/ProjectOP"
+    "repo": "CienProject2015/ProjectOP",
+    "topic": "games"
   },
   {
     "mode": "public",
@@ -391,7 +423,8 @@
       "AWS Cognito Sync"
     ],
     "stage": "stopped",
-    "started": "2016-01"
+    "started": "2016-01",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -405,7 +438,8 @@
       "jQuery"
     ],
     "stage": "stopped",
-    "started": "2016-02"
+    "started": "2016-02",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -413,7 +447,8 @@
     "summary": "Two goals written on a mind map in 2016: make a program everyone uses, and build a company everyone knows. Which program and which company was never written down.",
     "stack": [],
     "stage": "thought",
-    "started": "2016-05"
+    "started": "2016-05",
+    "topic": "life"
   },
   {
     "mode": "public",
@@ -422,7 +457,8 @@
     "stack": [],
     "stage": "finished",
     "started": "2016-11",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -435,7 +471,8 @@
     ],
     "stage": "finished",
     "started": "2016-12",
-    "repo": "bnitech-lab/maze-3d-2016"
+    "repo": "bnitech-lab/maze-3d-2016",
+    "topic": "games"
   },
   {
     "mode": "public",
@@ -446,7 +483,8 @@
       "CSV"
     ],
     "stage": "planned",
-    "started": "2016-12"
+    "started": "2016-12",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -454,7 +492,8 @@
     "summary": "A line from a job application draft: the stock apps on my phone were clumsy, and I wanted to join the maker and rebuild them.",
     "stack": [],
     "stage": "thought",
-    "started": "2017"
+    "started": "2017",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -462,7 +501,8 @@
     "summary": "Start a bowling club at my first job, and open a bowling alley after retiring. From the hobby field of a job application.",
     "stack": [],
     "stage": "thought",
-    "started": "2017"
+    "started": "2017",
+    "topic": "life"
   },
   {
     "mode": "public",
@@ -475,7 +515,8 @@
     "stage": "finished",
     "started": "2017-03",
     "ended": "2017-09",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -489,7 +530,8 @@
     "stage": "stopped",
     "started": "2017-03",
     "ended": "2020-09",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -497,7 +539,8 @@
     "summary": "One of five contest idea candidates in 2017. Only the title survives.",
     "stack": [],
     "stage": "thought",
-    "started": "2017-04"
+    "started": "2017-04",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -505,7 +548,8 @@
     "summary": "A couples' SNS or blog, one of five contest idea candidates in 2017. Only the title survives.",
     "stack": [],
     "stage": "thought",
-    "started": "2017-04"
+    "started": "2017-04",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -513,7 +557,8 @@
     "summary": "One of five contest idea candidates in 2017. Only the title survives.",
     "stack": [],
     "stage": "thought",
-    "started": "2017-04"
+    "started": "2017-04",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -521,7 +566,8 @@
     "summary": "One of five contest idea candidates in 2017, and my third parking idea after 2011 and 2015. Only the title survives.",
     "stack": [],
     "stage": "thought",
-    "started": "2017-04"
+    "started": "2017-04",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -529,7 +575,8 @@
     "summary": "Keep track of belongings with a phone, one of five contest idea candidates in 2017. Only the title survives.",
     "stack": [],
     "stage": "thought",
-    "started": "2017-04"
+    "started": "2017-04",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -542,7 +589,8 @@
     "stage": "stopped",
     "started": "2017-05",
     "ended": "2017-08",
-    "repo": "bnitech-lab/crash-tower-2017"
+    "repo": "bnitech-lab/crash-tower-2017",
+    "topic": "games"
   },
   {
     "mode": "public",
@@ -552,7 +600,8 @@
       "Public data"
     ],
     "stage": "planned",
-    "started": "2017-05"
+    "started": "2017-05",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -563,7 +612,8 @@
     ],
     "stage": "planned",
     "started": "2017-07",
-    "kind": "note"
+    "kind": "note",
+    "topic": "life"
   },
   {
     "mode": "public",
@@ -582,7 +632,8 @@
     ],
     "stage": "finished",
     "started": "2017-08",
-    "ended": "2017-12"
+    "ended": "2017-12",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -595,7 +646,8 @@
     ],
     "stage": "finished",
     "started": "2018",
-    "kind": "contribution"
+    "kind": "contribution",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -606,7 +658,8 @@
       "Netty"
     ],
     "stage": "thought",
-    "started": "2018"
+    "started": "2018",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -621,7 +674,8 @@
     "stage": "finished",
     "started": "2019-01",
     "ended": "2019-03",
-    "repo": "BootCamp-5/Nex-Da-M"
+    "repo": "BootCamp-5/Nex-Da-M",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -632,7 +686,8 @@
       "HTML"
     ],
     "stage": "stopped",
-    "started": "2019-12"
+    "started": "2019-12",
+    "topic": "web"
   },
   {
     "mode": "private",
@@ -650,7 +705,8 @@
     "stage": "running",
     "started": "2019-12",
     "as_of": "2021",
-    "kind": "contribution"
+    "kind": "contribution",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -662,7 +718,8 @@
     "stage": "finished",
     "started": "2020-08",
     "ended": "2020-09",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -676,7 +733,8 @@
     "stage": "finished",
     "started": "2020-10",
     "ended": "2021-04",
-    "repo": "bnitech/excel-download"
+    "repo": "bnitech/excel-download",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -690,7 +748,8 @@
     ],
     "stage": "stopped",
     "started": "2020-11",
-    "ended": "2021-05"
+    "ended": "2021-05",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -698,7 +757,8 @@
     "summary": "An entry on a 2021 side-income plan: run a store on a marketplace. An online course was in progress; the store never opened.",
     "stack": [],
     "stage": "thought",
-    "started": "2021-01"
+    "started": "2021-01",
+    "topic": "life"
   },
   {
     "mode": "public",
@@ -706,7 +766,8 @@
     "summary": "An entry on a 2021 side-income plan, marked not started.",
     "stack": [],
     "stage": "thought",
-    "started": "2021-01"
+    "started": "2021-01",
+    "topic": "life"
   },
   {
     "mode": "public",
@@ -714,7 +775,8 @@
     "summary": "An entry on a 2021 side-income plan, marked not started. What TLI stood for was not written down.",
     "stack": [],
     "stage": "thought",
-    "started": "2021-01"
+    "started": "2021-01",
+    "topic": "life"
   },
   {
     "mode": "public",
@@ -728,7 +790,8 @@
     "stage": "finished",
     "started": "2021-02",
     "ended": "2021-04",
-    "repo": "bnitech/spring-rest-docs"
+    "repo": "bnitech/spring-rest-docs",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -739,7 +802,8 @@
     ],
     "stage": "finished",
     "started": "2021-03",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -750,7 +814,8 @@
     ],
     "stage": "stopped",
     "started": "2021-04",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -762,7 +827,8 @@
       "JPA"
     ],
     "stage": "stopped",
-    "started": "2021-05"
+    "started": "2021-05",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -770,7 +836,8 @@
     "summary": "One line on a 2021 list of things I wanted to do. No subject or format was written down.",
     "stack": [],
     "stage": "thought",
-    "started": "2021-07"
+    "started": "2021-07",
+    "topic": "life"
   },
   {
     "mode": "public",
@@ -787,7 +854,8 @@
     "stage": "stopped",
     "started": "2021-08",
     "ended": "2022-10",
-    "kind": "contribution"
+    "kind": "contribution",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -795,7 +863,8 @@
     "summary": "A square on a 2022 goal chart: take contract work and run personal projects. No contract followed.",
     "stack": [],
     "stage": "thought",
-    "started": "2022"
+    "started": "2022",
+    "topic": "life"
   },
   {
     "mode": "public",
@@ -808,7 +877,8 @@
     ],
     "stage": "planned",
     "started": "2022-05",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -818,7 +888,8 @@
       "AWS"
     ],
     "stage": "planned",
-    "started": "2022-07"
+    "started": "2022-07",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -830,7 +901,8 @@
       "WebFlux"
     ],
     "stage": "stopped",
-    "started": "2023-05"
+    "started": "2023-05",
+    "topic": "web"
   },
   {
     "mode": "private",
@@ -844,7 +916,8 @@
     ],
     "stage": "stopped",
     "started": "2023-06",
-    "ended": "2024-08"
+    "ended": "2024-08",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -860,7 +933,8 @@
     "stage": "stopped",
     "started": "2024-02",
     "ended": "2024-07",
-    "kind": "contribution"
+    "kind": "contribution",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -874,7 +948,8 @@
     ],
     "stage": "stopped",
     "started": "2024-06",
-    "ended": "2024-09"
+    "ended": "2024-09",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -885,7 +960,8 @@
     ],
     "stage": "finished",
     "started": "2024-06",
-    "kind": "note"
+    "kind": "note",
+    "topic": "life"
   },
   {
     "mode": "public",
@@ -896,7 +972,8 @@
       "Kotlin"
     ],
     "stage": "thought",
-    "started": "2024-08"
+    "started": "2024-08",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -910,7 +987,8 @@
       "Tailwind"
     ],
     "stage": "stopped",
-    "started": "2025-01"
+    "started": "2025-01",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -918,7 +996,8 @@
     "summary": "A diary note from 2025: game development was my childhood dream and one reason I joined a game company; maybe Canada is where I try it. No concrete plan.",
     "stack": [],
     "stage": "thought",
-    "started": "2025-10"
+    "started": "2025-10",
+    "topic": "games"
   },
   {
     "mode": "public",
@@ -930,7 +1009,8 @@
     ],
     "stage": "finished",
     "started": "2026-01",
-    "ended": "2026-07"
+    "ended": "2026-07",
+    "topic": "ai"
   },
   {
     "mode": "private",
@@ -944,7 +1024,8 @@
     ],
     "stage": "finished",
     "started": "2026-03",
-    "ended": "2026-06"
+    "ended": "2026-06",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -960,7 +1041,8 @@
     "stage": "running",
     "started": "2026-03",
     "as_of": "2026-07",
-    "kind": "contribution"
+    "kind": "contribution",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -973,7 +1055,8 @@
     ],
     "stage": "retired",
     "started": "2026-03",
-    "ended": "2026-03"
+    "ended": "2026-03",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -990,7 +1073,8 @@
     "stage": "stopped",
     "started": "2026-03",
     "ended": "2026-06",
-    "repo": "bnivibe/dawnbase"
+    "repo": "bnivibe/dawnbase",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -1006,7 +1090,8 @@
     "restarted": [
       "2026-10"
     ],
-    "repo": "bnivibe/bnivibe"
+    "repo": "bnivibe/bnivibe",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1022,7 +1107,8 @@
     "restarted": [
       "2026-10"
     ],
-    "repo": "bnitech-lab/bnitech-lab.github.io"
+    "repo": "bnitech-lab/bnitech-lab.github.io",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -1034,7 +1120,8 @@
     ],
     "stage": "running",
     "started": "2026-03",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1046,7 +1133,8 @@
     ],
     "stage": "running",
     "started": "2026-03",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1058,7 +1146,8 @@
     ],
     "stage": "retired",
     "started": "2026-06",
-    "ended": "2026-10"
+    "ended": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1070,7 +1159,8 @@
     ],
     "stage": "retired",
     "started": "2026-06",
-    "ended": "2026-07"
+    "ended": "2026-07",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1084,7 +1174,8 @@
     ],
     "stage": "running",
     "started": "2026-07",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1096,7 +1187,8 @@
     ],
     "stage": "running",
     "started": "2026-07",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1112,7 +1204,8 @@
     ],
     "stage": "stopped",
     "started": "2026-07",
-    "ended": "2026-08"
+    "ended": "2026-08",
+    "topic": "web"
   },
   {
     "mode": "public",
@@ -1123,7 +1216,8 @@
     ],
     "stage": "retired",
     "started": "2026-07",
-    "ended": "2026-10"
+    "ended": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1136,7 +1230,8 @@
     ],
     "stage": "running",
     "started": "2026-07",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1148,7 +1243,8 @@
     ],
     "stage": "running",
     "started": "2026-07",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1161,7 +1257,8 @@
     ],
     "stage": "stopped",
     "started": "2026-07",
-    "ended": "2026-10"
+    "ended": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1174,7 +1271,8 @@
     ],
     "stage": "running",
     "started": "2026-07",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1188,7 +1286,8 @@
     ],
     "stage": "retired",
     "started": "2026-07",
-    "ended": "2026-08"
+    "ended": "2026-08",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1202,7 +1301,8 @@
     ],
     "stage": "running",
     "started": "2026-07",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1215,7 +1315,8 @@
     "stage": "finished",
     "started": "2026-07",
     "ended": "2026-08",
-    "kind": "note"
+    "kind": "note",
+    "topic": "life"
   },
   {
     "mode": "public",
@@ -1228,7 +1329,8 @@
     "stage": "running",
     "started": "2026-07",
     "as_of": "2026-10",
-    "kind": "note"
+    "kind": "note",
+    "topic": "life"
   },
   {
     "mode": "private",
@@ -1240,7 +1342,8 @@
     ],
     "stage": "running",
     "started": "2026-07",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "life"
   },
   {
     "mode": "public",
@@ -1250,7 +1353,8 @@
       "Shell"
     ],
     "stage": "finished",
-    "started": "2026-08"
+    "started": "2026-08",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -1264,7 +1368,8 @@
     ],
     "stage": "running",
     "started": "2026-08",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1276,7 +1381,8 @@
     ],
     "stage": "running",
     "started": "2026-08",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1287,7 +1393,8 @@
       "Shell"
     ],
     "stage": "finished",
-    "started": "2026-08"
+    "started": "2026-08",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -1298,7 +1405,8 @@
     ],
     "stage": "finished",
     "started": "2026-08",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -1312,7 +1420,8 @@
     ],
     "stage": "running",
     "started": "2026-09",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1324,7 +1433,8 @@
     ],
     "stage": "running",
     "started": "2026-09",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1335,7 +1445,8 @@
     ],
     "stage": "running",
     "started": "2026-09",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1346,7 +1457,8 @@
     ],
     "stage": "running",
     "started": "2026-09",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1359,7 +1471,8 @@
     ],
     "stage": "running",
     "started": "2026-09",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1372,7 +1485,8 @@
     ],
     "stage": "running",
     "started": "2026-09",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1380,7 +1494,8 @@
     "summary": "Record my English phone calls, score each one and compare it with the next to track my level. Past calls were scored once; no repeating setup was built.",
     "stack": [],
     "stage": "thought",
-    "started": "2026-09"
+    "started": "2026-09",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1388,7 +1503,8 @@
     "summary": "Give it a YouTube or Reels link and get the English transcript with a Korean translation, kept in one place; study-method videos become HTML notes. Done by hand inside sessions, never built.",
     "stack": [],
     "stage": "thought",
-    "started": "2026-09"
+    "started": "2026-09",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1401,7 +1517,8 @@
     "stage": "running",
     "started": "2026-09",
     "as_of": "2026-10",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   },
   {
     "mode": "private",
@@ -1413,7 +1530,8 @@
     ],
     "stage": "running",
     "started": "2026-09",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -1425,7 +1543,8 @@
       "Obsidian"
     ],
     "stage": "thought",
-    "started": "2026-10"
+    "started": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1437,7 +1556,8 @@
     ],
     "stage": "running",
     "started": "2026-10",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1449,7 +1569,8 @@
     ],
     "stage": "running",
     "started": "2026-10",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1460,7 +1581,8 @@
     ],
     "stage": "running",
     "started": "2026-10",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1474,7 +1596,8 @@
     ],
     "stage": "running",
     "started": "2026-10",
-    "repo": "bnivibe/coding-practice"
+    "repo": "bnivibe/coding-practice",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -1486,7 +1609,8 @@
     ],
     "stage": "running",
     "started": "2026-10",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1498,7 +1622,8 @@
     ],
     "stage": "running",
     "started": "2026-10",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1509,7 +1634,8 @@
     ],
     "stage": "running",
     "started": "2026-10",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1524,7 +1650,8 @@
       "JavaScript"
     ],
     "stage": "finished",
-    "started": "2026-10"
+    "started": "2026-10",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -1536,7 +1663,8 @@
       "HTML"
     ],
     "stage": "finished",
-    "started": "2026-10"
+    "started": "2026-10",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -1548,7 +1676,8 @@
     ],
     "stage": "running",
     "started": "2026-10",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1559,7 +1688,8 @@
       "Whisper"
     ],
     "stage": "finished",
-    "started": "2026-10"
+    "started": "2026-10",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -1569,7 +1699,8 @@
       "Claude"
     ],
     "stage": "thought",
-    "started": "2026-10"
+    "started": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1577,7 +1708,8 @@
     "summary": "A one-line note from 2026: analyze my blog's data. Which analysis was not written down.",
     "stack": [],
     "stage": "thought",
-    "started": "2026-10"
+    "started": "2026-10",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -1585,7 +1717,8 @@
     "summary": "A one-line note from 2026: draw the structure of Dooray documents as a picture.",
     "stack": [],
     "stage": "thought",
-    "started": "2026-10"
+    "started": "2026-10",
+    "topic": "apps"
   },
   {
     "mode": "public",
@@ -1596,7 +1729,8 @@
       "claude.ai Dashboard"
     ],
     "stage": "planned",
-    "started": "2026-10"
+    "started": "2026-10",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -1608,7 +1742,8 @@
     ],
     "stage": "running",
     "started": "2026-10",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "study"
   },
   {
     "mode": "public",
@@ -1620,7 +1755,8 @@
     ],
     "stage": "running",
     "started": "2026-10",
-    "as_of": "2026-10"
+    "as_of": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",
@@ -1632,6 +1768,7 @@
     "stage": "running",
     "started": "2026-10",
     "as_of": "2026-10",
-    "kind": "note"
+    "kind": "note",
+    "topic": "study"
   }
 ]

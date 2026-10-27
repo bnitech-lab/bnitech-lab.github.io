@@ -38,7 +38,7 @@ class ParseCard(unittest.TestCase):
 
 def private_row(**extra):
     row = {"mode": "private", "code_name": "K-01", "title": "Example idea",
-           "stack": ["Java"], "stage": "planned", "started": "2015"}
+           "stack": ["Java"], "stage": "planned", "started": "2015", "topic": "apps"}
     row.update(extra)
     return row
 
@@ -48,7 +48,8 @@ class CheckRows(unittest.TestCase):
     def test_valid_private_and_public_rows(self):
         rows = [private_row(),
                 {"mode": "public", "title": "Example game", "stack": ["C"], "stage": "finished",
-                 "started": "2011-12", "restarted": ["2012-07"], "repo": "example/example-game"}]
+                 "started": "2011-12", "restarted": ["2012-07"], "repo": "example/example-game",
+                 "topic": "games"}]
         self.assertEqual(build.check_rows(rows), [])
 
     def test_unknown_field_is_rejected(self):
@@ -71,6 +72,13 @@ class CheckRows(unittest.TestCase):
     def test_running_without_repo_needs_as_of(self):
         self.assertTrue(build.check_rows([private_row(stage="running")]))
         self.assertEqual(build.check_rows([private_row(stage="running", as_of="2026-10")]), [])
+
+    def test_topic_is_required_and_known(self):
+        row = private_row()
+        del row["topic"]
+        self.assertTrue(any("topic" in p for p in build.check_rows([row])))
+        self.assertTrue(any("topic" in p for p in build.check_rows([private_row(topic="hobby")])))
+        self.assertEqual(build.check_rows([private_row(topic="life")]), [])
 
 
 class Render(unittest.TestCase):

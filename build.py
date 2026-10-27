@@ -33,8 +33,9 @@ STAGES = {
     "running": "Running",
     "retired": "Retired",
 }
-COMMON_FIELDS = {"mode", "title", "stack", "stage", "started", "restarted", "ended", "as_of", "kind"}
+COMMON_FIELDS = {"mode", "title", "stack", "stage", "started", "restarted", "ended", "as_of", "kind", "topic"}
 KINDS = {"project", "contribution", "note"}  # contribution: my part in someone else's work; note: writing, study, not software
+TOPICS = {"games": "Games", "apps": "Apps", "web": "Web and backend", "ai": "AI tools", "study": "Study", "life": "Life"}  # insertion order is the display order for ties
 ALLOWED = {
     "private": COMMON_FIELDS | {"code_name"},
     "public": COMMON_FIELDS | {"summary", "repo"},
@@ -139,6 +140,10 @@ def check_rows(rows):
             problems.append("%s: a running idea without a repo needs as_of" % where)
         if "kind" in row and row["kind"] not in KINDS:
             problems.append("%s: kind must be one of %s" % (where, ", ".join(sorted(KINDS))))
+        if not row.get("topic"):
+            problems.append("%s: topic is required" % where)
+        elif row["topic"] not in TOPICS:
+            problems.append("%s: topic must be one of %s" % (where, ", ".join(TOPICS)))
     return problems
 
 
