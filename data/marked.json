@@ -137,7 +137,7 @@
   {
     "mode": "public",
     "title": "Teris",
-    "summary": "A console Tetris in C with hold, combos and a two-piece preview. In 2026 I came back to it and ported it to macOS.",
+    "summary": "A console Tetris in C with hold, combos and a two-piece preview. In 2026 I came back to it and ported it to macOS; the port is kept private.",
     "stack": [
       "C",
       "Windows console",
@@ -1061,7 +1061,7 @@
   {
     "mode": "public",
     "title": "dawnbase",
-    "summary": "A personal knowledge archive where Claude writes every article from a link or my notes and a read-only site shows them. Phase one finished and never deployed; search, tags and auth were planned and not built.",
+    "summary": "A personal knowledge archive where Claude wrote articles from links or my notes; phase one finished in 2026-06 and was never deployed. Since 2026-10 it is my private writing desk: Claude drafts posts about my experience as files, every post starts as a draft, and only I change its status.",
     "stack": [
       "Next.js",
       "TypeScript",
@@ -1070,10 +1070,14 @@
       "Vitest",
       "Playwright"
     ],
-    "stage": "stopped",
+    "stage": "running",
     "started": "2026-03",
     "ended": "2026-06",
-    "topic": "web"
+    "topic": "web",
+    "restarted": [
+      "2026-10"
+    ],
+    "as_of": "2026-10"
   },
   {
     "mode": "public",
@@ -1192,7 +1196,7 @@
   {
     "mode": "public",
     "title": "dawndeck",
-    "summary": "A personal start page for the laptop and the phone: city clocks and weather, an exchange rate, wiki search, spaced-repetition cards for English and CS, countdown banners and an expiry radar. Visitors read, the owner signs in.",
+    "summary": "A personal start page I opened every morning on the laptop and the phone: city clocks and weather, an exchange rate, wiki search, spaced-repetition cards for English and CS, countdown banners and an expiry radar. I folded it in 2026-10, once I no longer used it, and turned its servers off.",
     "stack": [
       "Next.js",
       "TypeScript",
@@ -1201,9 +1205,9 @@
       "Auth.js",
       "Tailwind"
     ],
-    "stage": "stopped",
+    "stage": "retired",
     "started": "2026-07",
-    "ended": "2026-08",
+    "ended": "2026-10",
     "topic": "web"
   },
   {
@@ -1616,8 +1620,8 @@
   },
   {
     "mode": "public",
-    "title": "career-counseling",
-    "summary": "A skill for private career conversations whose notes stay in one owner-only folder and reach no other tool or record.",
+    "title": "life-path-counseling",
+    "summary": "A skill for private conversations about the direction of my life, with work as one part of it. What is said stays in one owner-only folder and reaches no other tool or record.",
     "stack": [
       "Claude Code skill"
     ],
@@ -1670,7 +1674,7 @@
   {
     "mode": "public",
     "title": "experience-posts",
-    "summary": "A skill that writes English posts about my real engineering work into a private repository first, unfiltered, and publishes a filtered version later.",
+    "summary": "A skill that turns my experiences, from company work to my repositories and life, into English posts kept in a private blog only my laptop opens. Every post starts as a draft and only I change its status; LinkedIn and X versions come later.",
     "stack": [
       "Claude Code skill"
     ],
@@ -1777,14 +1781,13 @@
   {
     "mode": "public",
     "title": "engineering-notes",
-    "summary": "English posts about work I actually did at two companies, in a public repository that stands in for a portfolio site. An unfiltered private original comes first; the first draft is written.",
+    "summary": "English posts about work I actually did, planned as a public repository that stands in for a portfolio site. On hold since 2026-10: the posts are written in my private writing desk first.",
     "stack": [
       "Markdown",
       "GitHub"
     ],
-    "stage": "running",
+    "stage": "planned",
     "started": "2026-10",
-    "as_of": "2026-10",
     "topic": "study"
   },
   {
@@ -1812,6 +1815,103 @@
     "as_of": "2026-10",
     "kind": "note",
     "topic": "study"
+  },
+  {
+    "mode": "public",
+    "title": "Vancouver Month",
+    "summary": "A small turn-based game in Kotlin: one month as a newcomer in Vancouver. Pick a room by its total monthly cost, then one action a day until a job offer or the money runs out. Claude writes the code and the tests; I play every version and decide what changes. It grew into a 3D town in the browser.",
+    "stack": [
+      "Kotlin",
+      "Kotlin Multiplatform",
+      "Gradle"
+    ],
+    "stage": "running",
+    "started": "2026-10",
+    "repo": "bnitech-lab/vancouver-month-2026",
+    "topic": "games"
+  },
+  {
+    "mode": "public",
+    "title": "lesson-review",
+    "summary": "A skill for reviewing my English tutoring lessons between classes: recall drills from the lesson cards on a review schedule, my recordings compared with the lesson script and the tutor's corrections, and each new lesson filed into Drive.",
+    "stack": [
+      "Claude Code skill",
+      "Python",
+      "Markdown"
+    ],
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10",
+    "topic": "ai"
+  },
+  {
+    "mode": "public",
+    "title": "schedule-manage",
+    "summary": "A skill that keeps my schedule and the 05:00 morning plan true: it changes a coming day, adds reminders to the morning message, checks the next two weeks for clashes and saves events to the calendar.",
+    "stack": [
+      "Claude Code skill",
+      "Python",
+      "Google Calendar connector"
+    ],
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10",
+    "topic": "ai"
+  },
+  {
+    "mode": "public",
+    "title": "skill-manage",
+    "summary": "A skill that audits my own Claude Code skills: mechanical checks, tests with the network blocked, sixty days of use, rule conflicts and overlaps, reported as a document. Then it makes the fixes I approve.",
+    "stack": [
+      "Claude Code skill",
+      "Python"
+    ],
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-10",
+    "topic": "ai"
+  },
+  {
+    "mode": "public",
+    "title": "State reconciler for outside services",
+    "summary": "A small library that regularly compares the state my database records with the real state at outside services such as payments and shipping, and reports what drifted. The same problem came up five times in my work. Shaped in a debate meeting, then set aside for the game.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2026-10",
+    "topic": "web"
+  },
+  {
+    "mode": "public",
+    "title": "Claude Code course in Korean",
+    "summary": "A course or study group that teaches Korean developers how to work with Claude Code, built from my own skills, guards and public repositories. Paused after a debate meeting.",
+    "stack": [],
+    "stage": "thought",
+    "started": "2026-10",
+    "topic": "ai"
+  },
+  {
+    "mode": "public",
+    "title": "Idea factory line",
+    "summary": "A Claude Code skill that takes an adopted idea through the same build steps every time: a plan with recommended defaults, a repository, the smallest version I can try, my reaction, a work board, and publishing when I decide. Written down from how Vancouver Month was built.",
+    "stack": [
+      "Claude Code skill",
+      "Markdown"
+    ],
+    "stage": "planned",
+    "started": "2026-10",
+    "topic": "ai"
+  },
+  {
+    "mode": "public",
+    "title": "Trending skill teardown",
+    "summary": "Each week, pick one popular agent skill from my AI trend digest, try its method on one of my own skills and keep a one-page note: what to take, what to drop and how long it took. The first teardown went into a skill the day it was adopted.",
+    "stack": [
+      "Claude Code skill",
+      "Markdown"
+    ],
+    "stage": "planned",
+    "started": "2026-10",
+    "topic": "ai"
   },
   {
     "mode": "public",

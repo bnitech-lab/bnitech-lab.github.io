@@ -26,7 +26,9 @@
       "name": "Kotlin",
       "tools": [
         "Kotlin",
-        "Exposed"
+        "Exposed",
+        "Kotlin Multiplatform",
+        "Gradle"
       ]
     },
     {
@@ -190,6 +192,7 @@
         "Google Sheets",
         "CSV",
         "Gmail connector",
+        "Google Calendar connector",
         "Discord webhook",
         "Obsidian",
         "Leitner boxes",
