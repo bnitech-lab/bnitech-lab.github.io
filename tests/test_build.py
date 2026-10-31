@@ -39,6 +39,11 @@ class CheckRows(unittest.TestCase):
         problems = build.check_rows([private_row(stage="maybe", started="last year")])
         self.assertEqual(len(problems), 2)
 
+    def test_adopted_is_a_date(self):
+        self.assertEqual(build.check_rows([private_row(adopted="2026-10")]), [])
+        problems = build.check_rows([private_row(adopted="October")])
+        self.assertTrue(any("adopted" in p for p in problems))
+
     def test_months_must_exist(self):
         for bad in ("2011-13", "2011-00", "2011-1", "2011-99"):
             problems = build.check_rows([private_row(started=bad)])

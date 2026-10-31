@@ -20,12 +20,12 @@ class Strip(unittest.TestCase):
     def test_counts(self):
         rows = [private_row(started="2011", stage="finished"), private_row(started="2012", stage="running", as_of="2026-10"),
                 private_row(started="2012", stage="thought")]
-        self.assertEqual(build.counts(rows), {"total": 3, "running": 1, "finished": 1, "first_year": "2011"})
+        self.assertEqual(build.counts(rows), {"total": 3, "running": 1, "finished": 1, "meeting": 0, "first_year": "2011"})
 
     def test_no_rows_gives_empty_strip_and_zero_counts(self):
         self.assertEqual(build.all_years([], "2026-10-26"), [])
         self.assertEqual(build.strip([], []), [])
-        self.assertEqual(build.counts([]), {"total": 0, "running": 0, "finished": 0, "first_year": ""})
+        self.assertEqual(build.counts([]), {"total": 0, "running": 0, "finished": 0, "meeting": 0, "first_year": ""})
 
     def test_data_changed_date_refuses_a_shallow_checkout(self):
         answers = iter(["true\n"])

@@ -164,7 +164,7 @@ h2::before { content: ""; box-sizing: border-box; width: 10px; height: 10px; bac
 }
 .card p { font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
 @media (prefers-color-scheme: dark) { .card { box-shadow: 4px 4px 0 var(--ink); } } /* a black shadow would vanish on dark paper */
-.card .cstack { font-family: var(--mono); font-size: 11px; line-height: 1.5; color: var(--muted); }
+.card .cstack, .card .cmeet { font-family: var(--mono); font-size: 11px; line-height: 1.5; color: var(--muted); }
 /* The link is a 44px touch target; the negative margins give the extra height back to the gap and the card's padding. */
 .card a { align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; margin: -6px 0 -12px; font-size: 14px; font-weight: 600; }
 code { font-family: var(--mono); font-size: .86em; background: var(--paper); border: 1px solid var(--hair); border-radius: 2px; padding: 0 4px; }
