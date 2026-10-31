@@ -64,6 +64,18 @@ class RenderPage(unittest.TestCase):
         self.assertIsNone(re.search(r'\shidden(\s|>|=)', section))
         self.assertEqual(p.count('aria-expanded="false"'), 2 + 3)  # two year toggles, three names
 
+    def test_rows_adopted_at_a_meeting_carry_a_tag_a_card_line_and_a_count(self):
+        rows = [{"mode": "public", "title": "Picked", "summary": "Chosen after a meeting.", "stack": [],
+                 "stage": "planned", "started": "2026-10", "adopted": "2026-10", "topic": "ai"},
+                private_row(started="2026-10", adopted="2026-10", title="Quiet pick")]
+        p = page(rows)
+        self.assertEqual(p.count('<span class="kind">meeting</span>'), 1)  # the public row only
+        self.assertIn('<span class="cmeet">Adopted at an idea meeting, Oct 2026</span>', p)
+        self.assertEqual(p.count('class="cmeet"'), 1)
+        self.assertIn("<span>2 from idea meetings</span>", p)
+        self.assertIn("<span>1 from an idea meeting</span>", page(rows[:1]))
+        self.assertNotIn("idea meeting", page([private_row()]))
+
     def test_private_row_never_shows_a_kind_tag(self):
         p = page([private_row(kind="contribution", title="Quiet one")])
         self.assertIn('data-title="Quiet one"', p)

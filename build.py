@@ -46,7 +46,7 @@ STAGES = {
     "running": "Running",
     "retired": "Retired",
 }
-COMMON_FIELDS = {"mode", "title", "stack", "stage", "started", "restarted", "ended", "as_of", "kind", "topic"}
+COMMON_FIELDS = {"mode", "title", "stack", "stage", "started", "restarted", "ended", "as_of", "kind", "topic", "adopted"}
 KINDS = {"project", "contribution", "note"}  # contribution: my part in someone else's work; note: writing, study, not software
 TOPICS = {"games": "Games", "apps": "Apps", "web": "Web and backend", "ai": "AI tools", "study": "Study", "life": "Life"}  # insertion order is the display order for ties
 ALLOWED = {
@@ -327,6 +327,7 @@ def counts(rows):
     return {"total": len(rows),
             "running": sum(1 for r in rows if r["stage"] == "running"),
             "finished": sum(1 for r in rows if r["stage"] == "finished"),
+            "meeting": sum(1 for r in rows if r.get("adopted")),
             "first_year": min((r["started"][:4] for r in rows), default="")}
 
 
@@ -386,7 +387,7 @@ def check_rows(rows):
         stack = row.get("stack", [])
         if not isinstance(stack, list) or not all(isinstance(s, str) for s in stack):
             problems.append("%s: stack must be a list of names" % where)
-        for key in ("started", "ended", "as_of"):
+        for key in ("started", "ended", "as_of", "adopted"):
             if key in row and not DATE.match(str(row[key])):
                 problems.append("%s: %s must be YYYY or YYYY-MM" % (where, key))
         restarted = row.get("restarted", [])
@@ -470,8 +471,10 @@ def render_legend(rows, built, changed):
     c = counts(rows)
     if not c["total"]:
         return ""
+    meeting = ("" if not c["meeting"] else " · <span>1 from an idea meeting</span>" if c["meeting"] == 1
+               else f' · <span>{c["meeting"]} from idea meetings</span>')
     return (f'<p class="legend"><span>{_plural(c["total"], "thing")} since {attr(c["first_year"])}</span> · '
-            f'<span class="tag">{c["running"]} running</span> · <span>{c["finished"]} finished</span></p>'
+            f'<span class="tag">{c["running"]} running</span> · <span>{c["finished"]} finished</span>{meeting}</p>'
             f'<p class="legend dates">Data changed {attr(changed)} · page built {attr(built)}</p>')
 
 
@@ -538,6 +541,9 @@ def render_row(r, family_by_tool):
     code = f'<span class="code">{html.escape(r["code_name"])}</span> ' if private else ""
     kind = (f' <span class="kind">{html.escape(r["kind"])}</span>'
             if r.get("kind") in TAGGED_KINDS and not private else "")
+    adopted = r.get("adopted") if not private else ""
+    if adopted:  # chosen at an idea meeting (idea-debate): the same small tag, and a line on the card
+        kind += ' <span class="kind">meeting</span>'
     if private:
         summary = (f'Shown under the code name {html.escape(r["code_name"])}. '
                    "Only the title, stack, stage and dates are public.")
@@ -545,6 +551,8 @@ def render_row(r, family_by_tool):
         summary = inline(r.get("summary", ""))
     stack = ", ".join(html.escape(s) for s in r.get("stack", []))
     card = (f'<span class="cwhen">{_card_when(r)}</span>'
+            + (f'<span class="cmeet">Adopted at an idea meeting, {(month_name(adopted) + " ").lstrip()}{adopted[:4]}</span>'
+               if adopted else "")
             + (f"<p>{summary}</p>" if summary else "")
             + (f'<span class="cstack">{stack}</span>' if stack else "")
             + (f'<a href="https://github.com/{attr(r["repo"])}">Code on GitHub</a>' if r.get("repo") else ""))
