@@ -1827,6 +1827,7 @@
     ],
     "stage": "running",
     "started": "2026-10",
+    "adopted": "2026-10",
     "repo": "bnitech-lab/vancouver-month-2026",
     "topic": "games"
   },
@@ -1899,6 +1900,7 @@
     ],
     "stage": "planned",
     "started": "2026-10",
+    "adopted": "2026-10",
     "topic": "ai"
   },
   {
@@ -1911,7 +1913,28 @@
     ],
     "stage": "planned",
     "started": "2026-10",
+    "adopted": "2026-10",
     "topic": "ai"
+  },
+  {
+    "mode": "public",
+    "title": "Outage case puzzles",
+    "summary": "A five-minute solo game on the phone built from real public outage reports: each case is cut into frozen scenes (a log line, a graph, a chat) and I pick the chain of causes from cards. Every clue is quoted from its report, with the source.",
+    "stack": [],
+    "stage": "planned",
+    "started": "2026-10",
+    "adopted": "2026-10",
+    "topic": "games"
+  },
+  {
+    "mode": "public",
+    "title": "Old game revival",
+    "summary": "Bring one of my 2011 to 2017 games to the phone browser with the old build as the judge: it records the input and every position each tick, and tests check that the new version reaches the same state. First pick: PackMan plus from 2012.",
+    "stack": [],
+    "stage": "planned",
+    "started": "2026-10",
+    "adopted": "2026-10",
+    "topic": "games"
   },
   {
     "mode": "public",
