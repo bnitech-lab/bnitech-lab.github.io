@@ -23,6 +23,9 @@ flowchart LR
    title, stack, stage and dates only). Every row has a `topic`, one of six: `games`, `apps`,
    `web`, `ai`, `study` or `life`. An optional `kind` of `contribution` (my part in someone
    else's work) or `note` (writing or study, not software) adds a small tag after the title.
+   An optional `adopted` (`YYYY` or `YYYY-MM`) marks an idea I chose at an idea meeting, where
+   AI personas argue an idea out with me ([persona-debate-lab](https://github.com/bnivibe/persona-debate-lab)).
+   It adds a `meeting` tag, a line on the detail card, and a count in the totals line.
 2. `data/eras.json` says what I was doing in each period (studying where, working where, or on
    my own projects). The History shows a header for each period that has rows, newest first,
    with one line per year under it. A row goes under the period that holds its start month. If
