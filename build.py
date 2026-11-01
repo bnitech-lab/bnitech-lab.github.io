@@ -122,7 +122,8 @@ def check_stacks(stacks, rows):
     return problems
 
 
-THREAD_KEY = re.compile(r"^[a-z0-9-]+$")
+THREAD_KEY = re.compile(r"^[a-z0-9-]+\Z")
+THREAD_FIELDS = {"key", "name", "words"}
 
 
 def check_threads(threads, rows):
@@ -132,16 +133,22 @@ def check_threads(threads, rows):
     problems, known = [], set()
     for i, t in enumerate(threads["threads"]):
         where = "thread %d" % (i + 1)
-        if not isinstance(t, dict) or not THREAD_KEY.match(str(t.get("key", ""))) or not t.get("name"):
+        if (not isinstance(t, dict) or not isinstance(t.get("key"), str) or not THREAD_KEY.match(t["key"])
+                or not isinstance(t.get("name"), str) or not t["name"]):
             problems.append("%s: needs a key of lowercase letters, digits or hyphens, and a name" % where)
             continue
+        extra = sorted(set(t) - THREAD_FIELDS)
+        if extra:
+            problems.append("%s: fields not allowed: %s" % (where, ", ".join(extra)))
         if t["key"] in known:
             problems.append("%s: key %s is used twice" % (where, t["key"]))
         known.add(t["key"])
         words = t.get("words", [])
         if not isinstance(words, list) or not all(isinstance(w, str) and w for w in words):
             problems.append("%s: words must be a list of words" % where)
-    for i, r in enumerate(rows):
+    for i, r in enumerate(rows if isinstance(rows, list) else []):
+        if not isinstance(r, dict):
+            continue  # check_rows reports it
         named = r.get("threads", [])
         for key in named if isinstance(named, list) else []:
             if key not in known:
@@ -604,6 +611,16 @@ def theme_words(line):
     return f'{line["tries"]} tries since {line["first"]} · {tail}'
 
 
+def theme_years_said(line):
+    """The cells in words, for screen readers: which years were running, done and left unfinished."""
+    said = []
+    for mark, word in (("r", "running"), ("f", "finished"), ("o", "not finished")):
+        years = [y for y, m, _ in line["cells"] if m == mark]
+        if years:
+            said.append(f'{word} in {", ".join(years)}')
+    return "; ".join(said)
+
+
 def theme_hints(rows, threads):
     """Build-log lines for rows that share a theme's word (at a word start) but do not name the theme."""
     out = []
@@ -640,16 +657,18 @@ def render_themes(lines, threads, year_list):
             tries.append(f'<li><span class="ty">{attr(str(r["started"])[:4])}</span>'
                          f'<span class="tt">{code}{html.escape(r["title"])}</span>'
                          f'<span class="tn">{html.escape(" · ".join(notes))}{(" · " + stack) if stack else ""}</span></li>')
-        words = theme_words(line)
-        out.append(f'<details class="theme"><summary><span class="thead"><span class="tname">{html.escape(line["name"])}</span>'
-                   f'<span class="twords">{html.escape(words)}</span></span>'
-                   f'<span class="tcells" role="img" aria-label="{attr(line["name"] + ", " + words)}">{cells}</span></summary>'
-                   f'<ol class="tries">{"".join(tries)}</ol></details>')
-    key = ('<p class="tkey"><span><span class="tc f"></span> finished</span><span><span class="tc o"></span> not finished</span>'
-           '<span><span class="tc r"></span> running</span><span>a number: more than one that year</span></p>')
+        out.append(f'<details class="theme"><summary><span class="thead"><span class="tname">{html.escape(line["name"])}'
+                   f'<span class="tsign" aria-hidden="true"></span></span>'
+                   f'<span class="twords">{html.escape(theme_words(line))}</span></span>'
+                   f'<span class="tcells" aria-hidden="true">{cells}</span>'
+                   f'<span class="vh">{html.escape(theme_years_said(line))}</span></summary>'
+                   f'<ol class="tries" role="list">{"".join(tries)}</ol></details>')
+    key = ('<p class="tkey"><span><span class="tc f"></span> finished or retired</span>'
+           '<span><span class="tc o"></span> not finished</span><span><span class="tc r"></span> running</span>'
+           '<span>a number: more than one that year</span></p>')
     return ('<section class="themes"><h2>Keeps coming back</h2>'
             '<p class="hint">What I started in three or more separate years. Tap one for its tries.</p>'
-            + "".join(out) + _axis(year_list) + key + '</section>')
+            + _axis(year_list) + "".join(out) + key + '</section>')
 
 
 def render_history(rows, eras, stacks):
