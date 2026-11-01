@@ -12,8 +12,9 @@ flowchart LR
     M["data/marked.json<br/>rows I chose to show,<br/>each with a topic"] --> B["build.py"]
     E["data/eras.json<br/>what I was doing,<br/>by period"] --> B
     T["data/stacks.json<br/>every tool in one<br/>stack family"] --> B
+    H["data/threads.json<br/>the themes I keep<br/>coming back to"] --> B
     G["git log<br/>date of the last change<br/>to data/"] --> B
-    B --> S["_site/index.html<br/>year strip, chips, history,<br/>all written at build time"]
+    B --> S["_site/index.html<br/>themes, chips, history,<br/>all written at build time"]
     S --> P["GitHub Pages"]
 ```
 
@@ -25,7 +26,8 @@ flowchart LR
    else's work) or `note` (writing or study, not software) adds a small tag after the title.
    An optional `adopted` (`YYYY` or `YYYY-MM`) marks an idea I chose at an idea meeting, where
    AI personas argue an idea out with me ([persona-debate-lab](https://github.com/bnivibe/persona-debate-lab)).
-   It adds a `meeting` tag, a line on the detail card, and a count in the totals line.
+   It adds a `meeting` tag and a line on the detail card. An optional `threads` list names the
+   recurring themes a row belongs to (keys from `data/threads.json`; a row may name two).
 2. `data/eras.json` says what I was doing in each period (studying where, working where, or on
    my own projects). The History shows a header for each period that has rows, newest first,
    with one line per year under it. A row goes under the period that holds its start month. If
@@ -37,17 +39,23 @@ flowchart LR
    calendar year opens at a time, even when two periods share it.
 3. `data/stacks.json` puts every tool name a row lists into one stack family: "Java" and
    "Spring Boot" both sit under "Java and Spring". A tool belongs to exactly one family.
-4. `build.py` reads those three files and writes the whole page as static HTML with `page.html`
-   as the template: the year strip with its legend, the By topic and By stack chips, the History
+4. `data/threads.json` lists the themes I keep coming back to, each with a key, a name and a few
+   words. A theme shows at the top of the page once its rows started in three or more separate
+   years; rows adopted at an idea meeting draw but do not count toward the three years. Each theme
+   is one line of year cells (yellow running, filled finished or retired, hollow otherwise, a
+   number when a year holds more than one row) and opens to its tries in order. A row that shares
+   a theme's word without naming the theme gets a "thread?" line in the build log, as a hint only.
+5. `build.py` reads those four files and writes the whole page as static HTML with `page.html`
+   as the template: the recurring themes, the By topic and By stack chips, the History
    and a detail card for every row. It makes no network call and needs no token. It also asks
    git for the date of the last commit that touched `data/`, in UTC like the "page built" date,
-   and shows it on the page as "Data changed". On a shallow checkout that date would be wrong, so
+   and shows it in the footer as "Data changed". On a shallow checkout that date would be wrong, so
    the build fails instead.
-5. The small script inside `page.html` only opens and closes one year or one card at a time, and
+6. The small script inside `page.html` only opens and closes one year or one card at a time, and
    filters by the picked chip. It never creates rows. With JavaScript off, every year and every
    card is open. The By topic chips show and do nothing, and the By stack chips and the family
    boxes stay hidden.
-6. A GitHub Action rebuilds and publishes the page on every push to `main`, and also once a day
+7. A GitHub Action rebuilds and publishes the page on every push to `main`, and also once a day
    on a schedule. Its checkout fetches full history, for the date above. A second workflow runs
    the tests, `--check` and a build on every pull request.
 
