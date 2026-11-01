@@ -63,32 +63,48 @@ h1 { margin: 0; font-family: var(--pixel); font-weight: 400; font-size: clamp(48
 .intro { margin-top: 4px; font-size: 17px; line-height: 1.5; }
 .stripe { height: 10px; margin: -8px 0; background: repeating-linear-gradient(-45deg, #111111 0 8px, #ffd400 8px 16px); }
 
-/* The yellow tag: dates, the running count in the legend */
-.tag, .block > header .when, .cwhen {
+/* The yellow tag: dates on era headers and detail cards */
+.block > header .when, .cwhen {
   align-self: flex-start; padding: 1px 6px; background: var(--yellow); color: var(--on-yellow);
   font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
 }
 
-/* Year strip and legend */
+/* Recurring themes: one disclosure per theme, its cells in the same 2px-gap row as the axis under them */
 .glance { display: flex; flex-direction: column; gap: 6px; }
 .glance:empty { display: none; }
-.strip { display: flex; gap: 2px; }
-.cell {
-  flex: 1 1 0; min-width: 0; min-height: 44px; display: grid; grid-template-rows: 100px auto; gap: 4px;
-  padding: 0; border: 0; border-radius: 2px; cursor: pointer; background: transparent;
-  background-image: linear-gradient(var(--hair), var(--hair)); background-size: 100% 1px; background-position: 0 100px; background-repeat: no-repeat;
+.themes { display: flex; flex-direction: column; }
+.themes .hint { margin: 4px 0 10px; }
+.theme { border-top: 1px solid var(--hair); }
+.theme summary { list-style: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; padding: 10px 0; min-height: 44px; }
+.theme summary::-webkit-details-marker { display: none; }
+.thead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 10px; }
+.tname { font-size: 16px; font-weight: 600; }
+.tname::after { content: " +"; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.theme[open] .tname::after { content: " \2013"; }
+.theme summary:hover .tname { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.twords { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.tcells { display: flex; gap: 2px; }
+.tc {
+  flex: 1 1 0; min-width: 0; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 2px;
+  font-family: var(--mono); font-size: 10px; font-weight: 700; line-height: 1;
+  background: linear-gradient(var(--hair), var(--hair)) center / 4px 4px no-repeat;
 }
-.cell:hover { background-color: var(--panel); }
-.cell .bar { align-self: end; display: flex; flex-direction: column; justify-content: flex-end; background: var(--bar); }
-.cell .run { display: block; background: var(--yellow); }
-.cell .n { font-family: var(--mono); font-size: 10px; font-weight: 700; line-height: 1.4; text-align: center; padding-bottom: 2px; }
+.tc.f { background: var(--bar); color: var(--paper); }
+.tc.r { background: var(--yellow); color: var(--on-yellow); box-shadow: inset 0 0 0 1px var(--on-yellow); }
+.tc.o { background: transparent; box-shadow: inset 0 0 0 2px var(--muted); color: var(--ink); }
+.tries { margin: 2px 0 14px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.tries li { display: grid; grid-template-columns: 3.4em minmax(0, 1fr); gap: 0 8px; font-size: 14px; line-height: 1.45; }
+.tries .ty { font-family: var(--mono); font-size: 12px; color: var(--muted); padding-top: 1px; }
+.tries .tt { overflow-wrap: anywhere; }
+.tries .tn { grid-column: 2; font-family: var(--mono); font-size: 11px; color: var(--muted); overflow-wrap: anywhere; }
+.themes .axis { margin-top: 2px; }
+.tkey { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 8px 0 0; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.tkey > span { display: inline-flex; align-items: center; gap: 6px; }
+.tkey .tc { flex: none; width: 12px; height: 12px; }
 .axis { display: flex; gap: 2px; font-family: var(--mono); font-size: 10px; line-height: 1.4; color: var(--muted); }
 .axis span { flex: 1 1 0; min-width: 0; display: flex; justify-content: center; white-space: nowrap; }
 .axis span:first-child { justify-content: flex-start; }
 .axis span:last-child { justify-content: flex-end; }
-.legend { font-family: var(--mono); font-size: 11px; line-height: 1.8; margin-top: 4px; }
-.legend > span { white-space: nowrap; } /* a narrow screen breaks the line only between the three totals */
-.legend.dates { margin-top: 0; color: var(--muted); }
 
 /* Switch, chips and the family summary */
 .browse { display: flex; flex-direction: column; gap: 14px; }
@@ -191,9 +207,9 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
     <p class="intro">My lab, by <a href="https://github.com/bnivibe">Dawn</a>. From my first game in 2011 to what I am working on today. You are welcome to look around.</p>
   </header>
   <div class="stripe" aria-hidden="true"></div>
-  <div class="glance">{{STRIP}}{{LEGEND}}</div>
+  <div class="glance">{{THEMES}}</div>
   <div class="browse">{{FILTERS}}{{SUMMARIES}}{{HISTORY}}</div>
-  <footer>Rebuilt every day from this repository. <a href="https://github.com/bnitech-lab/bnitech-lab.github.io">Source on GitHub</a>.</footer>
+  <footer>Rebuilt every day from this repository. {{DATES}}. <a href="https://github.com/bnitech-lab/bnitech-lab.github.io">Source on GitHub</a>.</footer>
 </div>
 <script>
 /* One open year, one open card, chip filters and hash links (#2026, #topic=ai, #stack=java-and-spring).
@@ -212,7 +228,6 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
   const state = {mode: "topic", pick: "all", open: "", card: null, pinned: false};
 
   const rows = all(".row");
-  const cells = all(".cell[data-year]");
   const blocks = all(".block");
   const modes = all(".switch [data-mode]");
   const chipRows = all(".chips[data-mode]");
@@ -251,11 +266,9 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
     });
     families.forEach(f => { f.hidden = state.mode !== "stack" || f.getAttribute("data-family") !== state.pick; });
     rows.forEach(r => { r.hidden = !matches(r); });
-    let opened = "";
     years.forEach(y => {
       const shown = y.items.filter(r => !r.hidden);
       const open = shown.length > 0 && y.year === state.open;
-      if (open) opened = y.year;
       y.groups.forEach(g => {
         const count = g.items.filter(r => !r.hidden).length;
         g.el.hidden = !count;
@@ -269,7 +282,6 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
       y.n.textContent = shown.length + " " + (open ? DASH : "+");
     });
     blocks.forEach(b => { b.hidden = !b.querySelector(".year:not([hidden])"); });
-    cells.forEach(c => c.setAttribute("aria-expanded", String(opened !== "" && c.getAttribute("data-year") === opened)));
   };
 
   const paint = (row, on) => {
@@ -306,7 +318,7 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
     closeCard();
     render();
   };
-  // From a strip cell or a #2026 link: open the year and scroll to its first share. A filter that
+  // From a #2026 link: open the year and scroll to its first share. A filter that
   // would hide the whole year is cleared first. A year with no rows (no .year) changes nothing.
   const showYear = year => {
     const shares = years.filter(y => y.year === year);
@@ -347,13 +359,10 @@ footer a { color: var(--muted); text-decoration-color: currentColor; text-decora
       return;
     }
     if (!t.closest(".row")) closeCard();
-    const cell = t.closest(".cell[data-year]");
     const toggle = t.closest(".toggle");
     const mode = t.closest(".switch [data-mode]");
     const chip = t.closest(".chip[data-pick]");
-    if (cell) {
-      if (showYear(cell.getAttribute("data-year"))) writeHash(state.open);
-    } else if (toggle) {
+    if (toggle) {
       const year = toggle.closest(".year").getAttribute("data-year");
       const before = toggle.getBoundingClientRect().top;
       setOpen(state.open === year ? "" : year);
