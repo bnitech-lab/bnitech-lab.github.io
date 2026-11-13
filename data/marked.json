@@ -27,7 +27,10 @@
     "started": "2011",
     "ended": "2017",
     "kind": "note",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -40,7 +43,10 @@
     "started": "2011-04",
     "ended": "2011-06",
     "repo": "bnitech-lab/blue-dice-game-2011",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -55,7 +61,10 @@
     "stage": "finished",
     "started": "2011-05",
     "ended": "2012-12",
-    "topic": "web"
+    "topic": "web",
+    "threads": [
+      "communities"
+    ]
   },
   {
     "mode": "private",
@@ -64,7 +73,10 @@
     "stack": [],
     "stage": "planned",
     "started": "2011-05",
-    "topic": "apps"
+    "topic": "apps",
+    "threads": [
+      "parking"
+    ]
   },
   {
     "mode": "public",
@@ -108,7 +120,10 @@
     "started": "2011-09",
     "ended": "2011-10",
     "repo": "bnitech-lab/mukbo-db-2011",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -132,7 +147,10 @@
     "stage": "stopped",
     "started": "2011-11",
     "repo": "bnitech-lab/rolly-poly-2011",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -150,7 +168,10 @@
       "2026-03"
     ],
     "repo": "bnitech/Teris_2011",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -183,7 +204,10 @@
     "stage": "finished",
     "started": "2012-03",
     "ended": "2012-10",
-    "topic": "apps"
+    "topic": "apps",
+    "threads": [
+      "local-guides"
+    ]
   },
   {
     "mode": "public",
@@ -197,7 +221,10 @@
     "stage": "finished",
     "started": "2012-04",
     "ended": "2012-06",
-    "topic": "web"
+    "topic": "web",
+    "threads": [
+      "login"
+    ]
   },
   {
     "mode": "public",
@@ -211,7 +238,10 @@
     "started": "2012-04",
     "ended": "2012-07",
     "repo": "bnitech-lab/space-shooter-2012",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -260,7 +290,10 @@
     "started": "2012-09",
     "ended": "2012-11",
     "repo": "bnitech-lab/packman-plus-2012",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -287,7 +320,10 @@
     "stage": "stopped",
     "started": "2014-09",
     "ended": "2015-06",
-    "topic": "apps"
+    "topic": "apps",
+    "threads": [
+      "communities"
+    ]
   },
   {
     "mode": "public",
@@ -301,7 +337,10 @@
     "started": "2014-10",
     "ended": "2014-12",
     "repo": "bnitech-lab/angry-pokemons-2014",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "private",
@@ -329,7 +368,10 @@
     "stage": "finished",
     "started": "2015-09",
     "ended": "2015-12",
-    "topic": "apps"
+    "topic": "apps",
+    "threads": [
+      "local-guides"
+    ]
   },
   {
     "mode": "public",
@@ -356,7 +398,10 @@
     "stack": [],
     "stage": "thought",
     "started": "2015-10",
-    "topic": "apps"
+    "topic": "apps",
+    "threads": [
+      "parking"
+    ]
   },
   {
     "mode": "public",
@@ -411,7 +456,10 @@
     "started": "2015-11",
     "ended": "2016-02",
     "repo": "CienProject2015/ProjectOP",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -424,7 +472,10 @@
     ],
     "stage": "stopped",
     "started": "2016-01",
-    "topic": "apps"
+    "topic": "apps",
+    "threads": [
+      "communities"
+    ]
   },
   {
     "mode": "public",
@@ -458,7 +509,10 @@
     "stage": "finished",
     "started": "2016-11",
     "kind": "note",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -472,7 +526,10 @@
     "stage": "finished",
     "started": "2016-12",
     "repo": "bnitech-lab/maze-3d-2016",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -516,7 +573,10 @@
     "started": "2017-03",
     "ended": "2017-09",
     "kind": "note",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "teaching"
+    ]
   },
   {
     "mode": "public",
@@ -531,7 +591,10 @@
     "started": "2017-03",
     "ended": "2020-09",
     "kind": "note",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "blog"
+    ]
   },
   {
     "mode": "public",
@@ -549,7 +612,10 @@
     "stack": [],
     "stage": "thought",
     "started": "2017-04",
-    "topic": "web"
+    "topic": "web",
+    "threads": [
+      "communities"
+    ]
   },
   {
     "mode": "public",
@@ -567,7 +633,10 @@
     "stack": [],
     "stage": "thought",
     "started": "2017-04",
-    "topic": "apps"
+    "topic": "apps",
+    "threads": [
+      "parking"
+    ]
   },
   {
     "mode": "public",
@@ -590,7 +659,10 @@
     "started": "2017-05",
     "ended": "2017-08",
     "repo": "bnitech-lab/crash-tower-2017",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -601,7 +673,10 @@
     ],
     "stage": "planned",
     "started": "2017-05",
-    "topic": "apps"
+    "topic": "apps",
+    "threads": [
+      "local-guides"
+    ]
   },
   {
     "mode": "public",
@@ -687,7 +762,10 @@
     ],
     "stage": "stopped",
     "started": "2019-12",
-    "topic": "web"
+    "topic": "web",
+    "threads": [
+      "communities"
+    ]
   },
   {
     "mode": "private",
@@ -719,7 +797,10 @@
     "started": "2020-08",
     "ended": "2020-09",
     "kind": "note",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "teaching"
+    ]
   },
   {
     "mode": "public",
@@ -749,7 +830,10 @@
     "stage": "stopped",
     "started": "2020-11",
     "ended": "2021-05",
-    "topic": "web"
+    "topic": "web",
+    "threads": [
+      "login"
+    ]
   },
   {
     "mode": "public",
@@ -776,7 +860,10 @@
     "stack": [],
     "stage": "thought",
     "started": "2021-01",
-    "topic": "life"
+    "topic": "life",
+    "threads": [
+      "blog"
+    ]
   },
   {
     "mode": "public",
@@ -815,7 +902,10 @@
     "stage": "stopped",
     "started": "2021-04",
     "kind": "note",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "knowledge-store"
+    ]
   },
   {
     "mode": "public",
@@ -949,7 +1039,10 @@
     "stage": "stopped",
     "started": "2024-06",
     "ended": "2024-09",
-    "topic": "web"
+    "topic": "web",
+    "threads": [
+      "login"
+    ]
   },
   {
     "mode": "public",
@@ -997,7 +1090,10 @@
     "stack": [],
     "stage": "thought",
     "started": "2025-10",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -1074,6 +1170,10 @@
     "started": "2026-03",
     "ended": "2026-06",
     "topic": "web",
+    "threads": [
+      "knowledge-store",
+      "blog"
+    ],
     "restarted": [
       "2026-10"
     ],
@@ -1163,7 +1263,10 @@
     "stage": "retired",
     "started": "2026-06",
     "ended": "2026-07",
-    "topic": "ai"
+    "topic": "ai",
+    "threads": [
+      "knowledge-store"
+    ]
   },
   {
     "mode": "public",
@@ -1208,7 +1311,10 @@
     "stage": "retired",
     "started": "2026-07",
     "ended": "2026-10",
-    "topic": "web"
+    "topic": "web",
+    "threads": [
+      "knowledge-store"
+    ]
   },
   {
     "mode": "public",
@@ -1275,7 +1381,10 @@
     "stage": "running",
     "started": "2026-07",
     "as_of": "2026-10",
-    "topic": "ai"
+    "topic": "ai",
+    "threads": [
+      "knowledge-store"
+    ]
   },
   {
     "mode": "public",
@@ -1681,7 +1790,10 @@
     "stage": "running",
     "started": "2026-10",
     "as_of": "2026-10",
-    "topic": "ai"
+    "topic": "ai",
+    "threads": [
+      "blog"
+    ]
   },
   {
     "mode": "public",
@@ -1746,7 +1858,10 @@
     ],
     "stage": "thought",
     "started": "2026-10",
-    "topic": "ai"
+    "topic": "ai",
+    "threads": [
+      "blog"
+    ]
   },
   {
     "mode": "public",
@@ -1755,7 +1870,10 @@
     "stack": [],
     "stage": "thought",
     "started": "2026-10",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "blog"
+    ]
   },
   {
     "mode": "public",
@@ -1776,7 +1894,10 @@
     ],
     "stage": "planned",
     "started": "2026-10",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "knowledge-store"
+    ]
   },
   {
     "mode": "public",
@@ -1788,7 +1909,10 @@
     ],
     "stage": "planned",
     "started": "2026-10",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "blog"
+    ]
   },
   {
     "mode": "public",
@@ -1829,7 +1953,10 @@
     "started": "2026-10",
     "adopted": "2026-10",
     "repo": "bnitech-lab/vancouver-month-2026",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -1888,7 +2015,10 @@
     "stack": [],
     "stage": "thought",
     "started": "2026-10",
-    "topic": "ai"
+    "topic": "ai",
+    "threads": [
+      "teaching"
+    ]
   },
   {
     "mode": "public",
@@ -1956,7 +2086,10 @@
     "started": "2026-10",
     "as_of": "2026-11",
     "adopted": "2026-10",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -1971,7 +2104,10 @@
     "started": "2026-10",
     "as_of": "2026-11",
     "adopted": "2026-10",
-    "topic": "games"
+    "topic": "games",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -2034,7 +2170,10 @@
     "stack": [],
     "stage": "thought",
     "started": "2016-11",
-    "topic": "web"
+    "topic": "web",
+    "threads": [
+      "communities"
+    ]
   },
   {
     "mode": "public",
@@ -2067,7 +2206,10 @@
     ],
     "stage": "thought",
     "started": "2017-04",
-    "topic": "apps"
+    "topic": "apps",
+    "threads": [
+      "local-guides"
+    ]
   },
   {
     "mode": "public",
@@ -2093,7 +2235,10 @@
     "started": "2017-10",
     "ended": "2018-09",
     "kind": "note",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "knowledge-store"
+    ]
   },
   {
     "mode": "public",
@@ -2137,7 +2282,10 @@
     "started": "2018-12",
     "ended": "2018-12",
     "kind": "note",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "games"
+    ]
   },
   {
     "mode": "public",
@@ -2164,7 +2312,10 @@
     "stage": "finished",
     "started": "2019-03",
     "ended": "2019-04",
-    "topic": "apps"
+    "topic": "apps",
+    "threads": [
+      "login"
+    ]
   },
   {
     "mode": "public",
@@ -2178,7 +2329,10 @@
     "started": "2019-04",
     "ended": "2019-05",
     "kind": "note",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "teaching"
+    ]
   },
   {
     "mode": "public",
@@ -2193,7 +2347,10 @@
     "started": "2019-05",
     "ended": "2019-06",
     "kind": "note",
-    "topic": "study"
+    "topic": "study",
+    "threads": [
+      "teaching"
+    ]
   },
   {
     "mode": "private",
@@ -2206,7 +2363,10 @@
     "started": "2019-06",
     "ended": "2019-06",
     "kind": "note",
-    "topic": "web"
+    "topic": "web",
+    "threads": [
+      "login"
+    ]
   },
   {
     "mode": "private",
@@ -2219,7 +2379,10 @@
     "started": "2019-06",
     "ended": "2019-06",
     "kind": "note",
-    "topic": "web"
+    "topic": "web",
+    "threads": [
+      "login"
+    ]
   },
   {
     "mode": "private",
@@ -2236,6 +2399,9 @@
     "stage": "finished",
     "started": "2019-06",
     "ended": "2019",
-    "topic": "web"
+    "topic": "web",
+    "threads": [
+      "login"
+    ]
   }
 ]

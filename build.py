@@ -11,17 +11,20 @@ Reads, all inside this repository:
                      rejects any field it does not know.
   data/eras.json     what Dawn was doing in each period; the History headers.
   data/stacks.json   every tool name a row uses, mapped to one stack family.
+  data/threads.json  the recurring themes rows may name in their `threads` field, with words that
+                     hint at an untagged row in the build log.
   page.html          the template, with the CSS and the small script that opens years and cards
-                     and filters by chip; render() fills its five placeholders.
+                     and filters by chip; render() fills its placeholders.
   git history        the date of the last commit that touched data/ ("Data changed" on the page).
 
-Writes one static page: a year strip and legend, topic and stack-family chips, and the History,
+Writes one static page: the recurring themes, topic and stack-family chips, and the History,
 where rows sit under the era they started in, one line per year, grouped by stage, each title
 with a detail card. Everything on the page is rendered here, at build time.
 
---check fails when a row has a bad field, kind or topic, when an era is malformed, or when a tool
-a row uses is in no family or in two. A build also prints a "still running?" line for each running
-row without a repo whose as_of is more than twelve months old; that is the log only, not a failure.
+--check fails when a row has a bad field, kind, topic or thread, when an era is malformed, or when a
+tool a row uses is in no family or in two. A build also prints a "still running?" line for each
+running row without a repo whose as_of is more than twelve months old, and a "thread?" line for each
+row that shares a theme's word without naming the theme; both are the log only, not failures.
 
 The build makes no network call and needs no token. It needs a git checkout with full history and
 fails on a shallow one. Standard library only.
@@ -46,7 +49,7 @@ STAGES = {
     "running": "Running",
     "retired": "Retired",
 }
-COMMON_FIELDS = {"mode", "title", "stack", "stage", "started", "restarted", "ended", "as_of", "kind", "topic", "adopted"}
+COMMON_FIELDS = {"mode", "title", "stack", "stage", "started", "restarted", "ended", "as_of", "kind", "topic", "adopted", "threads"}
 KINDS = {"project", "contribution", "note"}  # contribution: my part in someone else's work; note: writing, study, not software
 TOPICS = {"games": "Games", "apps": "Apps", "web": "Web and backend", "ai": "AI tools", "study": "Study", "life": "Life"}  # insertion order is the display order for ties
 ALLOWED = {
@@ -116,6 +119,40 @@ def check_stacks(stacks, rows):
                 used.update(s for s in stack if isinstance(s, str))
         for tool in sorted(used - set(seen)):
             problems.append("tool %s is used in marked.json but is in no stack family" % tool)
+    return problems
+
+
+THREAD_KEY = re.compile(r"^[a-z0-9-]+\Z")
+THREAD_FIELDS = {"key", "name", "words"}
+
+
+def check_threads(threads, rows):
+    """Return problems with data/threads.json and with the theme keys rows name; empty means valid."""
+    if not isinstance(threads, dict) or not isinstance(threads.get("threads"), list):
+        return ['threads.json must hold {"threads": [...]}']
+    problems, known = [], set()
+    for i, t in enumerate(threads["threads"]):
+        where = "thread %d" % (i + 1)
+        if (not isinstance(t, dict) or not isinstance(t.get("key"), str) or not THREAD_KEY.match(t["key"])
+                or not isinstance(t.get("name"), str) or not t["name"]):
+            problems.append("%s: needs a key of lowercase letters, digits or hyphens, and a name" % where)
+            continue
+        extra = sorted(set(t) - THREAD_FIELDS)
+        if extra:
+            problems.append("%s: fields not allowed: %s" % (where, ", ".join(extra)))
+        if t["key"] in known:
+            problems.append("%s: key %s is used twice" % (where, t["key"]))
+        known.add(t["key"])
+        words = t.get("words", [])
+        if not isinstance(words, list) or not all(isinstance(w, str) and w for w in words):
+            problems.append("%s: words must be a list of words" % where)
+    for i, r in enumerate(rows if isinstance(rows, list) else []):
+        if not isinstance(r, dict):
+            continue  # check_rows reports it
+        named = r.get("threads", [])
+        for key in named if isinstance(named, list) else []:
+            if key not in known:
+                problems.append("row %d: unknown thread %s" % (i + 1, key))
     return problems
 
 
@@ -314,23 +351,6 @@ def all_years(rows, today):
     return [str(y) for y in range(first, int(today[:4]) + 1)]
 
 
-def strip(rows, years):
-    """One cell per year for the year strip: how many rows started then, and how many of those are running."""
-    return [{"year": y,
-             "count": sum(1 for r in rows if r["started"][:4] == y),
-             "running": sum(1 for r in rows if r["started"][:4] == y and r["stage"] == "running")}
-            for y in years]
-
-
-def counts(rows):
-    """The legend totals; `first_year` is empty when there are no rows."""
-    return {"total": len(rows),
-            "running": sum(1 for r in rows if r["stage"] == "running"),
-            "finished": sum(1 for r in rows if r["stage"] == "finished"),
-            "meeting": sum(1 for r in rows if r.get("adopted")),
-            "first_year": min((r["started"][:4] for r in rows), default="")}
-
-
 def data_changed_date(run=subprocess.check_output):
     """The date (YYYY-MM-DD, in UTC like the "page built" date) of the last commit that touched
     data/, read from git as a Unix timestamp. A shallow checkout, or a history with no commit
@@ -397,6 +417,9 @@ def check_rows(rows):
             problems.append("%s: repo must look like owner/name" % where)
         if row.get("stage") == "running" and not row.get("repo") and not row.get("as_of"):
             problems.append("%s: a running idea without a repo needs as_of" % where)
+        threads = row.get("threads", [])
+        if not isinstance(threads, list) or not all(isinstance(t, str) for t in threads):
+            problems.append("%s: threads must be a list of theme keys" % where)
         if "kind" in row and row["kind"] not in KINDS:
             problems.append("%s: kind must be one of %s" % (where, ", ".join(sorted(KINDS))))
         if not row.get("topic"):
@@ -429,7 +452,7 @@ def years(row):
 STAGE_WORD = {"finished": "finished", "running": "running", "stopped": "stopped", "retired": "retired",
               "planned": "planned", "thought": "idea"}  # the word a card and a group label use for each stage
 TAGGED_KINDS = ("contribution", "note")  # kinds that get a small tag after the title
-PLACEHOLDER = re.compile(r"\{\{(STRIP|LEGEND|FILTERS|SUMMARIES|HISTORY)\}\}")
+PLACEHOLDER = re.compile(r"\{\{(THEMES|FILTERS|SUMMARIES|HISTORY|DATES)\}\}")
 
 
 def attr(value):
@@ -437,45 +460,11 @@ def attr(value):
     return html.escape(str(value), quote=True)
 
 
-def _plural(n, word):
-    return f"{n} {word}" if n == 1 else f"{n} {word}s"
-
-
 def _axis(year_list):
     """Year labels under a row of per-year cells: the first, middle and last year, each under its own cell."""
     marks = {year_list[0], year_list[(len(year_list) - 1) // 2], year_list[-1]} if year_list else set()
     spans = "".join(f"<span>{y}</span>" if y in marks else "<span></span>" for y in year_list)
     return f'<div class="axis" aria-hidden="true">{spans}</div>'
-
-
-def render_strip(cells):
-    """The year strip: one button per year, a bar scaled to the busiest year with its running share
-    in yellow, and the count under it. A year with rows never drops below 3%; an empty year is 0."""
-    if not cells:
-        return ""
-    top = max(c["count"] for c in cells)
-    out = []
-    for c in cells:
-        bar = max(3, round(100 * c["count"] / top)) if c["count"] else 0
-        run = round(100 * c["running"] / c["count"]) if c["count"] else 0
-        label = f'{c["year"]}: {_plural(c["count"], "thing")}, {c["running"]} running'
-        out.append(f'<button type="button" class="cell" data-year="{attr(c["year"])}" aria-label="{attr(label)}">'
-                   f'<span class="bar" style="height: {bar}%"><span class="run" style="height: {run}%"></span></span>'
-                   f'<span class="n">{c["count"]}</span></button>')
-    return f'<div class="strip" role="group" aria-label="Things per year">{"".join(out)}</div>{_axis([c["year"] for c in cells])}'
-
-
-def render_legend(rows, built, changed):
-    """Two lines under the strip: the totals, with the running count in the yellow tag that also
-    explains the yellow bars, then the two dates."""
-    c = counts(rows)
-    if not c["total"]:
-        return ""
-    meeting = ("" if not c["meeting"] else " · <span>1 from an idea meeting</span>" if c["meeting"] == 1
-               else f' · <span>{c["meeting"]} from idea meetings</span>')
-    return (f'<p class="legend"><span>{_plural(c["total"], "thing")} since {attr(c["first_year"])}</span> · '
-            f'<span class="tag">{c["running"]} running</span> · <span>{c["finished"]} finished</span>{meeting}</p>'
-            f'<p class="legend dates">Data changed {attr(changed)} · page built {attr(built)}</p>')
 
 
 def _chip(pick, label, n, pressed=False):
@@ -588,6 +577,100 @@ def render_block(block, family_by_tool):
             f'{"".join(render_year(y, family_by_tool) for y in block["years"])}</section>')
 
 
+LIVELY = (("r", {"running"}), ("f", {"finished", "retired"}))  # a theme cell's mark: its liveliest stage that year
+
+
+def _theme_cell(rows_in_year):
+    """(mark, count) for one year of a theme: "r" running, "f" finished or retired, "o" anything else, "" none."""
+    stages = {r["stage"] for r in rows_in_year}
+    for mark, group in LIVELY:
+        if stages & group:
+            return mark, len(rows_in_year)
+    return ("o" if rows_in_year else ""), len(rows_in_year)
+
+
+def theme_lines(rows, threads, year_list):
+    """One line per theme started in three or more separate years. Rows adopted at an idea meeting
+    draw but do not count toward the three years, so a meeting cannot make a theme on its own.
+    Lines run latest year first, then longest span, then most tries."""
+    lines = []
+    for t in threads.get("threads", []):
+        members = sorted((r for r in rows if t["key"] in r.get("threads", [])), key=lambda r: str(r["started"]))
+        if len({str(r["started"])[:4] for r in members if not r.get("adopted")}) < 3:
+            continue
+        years = [str(r["started"])[:4] for r in members]
+        lines.append({"key": t["key"], "name": t["name"], "first": years[0], "last": years[-1], "tries": len(members),
+                      "running": sum(1 for r in members if r["stage"] == "running"), "rows": members,
+                      "cells": [(y,) + _theme_cell([r for r, ry in zip(members, years) if ry == y]) for y in year_list]})
+    return sorted(lines, key=lambda l: (-int(l["last"]), -(int(l["last"]) - int(l["first"])), -l["tries"], l["name"]))
+
+
+def theme_words(line):
+    """The words that open a theme line, so a rare visit reads it without decoding the cells."""
+    tail = f'{line["running"]} running' if line["running"] else f'last in {line["last"]}'
+    return f'{line["tries"]} tries since {line["first"]} · {tail}'
+
+
+def theme_years_said(line):
+    """The cells in words, for screen readers: which years were running, done and left unfinished."""
+    said = []
+    for mark, word in (("r", "running"), ("f", "finished"), ("o", "not finished")):
+        years = [y for y, m, _ in line["cells"] if m == mark]
+        if years:
+            said.append(f'{word} in {", ".join(years)}')
+    return "; ".join(said)
+
+
+def theme_hints(rows, threads):
+    """Build-log lines for rows that share a theme's word (at a word start) but do not name the theme."""
+    out = []
+    for t in threads.get("threads", []):
+        for r in rows:
+            if t["key"] in r.get("threads", []):
+                continue
+            text = (r["title"] + " " + r.get("summary", "")).lower()
+            word = next((w for w in t.get("words", []) if re.search(r"\b" + re.escape(w.lower()), text)), None)
+            if word:
+                out.append("thread? %s shares '%s' with thread %s" % (r["title"], word, t["key"]))
+    return out
+
+
+def render_themes(lines, threads, year_list):
+    """The block under the header: each theme a disclosure whose summary holds its name, its words and
+    one cell per year, and whose body lists its tries in order with their stage and stack."""
+    if not lines:
+        return ""
+    names = {t["key"]: t["name"] for t in threads.get("threads", [])}
+    out = []
+    for line in lines:
+        cells = "".join(f'<span class="tc {mark}">{n if n > 1 else ""}</span>' if mark else '<span class="tc"></span>'
+                        for _, mark, n in line["cells"])
+        tries = []
+        for r in line["rows"]:
+            private = r["mode"] == "private"
+            code = f'<span class="code">{html.escape(r["code_name"])}</span> ' if private else ""
+            notes = [STAGE_WORD[r["stage"]]]
+            notes += ["also on " + names[k] for k in r.get("threads", []) if k != line["key"] and k in names]
+            if r.get("adopted") and not private:
+                notes.append("from an idea meeting")
+            stack = ", ".join(html.escape(x) for x in r.get("stack", []))
+            tries.append(f'<li><span class="ty">{attr(str(r["started"])[:4])}</span>'
+                         f'<span class="tt">{code}{html.escape(r["title"])}</span>'
+                         f'<span class="tn">{html.escape(" · ".join(notes))}{(" · " + stack) if stack else ""}</span></li>')
+        out.append(f'<details class="theme"><summary><span class="thead"><span class="tname">{html.escape(line["name"])}'
+                   f'<span class="tsign" aria-hidden="true"></span></span>'
+                   f'<span class="twords">{html.escape(theme_words(line))}</span></span>'
+                   f'<span class="tcells" aria-hidden="true">{cells}</span>'
+                   f'<span class="vh">{html.escape(theme_years_said(line))}</span></summary>'
+                   f'<ol class="tries" role="list">{"".join(tries)}</ol></details>')
+    key = ('<p class="tkey"><span><span class="tc f"></span> finished or retired</span>'
+           '<span><span class="tc o"></span> not finished</span><span><span class="tc r"></span> running</span>'
+           '<span>a number: more than one that year</span></p>')
+    return ('<section class="themes"><h2>Keeps coming back</h2>'
+            '<p class="hint">What I started in three or more separate years. Tap one for its tries.</p>'
+            + _axis(year_list) + "".join(out) + key + '</section>')
+
+
 def render_history(rows, eras, stacks):
     if not rows:
         return ""
@@ -598,16 +681,18 @@ def render_history(rows, eras, stacks):
             f'{blocks}</section>')
 
 
-def render(rows, eras, stacks, built, changed, today=None):
-    """The whole page: page.html with its five placeholders filled. `built` and `changed` are the
-    page-built and data-changed dates for the legend; `today` (default `built`) ends the year strip."""
+def render(rows, eras, stacks, built, changed, today=None, threads=None):
+    """The whole page: page.html with its placeholders filled. `built` and `changed` are the page-built
+    and data-changed dates for the footer; `today` (default `built`) ends the years the cells cover;
+    `threads` is data/threads.json (no themes when it is left out)."""
     years_shown = all_years(rows, today or built)
+    threads = threads or {"threads": []}
     parts = {
-        "STRIP": render_strip(strip(rows, years_shown)),
-        "LEGEND": render_legend(rows, built, changed),
+        "THEMES": render_themes(theme_lines(rows, threads, years_shown), threads, years_shown),
         "FILTERS": render_filters(rows, stacks),
         "SUMMARIES": render_summaries(rows, stacks, years_shown),
         "HISTORY": render_history(rows, eras, stacks),
+        "DATES": f"Data changed {attr(changed)} · page built {attr(built)}",
     }
     with open(os.path.join(HERE, "page.html"), encoding="utf-8") as f:
         page = f.read()
@@ -627,21 +712,22 @@ def main(argv=None):
     rows = load("marked.json")
     eras = load("eras.json") if os.path.exists(os.path.join(HERE, "data", "eras.json")) else []
     stacks = load("stacks.json")
-    problems = check_rows(rows) + check_eras(eras) + check_stacks(stacks, rows)
+    threads = load("threads.json") if os.path.exists(os.path.join(HERE, "data", "threads.json")) else {"threads": []}
+    problems = check_rows(rows) + check_eras(eras) + check_stacks(stacks, rows) + check_threads(threads, rows)
     if problems:
         print("\n".join(problems), file=sys.stderr)
         return 1
     if a.check:
-        print("data ok: %d marked row(s), %d era(s), %d stack famil(ies)"
-              % (len(rows), len(eras), len(stacks["families"])))
+        print("data ok: %d marked row(s), %d era(s), %d stack famil(ies), %d theme(s)"
+              % (len(rows), len(eras), len(stacks["families"]), len(threads["threads"])))
         return 0
     built = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     changed = data_changed_date()  # fails a shallow checkout before anything is written
-    for line in stale_running(rows, built):
+    for line in stale_running(rows, built) + theme_hints(rows, threads):
         print(line)
     os.makedirs(a.out, exist_ok=True)
     with open(os.path.join(a.out, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render(rows, eras, stacks, built, changed))
+        f.write(render(rows, eras, stacks, built, changed, threads=threads))
     open(os.path.join(a.out, ".nojekyll"), "w").close()
     print("built %s: %d row(s)" % (a.out, len(rows)))
     return 0
