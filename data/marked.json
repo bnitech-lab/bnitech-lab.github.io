@@ -2048,6 +2048,22 @@
   },
   {
     "mode": "public",
+    "title": "Lessontote",
+    "summary": "A web app for reviewing English lessons from a tutor's own material: the tutor adds each lesson, and the student reviews it with quizzes and practice while the app keeps each student's progress. First deployed in November 2026; the repository is private.",
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Vitest",
+      "Playwright"
+    ],
+    "stage": "running",
+    "started": "2026-10",
+    "as_of": "2026-11",
+    "topic": "web"
+  },
+  {
+    "mode": "public",
     "title": "Idea factory line",
     "summary": "A Claude Code skill that takes an adopted idea through the same build steps every time: a plan with recommended defaults, a repository, the smallest version I can try, my reaction, a work board, and publishing when I decide. Written down from how Vancouver Month was built. It became my dev-workflow skill in November 2026, which every build session reads before its first step.",
     "stack": [
