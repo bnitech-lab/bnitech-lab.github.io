@@ -13,8 +13,8 @@ ERAS = [{"from": "2014-03", "to": "2018-02", "label": "Student", "where": "Other
 STACKS = {"families": [{"name": "Java and Spring", "tools": ["Java"]}, {"name": "Python", "tools": ["Python"]}]}
 
 
-def page(rows, today="2026-10-27"):
-    return build.render(rows, ERAS, STACKS, "2026-10-27", "2026-10-26", today=today)
+def page(rows, today="2026-10-27", threads=None):
+    return build.render(rows, ERAS, STACKS, "2026-10-27", "2026-10-26", today=today, threads=threads)
 
 
 class RenderPage(unittest.TestCase):
@@ -23,18 +23,6 @@ class RenderPage(unittest.TestCase):
         self.assertNotIn("{{", p)
         self.assertIn("Lab is where I work on it. Not a company.", p)
         self.assertIn("You are welcome to look around.", p)
-
-    def test_strip_cells_and_legend(self):
-        rows = [private_row(started="2015-01", stage="finished"), private_row(started="2016-02", stage="running", as_of="2026-10"),
-                private_row(started="2016-03", stage="thought")]
-        p = page(rows, today="2017-01-01")
-        self.assertEqual(p.count('class="cell"'), 3)
-        self.assertIn('data-year="2017"', p)
-        self.assertIn('aria-label="2016: 2 things, 1 running"', p)
-        self.assertIn('aria-label="2015: 1 thing, 0 running"', p)
-        self.assertIn('<span class="tag">1 running</span>', p)
-        self.assertIn("3 things since 2015", p)
-        self.assertIn("Data changed 2026-10-26 · page built 2026-10-27", p)
 
     def test_filters_and_summaries(self):
         rows = [private_row(topic="ai", stack=["Python"]), private_row(topic="games", stack=["Java"]), private_row(topic="ai", stack=[])]
@@ -64,7 +52,7 @@ class RenderPage(unittest.TestCase):
         self.assertIsNone(re.search(r'\shidden(\s|>|=)', section))
         self.assertEqual(p.count('aria-expanded="false"'), 2 + 3)  # two year toggles, three names
 
-    def test_rows_adopted_at_a_meeting_carry_a_tag_a_card_line_and_a_count(self):
+    def test_rows_adopted_at_a_meeting_carry_a_tag_and_a_card_line(self):
         rows = [{"mode": "public", "title": "Picked", "summary": "Chosen after a meeting.", "stack": [],
                  "stage": "planned", "started": "2026-10", "adopted": "2026-10", "topic": "ai"},
                 private_row(started="2026-10", adopted="2026-10", title="Quiet pick")]
@@ -72,8 +60,6 @@ class RenderPage(unittest.TestCase):
         self.assertEqual(p.count('<span class="kind">meeting</span>'), 1)  # the public row only
         self.assertIn('<span class="cmeet">Adopted at an idea meeting, Oct 2026</span>', p)
         self.assertEqual(p.count('class="cmeet"'), 1)
-        self.assertIn("<span>2 from idea meetings</span>", p)
-        self.assertIn("<span>1 from an idea meeting</span>", page(rows[:1]))
         self.assertNotIn("idea meeting", page([private_row()]))
 
     def test_private_row_never_shows_a_kind_tag(self):

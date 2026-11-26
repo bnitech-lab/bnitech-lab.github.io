@@ -1,0 +1,69 @@
+{
+  "threads": [
+    {
+      "key": "games",
+      "name": "Games",
+      "words": [
+        "game"
+      ]
+    },
+    {
+      "key": "knowledge-store",
+      "name": "Knowledge store",
+      "words": [
+        "knowledge"
+      ]
+    },
+    {
+      "key": "blog",
+      "name": "Blog",
+      "words": [
+        "blog"
+      ]
+    },
+    {
+      "key": "teaching",
+      "name": "Teaching and talks",
+      "words": [
+        "lecture",
+        "team talk",
+        "study group"
+      ]
+    },
+    {
+      "key": "login",
+      "name": "Login and accounts",
+      "words": [
+        "login service",
+        "login pages",
+        "login server",
+        "auth api",
+        "auth call"
+      ]
+    },
+    {
+      "key": "communities",
+      "name": "Boards and communities",
+      "words": [
+        "bulletin board",
+        "social network"
+      ]
+    },
+    {
+      "key": "parking",
+      "name": "Parking",
+      "words": [
+        "parking"
+      ]
+    },
+    {
+      "key": "local-guides",
+      "name": "Local guide apps",
+      "words": [
+        "guide app",
+        "culture program",
+        "open data sets"
+      ]
+    }
+  ]
+}
